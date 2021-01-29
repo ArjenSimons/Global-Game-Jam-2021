@@ -13,12 +13,26 @@ public class DropOffButton : MonoBehaviour
     [SerializeField]
     private float pressSpeed = 2f;
 
+    [SerializeField]
+    private float minRangeForInteraction = 2.0f;
+
     [Header("Events")]
     [SerializeField]
     private UnityEvent OnPress = null;
 
     private bool hasFocus;
     private bool isBeingPressed;
+
+    private float sqrMinRangeForInteraction;
+
+    private Transform tfMainCamera;
+
+    private void Start()
+    {
+        tfMainCamera = Camera.main.transform;
+
+        sqrMinRangeForInteraction = minRangeForInteraction * minRangeForInteraction;
+    }
 
     private void Update()
     {
@@ -30,12 +44,20 @@ public class DropOffButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        hasFocus = true;
+        if (CameraIsInRange())
+        {
+            hasFocus = true;
+        }
     }
 
     private void OnMouseExit()
     {
         hasFocus = false;
+    }
+
+    private bool CameraIsInRange()
+    {
+        return (tfMainCamera.position - transform.position).sqrMagnitude < sqrMinRangeForInteraction;
     }
 
     private IEnumerator Press()
