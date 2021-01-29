@@ -9,6 +9,10 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ItemTypes itemTypes = null;
     [SerializeField] private ItemColors itemColors = null;
 
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemRequestedChannel = null;
+
     private List<LostItem> spawnableItems = new List<LostItem>();
     private List<LostItem> droppedItems = new List<LostItem>();
     private List<LostItem> requestedItems = new List<LostItem>();
@@ -26,6 +30,8 @@ public class ItemManager : MonoBehaviour
                 spawnableItems.Add(lostItem);
             }
         }
+
+        itemRequestedChannel.OnEventRaised += RequestItem;
     }
 
     private void Update()
@@ -43,6 +49,9 @@ public class ItemManager : MonoBehaviour
         spawnableItems.Remove(item);
         droppedItems.Add(item);
         thrashShute.DropItem(item);
+
+        //TODO: make sure this happens at random interfals
+        itemRequestedChannel.RaiseEvent(item);
     }
 
     public void RequestItem(LostItem item)

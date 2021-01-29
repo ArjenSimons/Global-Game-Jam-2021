@@ -19,11 +19,11 @@ public class Printer : MonoBehaviour
 
     [Header("Channel Listening to")]
     [SerializeField]
-    private LostItemChannel itemDroppedChannel = null;
+    private LostItemChannel itemRequestedChannel = null;
 
     private void Start()
     {
-        itemDroppedChannel.OnEventRaised += Print;
+        itemRequestedChannel.OnEventRaised += Print;
     }
 
     private void Update()

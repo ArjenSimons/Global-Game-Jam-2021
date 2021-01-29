@@ -8,12 +8,6 @@ public class ThrashShute : MonoBehaviour
     [SerializeField] [Range(10, 100)] private float avgThrowForce = 50;
     [SerializeField] [Range(5, 20)] private float throwForceDeviation = 10;
 
-    [Header("Channel Broadcasting on")]
-    [SerializeField]
-    private LostItemChannel itemDroppedChannel = null;
-
-    private List<GameObject> itemsToDrop = null;
-
     public void DropItem(LostItem itemToDrop)
     {
         Vector3 itemPos = transform.position;
@@ -31,6 +25,5 @@ public class ThrashShute : MonoBehaviour
         itemRB.AddForce(Vector3.down * force * 10);
 
         itemObj.transform.rotation = itemRot;
-        itemDroppedChannel.RaiseEvent(itemToDrop);
     }
 }

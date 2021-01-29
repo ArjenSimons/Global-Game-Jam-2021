@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
   m_Name: Suitcase
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 688285538708786769, guid: 32d0fa2c7b376464c8a9ef859c2d9e4f, type: 3}
-  renderersToColor:
-  - {fileID: 0}
+  prefabItem: {fileID: 688285538708786769, guid: 2068cc462822c3f41a63da528abb8206, type: 3}
   displayName: Suitcase

@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: itemDroppedChannel
       value: 
       objectReference: {fileID: 11400000, guid: 789c8fe7ecb787446b845fd1834d093f, type: 2}
+    - target: {fileID: 144221572, guid: 95dc62071ba782c4e8d976fb82edf660, type: 3}
+      propertyPath: itemRequestedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}
     - target: {fileID: 2973400234456568083, guid: 95dc62071ba782c4e8d976fb82edf660, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -906,6 +906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desk
       objectReference: {fileID: 0}
+    - target: {fileID: 5951060534096868566, guid: 225fa9bfdcf3ebb44b4d625afa916566, type: 3}
+      propertyPath: itemRequestedChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 225fa9bfdcf3ebb44b4d625afa916566, type: 3}
 --- !u!1 &1270351345
