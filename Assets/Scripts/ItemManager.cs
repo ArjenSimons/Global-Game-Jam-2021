@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-
     [SerializeField] private ThrashShute thrashShute = null;
     [SerializeField] private ItemTypes itemTypes = null;
     [SerializeField] private ItemColors itemColors = null;
@@ -21,9 +20,9 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
-        foreach(ItemType type in itemTypes.Types)
+        foreach (ItemType type in itemTypes.Types)
         {
-            foreach(ItemColor color in itemColors.Colors)
+            foreach (ItemColor color in itemColors.Colors)
             {
                 LostItem lostItem = new LostItem(type, color);
                 spawnableItems.Add(lostItem);
@@ -33,7 +32,7 @@ public class ItemManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             DropRandomItem();
         }

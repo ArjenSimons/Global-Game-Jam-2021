@@ -11,7 +11,7 @@ public class ItemDropRecognizer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("LostItem"))
+        if (other.CompareTag("PickupableItem"))
         {
             RecognizedItem = other.gameObject;
         }
@@ -19,7 +19,7 @@ public class ItemDropRecognizer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("LostItem") && other.gameObject == RecognizedItem)
+        if (other.CompareTag("PickupableItem") && other.gameObject == RecognizedItem)
         {
             RecognizedItem = null;
         }
