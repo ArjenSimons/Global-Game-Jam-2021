@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 688285538708786768}
   - component: {fileID: 8973487124340134282}
   - component: {fileID: 511985476399030662}
+  - component: {fileID: 7528002189598090024}
   m_Layer: 0
   m_Name: Suitcase
   m_TagString: LostItem
@@ -374,6 +375,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.4, z: 0.55}
   m_Center: {x: 0, y: 0.01, z: 0}
+--- !u!114 &7528002189598090024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688285538708786769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d967607b771e7547bd577e047a310e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderersToColor:
+  - {fileID: 688285538399028154}
+  - {fileID: 688285537693119951}
+  - {fileID: 9197266614285787946}
+  - {fileID: 5199802469917744492}
+  - {fileID: 742631299697459224}
+  - {fileID: 8555532705910530797}
+  - {fileID: 525301565409910822}
+  - {fileID: 8951997085572693241}
 --- !u!1 &1286143724431059242
 GameObject:
   m_ObjectHideFlags: 0
