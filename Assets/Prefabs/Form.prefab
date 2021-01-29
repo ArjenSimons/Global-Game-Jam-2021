@@ -718,7 +718,6 @@ GameObject:
   - component: {fileID: 4225498123341249111}
   - component: {fileID: 4225498123341249098}
   - component: {fileID: 4225498123341249109}
-  - component: {fileID: 4225498123341249108}
   m_Layer: 0
   m_Name: A4
   m_TagString: Untagged
@@ -789,19 +788,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4225498123341249108
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225498123341249110}
-  m_Material: {fileID: 13400000, guid: c0d1ff6d7e0adc74eb39f32ae86a88f0, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4225498123614416929
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,9 +799,10 @@ GameObject:
   - component: {fileID: 4225498123614416934}
   - component: {fileID: 5298894705740395205}
   - component: {fileID: 6709283689592248260}
+  - component: {fileID: 1353535920287133567}
   m_Layer: 0
   m_Name: Form
-  m_TagString: Untagged
+  m_TagString: PickupableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -864,12 +851,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f2147c0a3855e48889f0a764de096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperCollider: {fileID: 4225498123341249108}
+  paperCollider: {fileID: 0}
   rigidBody: {fileID: 5298894705740395205}
   textName: {fileID: 7189565441851285174}
   textItem: {fileID: 3163956506121805670}
   textColor: {fileID: 3410014719009461647}
   textRemarks: {fileID: 4583463994389239110}
+--- !u!65 &1353535920287133567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4225498123614416929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21, y: 0.005, z: 0.297}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4239557814091149008
 GameObject:
   m_ObjectHideFlags: 0

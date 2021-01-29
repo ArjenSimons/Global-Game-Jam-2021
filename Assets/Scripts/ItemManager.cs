@@ -5,10 +5,30 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField]
+    private float startDelay = 2.0f;
 
+    [SerializeField]
+    private float dropInterval = 30.0f;
+
+    [SerializeField]
+    private int dropRate = 5;
+
+    [SerializeField]
+    private float dropBurstInterval = 0.125f;
+
+    [Header("Scene References")]
     [SerializeField] private ThrashShute thrashShute = null;
+
+    [Header("Project References")]
     [SerializeField] private ItemTypes itemTypes = null;
+
     [SerializeField] private ItemColors itemColors = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemRequestedChannel = null;
 
     private List<LostItem> spawnableItems = new List<LostItem>();
     private List<LostItem> droppedItems = new List<LostItem>();
@@ -17,47 +37,61 @@ public class ItemManager : MonoBehaviour
     public List<LostItem> DroppedItems => droppedItems;
     public List<LostItem> RequestedItems => requestedItems;
 
-    public event Action OnItemDrop;
-
     private void Start()
     {
-        foreach(ItemType type in itemTypes.Types)
+        foreach (ItemType type in itemTypes.Types)
         {
-            foreach(ItemColor color in itemColors.Colors)
+            foreach (ItemColor color in itemColors.Colors)
             {
                 LostItem lostItem = new LostItem(type, color);
                 spawnableItems.Add(lostItem);
             }
         }
+
+        itemRequestedChannel.OnEventRaised += RequestItem;
+
+        StartCoroutine(DropAtInterval());
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             DropRandomItem();
         }
     }
 
-    private void DropRandomItem()
+    private bool DropRandomItem()
     {
-        if (spawnableItems.Count <= 0) return;
+        if (spawnableItems.Count <= 0)
+        {
+            return false;
+        }
+
         LostItem item = GetRandomItem();
         spawnableItems.Remove(item);
         droppedItems.Add(item);
         thrashShute.DropItem(item);
+
+        //TODO: make sure this happens at random interfals
+        itemRequestedChannel.RaiseEvent(item);
+        return true;
     }
 
-    private void RequestItem(LostItem item)
+    public void RequestItem(LostItem item)
     {
         droppedItems.Remove(item);
         requestedItems.Add(item);
     }
 
-    private void ReturnItem(LostItem item)
+    public bool ReturnItem(LostItem item)
     {
+        if (!requestedItems.Contains(item)) return false;
+
         requestedItems.Remove(item);
         spawnableItems.Add(item);
+
+        return true;
     }
 
     private LostItem GetRandomItem()
@@ -66,5 +100,26 @@ public class ItemManager : MonoBehaviour
         LostItem item = spawnableItems[randomIndex];
 
         return item;
+    }
+
+    private IEnumerator DropAtInterval()
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        while (true)
+        {
+            yield return DropItemsInBurst();
+            yield return new WaitForSeconds(dropInterval);
+        }
+    }
+
+    private IEnumerator DropItemsInBurst()
+    {
+        int count = dropRate;
+        while (count != 0 && DropRandomItem())
+        {
+            yield return new WaitForSeconds(dropBurstInterval);
+            count--;
+        }
     }
 }
