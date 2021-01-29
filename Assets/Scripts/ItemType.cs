@@ -8,4 +8,7 @@ public class ItemType : ScriptableObject
 
     [SerializeField]
     private string displayName = "Suitcase";
+
+    public GameObject PrefabItem => prefabItem;
+    public string DisplayName => displayName;
 }
