@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 779046540003347404, guid: dbf373f1aadf03141adab6758bba5bcc, type: 3}
   avgThrowForce: 50
   throwForceDeviation: 10
+  itemDroppedChannel: {fileID: 11400000, guid: 789c8fe7ecb787446b845fd1834d093f, type: 2}
 --- !u!1 &6823161633009281662
 GameObject:
   m_ObjectHideFlags: 0

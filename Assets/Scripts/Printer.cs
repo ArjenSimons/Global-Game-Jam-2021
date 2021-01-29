@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class Printer : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject prefabForm = null;
-
-    [SerializeField]
-    private Transform printSpawn = null;
-
+    [Header("Settings")]
     [SerializeField]
     private float tweenDistance = 0.38f;
 
     [SerializeField]
     private float tweenDuration = 3f;
 
+    [Header("Project References")]
+    [SerializeField]
+    private GameObject prefabForm = null;
+
+    [Header("Scene References")]
+    [SerializeField]
+    private Transform printSpawn = null;
+
+    [Header("Channel Listening to")]
+    [SerializeField]
+    private LostItemChannel itemDroppedChannel = null;
+
     private void Start()
     {
-        Print("Test", "Test print");
+        itemDroppedChannel.OnEventRaised += Print;
     }
 
     private void Update()
