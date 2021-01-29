@@ -14,5 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colors:
   - {fileID: 11400000, guid: e8860581811df604080d1481e05fa336, type: 2}
+  - {fileID: 11400000, guid: a60c512be214eaa4db1f599941986359, type: 2}
+  - {fileID: 11400000, guid: 7bb0682700d02a84ba5c260d9ce29ece, type: 2}
+  - {fileID: 11400000, guid: 10ee723c8971d9640bc87659bfec4838, type: 2}
+  - {fileID: 11400000, guid: 50956d251e07d6b4c8c07684bb4451ec, type: 2}
+  - {fileID: 11400000, guid: 53653208d520cfd40bba7d82faf1ca83, type: 2}
+  - {fileID: 11400000, guid: bef34bf749515ba40b5473224f9a0a3c, type: 2}
+  - {fileID: 11400000, guid: 8009d3830a84dd74e9d4b29052b70396, type: 2}
+  - {fileID: 11400000, guid: 5eb56e027acdd394bbd59a412fe2108f, type: 2}
+  - {fileID: 11400000, guid: 4aa49388e32f7b24f8d41303b21d1844, type: 2}
   - {fileID: 11400000, guid: 04c005640045c134fa38ac6c85e97a86, type: 2}
   - {fileID: 11400000, guid: cf77783208165c2498594b7400aa9412, type: 2}
+  - {fileID: 11400000, guid: b77cbc4c7d3a7a24a8d2ed3ccc61daa4, type: 2}
+  - {fileID: 11400000, guid: 886e7af3f7a46194298701e118dda78b, type: 2}
