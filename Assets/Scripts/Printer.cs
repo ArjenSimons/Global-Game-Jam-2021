@@ -33,4 +33,9 @@ public class Printer : MonoBehaviour
         form.SetText(text);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
     }
+
+    public void Print(LostItem lostItem)
+    {
+
+    }
 }
