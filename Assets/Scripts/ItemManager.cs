@@ -16,8 +16,6 @@ public class ItemManager : MonoBehaviour
     public List<LostItem> DroppedItems => droppedItems;
     public List<LostItem> RequestedItems => requestedItems;
 
-    public event Action OnItemDrop;
-
     private void Start()
     {
         foreach (ItemType type in itemTypes.Types)

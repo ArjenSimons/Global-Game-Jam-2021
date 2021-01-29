@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemColorSetter : MonoBehaviour
+public class Item : MonoBehaviour
 {
     [SerializeField]
     private List<MeshRenderer> renderersToColor = null;
+
+    public LostItem LostItem;
 
     public void SetColor(Color color)
     {
