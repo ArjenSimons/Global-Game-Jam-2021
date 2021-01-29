@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ThrashShute : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private List<GameObject> items = null;
+
     [SerializeField] [Range(10, 100)] private float avgThrowForce = 50;
     [SerializeField] [Range(5, 20)] private float throwForceDeviation = 10;
 
-    private List<GameObject> itemsToDrop = null;
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemDroppedChannel = null;
 
+    private List<GameObject> itemsToDrop = null;
 
     public void DropItem(LostItem itemToDrop)
     {
@@ -26,7 +31,7 @@ public class ThrashShute : MonoBehaviour
         itemRB.AddForce(Vector3.down * force * 10);
 
         item.transform.rotation = itemRot;
-    }
 
-    
+        itemDroppedChannel.RaiseEvent(itemToDrop);
+    }
 }

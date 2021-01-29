@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 6709283689592248260}
   m_Layer: 0
   m_Name: Form
-  m_TagString: Untagged
+  m_TagString: PickupableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
