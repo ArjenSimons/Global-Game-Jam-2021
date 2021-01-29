@@ -366,33 +366,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1922752637446902575, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0ade8c98f86c680478d4dbede6550c69, type: 2}
-    - target: {fileID: 1922752638165193890, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: itemManager
-      value: 
-      objectReference: {fileID: 1122596370}
-    - target: {fileID: 1922752638742896935, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0ade8c98f86c680478d4dbede6550c69, type: 2}
     - target: {fileID: 1922752638833051273, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
       propertyPath: m_RootOrder
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922752638833051273, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922752638833051273, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922752638833051273, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1922752638833051273, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,25 +416,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
---- !u!1 &469064684 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1922752637453672911, guid: 05e97105bc0dac146a80aefc29bc9caf, type: 3}
-  m_PrefabInstance: {fileID: 469064683}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &469064685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469064684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlowColor: {r: 1, g: 0, b: 0, a: 1}
-  LerpFactor: 10
 --- !u!1 &473769754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,24 +1045,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desk
       objectReference: {fileID: 0}
-    - target: {fileID: 5951060534096868566, guid: 225fa9bfdcf3ebb44b4d625afa916566, type: 3}
-      propertyPath: itemRequestedChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 225fa9bfdcf3ebb44b4d625afa916566, type: 3}
---- !u!114 &1122596370 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1796941287122251468, guid: ea1c54ef271359e4a9f4c57a72651200, type: 3}
-  m_PrefabInstance: {fileID: 394854743}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09483334c06404545ab7e95d2d8f3560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!84 &1160919378
+--- !u!84 &1194098546
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1119,8 +1061,8 @@ RenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 3
-  m_Width: 3840
-  m_Height: 2160
+  m_Width: 1185
+  m_Height: 277
   m_AntiAliasing: 2
   m_MipCount: -1
   m_DepthFormat: 2
