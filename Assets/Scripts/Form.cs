@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 
-
 public class Form : MonoBehaviour
 {
     [SerializeField]
@@ -11,7 +10,16 @@ public class Form : MonoBehaviour
     private Rigidbody rigidBody = null;
 
     [SerializeField]
-    private TMP_Text text = null;
+    private TMP_Text textName = null;
+
+    [SerializeField]
+    private TMP_Text textItem = null;
+
+    [SerializeField]
+    private TMP_Text textColor = null;
+
+    [SerializeField]
+    private TMP_Text textRemarks = null;
 
     private void Start()
     {
@@ -19,9 +27,13 @@ public class Form : MonoBehaviour
         //TODO: make object not grabbable by player
     }
 
-    public void SetText(string text)
+
+    public void SetText(string name, string item, string color, string remarks = "")
     {
-        this.text.text = text;
+        textName.text = name;
+        textItem.text = item;
+        textColor.text = color;
+        textRemarks.text = remarks;
     }
 
     public void EnablePaper()
