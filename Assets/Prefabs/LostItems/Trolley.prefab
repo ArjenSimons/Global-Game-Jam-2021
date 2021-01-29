@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 688285537693119945}
   - component: {fileID: 688285537693119950}
   - component: {fileID: 688285537693119951}
+  - component: {fileID: 5424195674456059725}
   m_Layer: 0
   m_Name: HandlePart (1)
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5424195674456059725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688285537693119946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &688285538220710498
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +140,7 @@ GameObject:
   - component: {fileID: 688285538399028164}
   - component: {fileID: 688285538399028153}
   - component: {fileID: 688285538399028154}
+  - component: {fileID: 919537278009394364}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -195,6 +211,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &919537278009394364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688285538399028165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &688285538708786769
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +237,7 @@ GameObject:
   - component: {fileID: 8973487124340134282}
   - component: {fileID: 511985476399030662}
   - component: {fileID: 7528002189598090024}
+  - component: {fileID: 6496700141054083837}
   m_Layer: 0
   m_Name: Trolley
   m_TagString: PickupableItem
@@ -281,6 +312,27 @@ MonoBehaviour:
   - {fileID: 425832393192811354}
   - {fileID: 5918112251588809483}
   - {fileID: 3064678210459434614}
+--- !u!114 &6496700141054083837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688285538708786769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 919537278009394364}
+  - {fileID: 5424195674456059725}
+  - {fileID: 3072408884701760854}
+  - {fileID: 5672258498572530705}
+  - {fileID: 42007990803472114}
+  - {fileID: 8691931116989086194}
+  - {fileID: 4107397856776886090}
+  - {fileID: 4319378772487956862}
 --- !u!1 &2364575695082169773
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +345,7 @@ GameObject:
   - component: {fileID: 5756360289973845811}
   - component: {fileID: 5918112251588809483}
   - component: {fileID: 1943087689835903039}
+  - component: {fileID: 4107397856776886090}
   m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -376,6 +429,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4107397856776886090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364575695082169773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &4174926094599242900
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +455,7 @@ GameObject:
   - component: {fileID: 3955635025848787765}
   - component: {fileID: 425832393192811354}
   - component: {fileID: 3246626894124371370}
+  - component: {fileID: 8691931116989086194}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -471,6 +539,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8691931116989086194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174926094599242900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &4343648069396743492
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +564,7 @@ GameObject:
   - component: {fileID: 6204684757189311255}
   - component: {fileID: 3363496801647490161}
   - component: {fileID: 5509564307755215126}
+  - component: {fileID: 3072408884701760854}
   m_Layer: 0
   m_Name: HandlePart (2)
   m_TagString: Untagged
@@ -552,6 +635,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3072408884701760854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343648069396743492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &6439213595626901754
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +660,7 @@ GameObject:
   - component: {fileID: 6932829197441285637}
   - component: {fileID: 6765538054651673733}
   - component: {fileID: 4564881381795313430}
+  - component: {fileID: 5672258498572530705}
   m_Layer: 0
   m_Name: HandlePart (3)
   m_TagString: Untagged
@@ -633,6 +731,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5672258498572530705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439213595626901754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &6538213192008014121
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +757,7 @@ GameObject:
   - component: {fileID: 1159943340450840873}
   - component: {fileID: 8563600930541197800}
   - component: {fileID: 8088787344420260947}
+  - component: {fileID: 42007990803472114}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -728,6 +841,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &42007990803472114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6538213192008014121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &6766009928444596142
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +901,7 @@ GameObject:
   - component: {fileID: 6538255620832587659}
   - component: {fileID: 3064678210459434614}
   - component: {fileID: 7725048060029229458}
+  - component: {fileID: 4319378772487956862}
   m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -857,3 +985,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4319378772487956862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317280770019973621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
