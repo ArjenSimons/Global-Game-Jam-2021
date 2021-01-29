@@ -338,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressFactor: 4
   pressSpeed: 0.1
+  minRangeForInteraction: 2
   OnPress:
     m_PersistentCalls:
       m_Calls:
@@ -353,6 +354,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  distanceToCam: 0
 --- !u!1 &1922752637485504457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922752638833051273}
   m_Layer: 0
-  m_Name: DroppointWall
+  m_Name: DroppOffWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
