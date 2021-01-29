@@ -5,8 +5,6 @@ using UnityEngine;
 public class ThrashShute : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private List<GameObject> items = null;
-
     [SerializeField] [Range(10, 100)] private float avgThrowForce = 50;
     [SerializeField] [Range(5, 20)] private float throwForceDeviation = 10;
 
@@ -21,17 +19,18 @@ public class ThrashShute : MonoBehaviour
         Vector3 itemPos = transform.position;
         Quaternion itemRot = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 
-        GameObject item = Instantiate(itemToDrop.ItemType.PrefabItem, transform);
-        item.GetComponent<ItemColorSetter>().SetColor(itemToDrop.ItemColor.Color);
+        GameObject itemObj = Instantiate(itemToDrop.ItemType.PrefabItem, transform);
+        Item item = itemObj.GetComponent<Item>();
+        item.SetColor(itemToDrop.ItemColor.Color);
+        item.LostItem = itemToDrop;
 
-        Rigidbody itemRB = item.GetComponent<Rigidbody>();
+        Rigidbody itemRB = itemObj.GetComponent<Rigidbody>();
 
         float deviation = Random.Range(throwForceDeviation * -1, throwForceDeviation);
         float force = avgThrowForce + deviation;
         itemRB.AddForce(Vector3.down * force * 10);
 
-        item.transform.rotation = itemRot;
-
+        itemObj.transform.rotation = itemRot;
         itemDroppedChannel.RaiseEvent(itemToDrop);
     }
 }
