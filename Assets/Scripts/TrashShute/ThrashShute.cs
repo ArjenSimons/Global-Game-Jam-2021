@@ -21,8 +21,10 @@ public class ThrashShute : MonoBehaviour
         Vector3 itemPos = transform.position;
         Quaternion itemRot = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 
+        Color color = itemToDrop.ItemColor.Color;
         GameObject item = Instantiate(itemToDrop.ItemType.PrefabItem, transform);
-        item.GetComponent<ItemColorSetter>().SetColor(itemToDrop.ItemColor.Color);
+        item.GetComponent<ItemColorSetter>().SetColor(color);
+        item.GetComponent<GlowObjectGroup>().SetColor(color);
 
         Rigidbody itemRB = item.GetComponent<Rigidbody>();
 

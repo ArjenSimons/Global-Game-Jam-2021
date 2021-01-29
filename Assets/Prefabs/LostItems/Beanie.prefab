@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8577051457124104694}
   - component: {fileID: 3416889017617139676}
   - component: {fileID: 952696663535390601}
+  - component: {fileID: 2334635524243787527}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 812573907b5d20940bbbf786e181a66a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2334635524243787527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606228742147999788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &2034611618293933621
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ GameObject:
   - component: {fileID: 2000351554884724418}
   - component: {fileID: 8155311814816389053}
   - component: {fileID: 326634401302736356}
+  - component: {fileID: 2397850814588390789}
   m_Layer: 0
   m_Name: TopBal
   m_TagString: Untagged
@@ -140,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 812573907b5d20940bbbf786e181a66a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2397850814588390789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034611618293933621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
 --- !u!1 &8062336948308127756
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +204,7 @@ GameObject:
   - component: {fileID: 7354284944121468485}
   - component: {fileID: 3943531374784954902}
   - component: {fileID: 8365848069502970050}
+  - component: {fileID: 2347528273170457126}
   m_Layer: 0
   m_Name: Beanie
   m_TagString: PickupableItem
@@ -243,6 +274,18 @@ MonoBehaviour:
   - {fileID: 131360884309390286}
   - {fileID: 952696663535390601}
   - {fileID: 326634401302736356}
+--- !u!114 &2347528273170457126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062336948308127756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9036443930660750224
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +297,7 @@ GameObject:
   - component: {fileID: 6578799276113674873}
   - component: {fileID: 3445520723368045822}
   - component: {fileID: 131360884309390286}
+  - component: {fileID: 9160885257129306584}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -302,7 +346,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 812573907b5d20940bbbf786e181a66a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -324,3 +368,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9160885257129306584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036443930660750224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 1, b: 1, a: 0}
+  LerpFactor: 10
