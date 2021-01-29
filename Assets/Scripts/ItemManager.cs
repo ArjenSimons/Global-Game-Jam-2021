@@ -45,16 +45,20 @@ public class ItemManager : MonoBehaviour
         thrashShute.DropItem(item);
     }
 
-    private void RequestItem(LostItem item)
+    public void RequestItem(LostItem item)
     {
         droppedItems.Remove(item);
         requestedItems.Add(item);
     }
 
-    private void ReturnItem(LostItem item)
+    public bool ReturnItem(LostItem item)
     {
+        if (!requestedItems.Contains(item)) return false;
+
         requestedItems.Remove(item);
         spawnableItems.Add(item);
+
+        return true;
     }
 
     private LostItem GetRandomItem()
