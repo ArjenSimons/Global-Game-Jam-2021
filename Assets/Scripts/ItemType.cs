@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemType", menuName = "ScriptableObjects/ItemType")]
@@ -11,4 +12,5 @@ public class ItemType : ScriptableObject
 
     public GameObject PrefabItem => prefabItem;
     public string DisplayName => displayName;
+
 }

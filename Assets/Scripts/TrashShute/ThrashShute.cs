@@ -11,12 +11,13 @@ public class ThrashShute : MonoBehaviour
     private List<GameObject> itemsToDrop = null;
 
 
-    public void DropItem(GameObject itemToDrop)
+    public void DropItem(LostItem itemToDrop)
     {
         Vector3 itemPos = transform.position;
         Quaternion itemRot = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 
-        GameObject item = Instantiate(itemToDrop, transform);
+        GameObject item = Instantiate(itemToDrop.ItemType.PrefabItem, transform);
+        item.GetComponent<ItemColorSetter>().SetColor(itemToDrop.ItemColor.Color);
 
         Rigidbody itemRB = item.GetComponent<Rigidbody>();
 

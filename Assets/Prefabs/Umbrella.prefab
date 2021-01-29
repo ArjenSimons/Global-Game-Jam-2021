@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 3222709179295407132}
   - component: {fileID: 6527094286999536921}
   - component: {fileID: 5560342822202669820}
+  - component: {fileID: 3143630373173109106}
   m_Layer: 0
   m_Name: Umbrella
   m_TagString: LostItem
@@ -228,6 +229,23 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3143630373173109106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222709179295407131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d967607b771e7547bd577e047a310e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderersToColor:
+  - {fileID: 3222709180931038373}
+  - {fileID: 1893963995115814918}
+  - {fileID: 1852062729337511051}
+  - {fileID: 4962157972672746785}
 --- !u!1 &3222709180931038370
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +338,7 @@ GameObject:
   - component: {fileID: 3390213704363785284}
   - component: {fileID: 4794529328336917335}
   - component: {fileID: 4962157972672746785}
+  - component: {fileID: 4229317720659290122}
   m_Layer: 0
   m_Name: Plastic (3)
   m_TagString: Untagged
@@ -390,3 +409,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4229317720659290122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5394230153527982378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d967607b771e7547bd577e047a310e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderersToColor:
+  - {fileID: 3222709180931038373}
+  - {fileID: 1893963995115814918}
+  - {fileID: 1852062729337511051}
+  - {fileID: 4962157972672746785}

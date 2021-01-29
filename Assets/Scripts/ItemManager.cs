@@ -14,8 +14,8 @@ public class ItemManager : MonoBehaviour
     private List<LostItem> droppedItems = new List<LostItem>();
     private List<LostItem> requestedItems = new List<LostItem>();
 
-    public List<LostItem> AvailableItems => spawnableItems;
     public List<LostItem> DroppedItems => droppedItems;
+    public List<LostItem> RequestedItems => requestedItems;
 
     public event Action OnItemDrop;
 
@@ -26,6 +26,7 @@ public class ItemManager : MonoBehaviour
             foreach(ItemColor color in itemColors.Colors)
             {
                 LostItem lostItem = new LostItem(type, color);
+                spawnableItems.Add(lostItem);
             }
         }
     }
@@ -40,10 +41,11 @@ public class ItemManager : MonoBehaviour
 
     private void DropRandomItem()
     {
+        if (spawnableItems.Count <= 0) return;
         LostItem item = GetRandomItem();
         spawnableItems.Remove(item);
         droppedItems.Add(item);
-        thrashShute.DropItem(item.ItemType.PrefabItem);
+        thrashShute.DropItem(item);
     }
 
     private void RequestItem(LostItem item)
