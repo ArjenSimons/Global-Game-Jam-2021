@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
-  m_Name: Umbrella
+  m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
+  m_Name: Sand
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 3222709179295407131, guid: 2e33da24bb6326943814e0ee958e0993, type: 3}
-  displayName: Umbrella
+  color: {r: 0.85882354, g: 0.81960785, b: 0.7058824, a: 1}
+  displayName: Sand

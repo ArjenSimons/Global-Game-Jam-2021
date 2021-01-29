@@ -10,25 +10,14 @@ public class ThrashShute : MonoBehaviour
 
     private List<GameObject> itemsToDrop = null;
 
-    private void Start()
-    {
-        itemsToDrop = items;
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            DropItem();
-        }
-    }
-
-    private void DropItem()
+    public void DropItem(LostItem itemToDrop)
     {
         Vector3 itemPos = transform.position;
         Quaternion itemRot = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 
-        GameObject item = Instantiate(GetRandomItem(), transform);
+        GameObject item = Instantiate(itemToDrop.ItemType.PrefabItem, transform);
+        item.GetComponent<ItemColorSetter>().SetColor(itemToDrop.ItemColor.Color);
 
         Rigidbody itemRB = item.GetComponent<Rigidbody>();
 
@@ -39,18 +28,5 @@ public class ThrashShute : MonoBehaviour
         item.transform.rotation = itemRot;
     }
 
-    private GameObject GetRandomItem()
-    {
-        if (items.Count <= 0)
-        {
-            Debug.LogWarning("No items left to drop");
-            return null;
-        }
-        int randomIndex = Random.Range(0, items.Count);
-        GameObject item = itemsToDrop[randomIndex];
-
-        //itemsToDrop.RemoveAt(randomIndex);
-
-        return item;
-    }
+    
 }
