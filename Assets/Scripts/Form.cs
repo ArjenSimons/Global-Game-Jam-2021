@@ -4,9 +4,6 @@ using UnityEngine;
 public class Form : MonoBehaviour
 {
     [SerializeField]
-    private Collider paperCollider = null;
-
-    [SerializeField]
     private Rigidbody rigidBody = null;
 
     [SerializeField]
@@ -21,12 +18,14 @@ public class Form : MonoBehaviour
     [SerializeField]
     private TMP_Text textRemarks = null;
 
+    private Collider paperCollider;
+
     private void Start()
     {
+        paperCollider = GetComponent<Collider>();
         paperCollider.enabled = false;
         //TODO: make object not grabbable by player
     }
-
 
     public void SetText(string name, string item, string color, string remarks = "")
     {

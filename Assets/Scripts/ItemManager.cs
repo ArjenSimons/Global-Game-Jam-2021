@@ -5,8 +5,25 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField]
+    private float startDelay = 2.0f;
+
+    [SerializeField]
+    private float dropInterval = 30.0f;
+
+    [SerializeField]
+    private int dropRate = 5;
+
+    [SerializeField]
+    private float dropBurstInterval = 0.125f;
+
+    [Header("Scene References")]
     [SerializeField] private ThrashShute thrashShute = null;
+
+    [Header("Project References")]
     [SerializeField] private ItemTypes itemTypes = null;
+
     [SerializeField] private ItemColors itemColors = null;
 
     [Header("Channel Broadcasting on")]
@@ -32,6 +49,8 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
+
+        StartCoroutine(DropAtInterval());
     }
 
     private void Update()
@@ -42,9 +61,13 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private void DropRandomItem()
+    private bool DropRandomItem()
     {
-        if (spawnableItems.Count <= 0) return;
+        if (spawnableItems.Count <= 0)
+        {
+            return false;
+        }
+
         LostItem item = GetRandomItem();
         spawnableItems.Remove(item);
         droppedItems.Add(item);
@@ -52,6 +75,7 @@ public class ItemManager : MonoBehaviour
 
         //TODO: make sure this happens at random interfals
         itemRequestedChannel.RaiseEvent(item);
+        return true;
     }
 
     public void RequestItem(LostItem item)
@@ -76,5 +100,26 @@ public class ItemManager : MonoBehaviour
         LostItem item = spawnableItems[randomIndex];
 
         return item;
+    }
+
+    private IEnumerator DropAtInterval()
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        while (true)
+        {
+            yield return DropItemsInBurst();
+            yield return new WaitForSeconds(dropInterval);
+        }
+    }
+
+    private IEnumerator DropItemsInBurst()
+    {
+        int count = dropRate;
+        while (count != 0 && DropRandomItem())
+        {
+            yield return new WaitForSeconds(dropBurstInterval);
+            count--;
+        }
     }
 }
