@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d19fa746b3d2d3e439f836d9dd1c947e, type: 3}
-  m_Name: DropDoorQue
+  m_Name: BigRigidHitCue
   m_EditorClassIdentifier: 
   loop: 0
   audioClipsGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: cdd71ecab74dc3e4e8a7ce71e900dd0f, type: 3}
+    - {fileID: 8300000, guid: f4ee93febf5828041b11b45977207bb6, type: 3}
+    - {fileID: 8300000, guid: 656c9d452f554404189ce4f0bd0ecd3e, type: 3}
+    - {fileID: 8300000, guid: a23c49185db07f14ab62dbf4c46cf672, type: 3}
+    - {fileID: 8300000, guid: 987f2da3c80796342a01cd8f8a60d195, type: 3}
