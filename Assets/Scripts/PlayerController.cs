@@ -109,7 +109,8 @@ public class PlayerController : MonoBehaviour
         UpdateCharacterRotation(cameraTransform.eulerAngles.y);
         //playerRigidbody.velocity += (playerVelocity * Time.deltaTime * playerSpeed);
         //playerRigidbody.AddRelativeForce(new Vector3(playerVelocity.x, 0, playerVelocity.z) * playerSpeed);
-        playerRigidbody.AddForce((transform.forward * playerSpeed * playerVelocity.x) + (transform.right * playerSpeed * playerVelocity.z));
+        Vector3 newVelocity = playerVelocity.normalized;
+        playerRigidbody.AddForce((transform.forward * playerSpeed * newVelocity.x) + (transform.right * playerSpeed * newVelocity.z));
         //playerRigidbody.velocity = (transform.forward * Time.fixedDeltaTime * playerSpeed * playerVelocity.x) + (transform.right * Time.fixedDeltaTime * playerSpeed * playerVelocity.z);
     }
 
