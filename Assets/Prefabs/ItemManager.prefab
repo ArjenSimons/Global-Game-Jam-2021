@@ -43,6 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09483334c06404545ab7e95d2d8f3560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startDelay: 2
+  dropInterval: 30
+  dropRate: 15
+  dropBurstInterval: 0.125
   thrashShute: {fileID: 0}
   itemTypes: {fileID: 11400000, guid: eb48b66ebb5daae4fb5db5f62112d1c1, type: 2}
   itemColors: {fileID: 11400000, guid: 55034f8f97d7a8d4da5d431a5a0bc713, type: 2}
