@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderersToColor:
   - {fileID: 3724304979823382751}
+  items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
+  CanTriggerDropOffButton: 0
 --- !u!114 &2625306131172805727
 MonoBehaviour:
   m_ObjectHideFlags: 0
