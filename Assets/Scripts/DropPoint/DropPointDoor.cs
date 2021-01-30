@@ -1,5 +1,3 @@
-using BWolf.Utilities;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,13 +8,7 @@ public class DropPointDoor : MonoBehaviour
     private float closeDelay = 1.0f;
 
     [SerializeField]
-    private float timeClosed = 0.5f;
-
-    [SerializeField]
-    private Vector3 closePosition = default;
-
-    [SerializeField]
-    private Vector3 closeScale = default;
+    private Vector3 closePosition = new Vector3(0, 1.05f, 0.1f);
 
     [SerializeField]
     private float closeTime = 1.0f;
@@ -37,13 +29,13 @@ public class DropPointDoor : MonoBehaviour
     private LostItemChannel itemRequestedChannel = null;
 
     private Vector3 openScale;
+
     private Vector3 openPosition;
 
     private bool droppingOfItem;
 
     private void Start()
     {
-        openScale = transform.localScale;
         openPosition = transform.localPosition;
     }
 
@@ -51,46 +43,21 @@ public class DropPointDoor : MonoBehaviour
     {
         if (!droppingOfItem)
         {
-            StartCoroutine(DropOffItemsBehindDoor());
-        }
-    }
+            droppingOfItem = true;
 
-    private IEnumerator DropOffItemsBehindDoor()
-    {
-        droppingOfItem = true;
-
-        yield return new WaitForSeconds(closeDelay);
-        yield return Close();
-
-        DropOffItems();
-
-        yield return new WaitForSeconds(timeClosed);
-        yield return Open();
-
-        droppingOfItem = false;
-    }
-
-    private IEnumerator Close()
-    {
-        LerpValue<Vector3> scaling = new LerpValue<Vector3>(openScale, closeScale, closeTime);
-        LerpValue<Vector3> moving = new LerpValue<Vector3>(openPosition, closePosition, closeTime);
-        while (scaling.Continue() && moving.Continue())
-        {
-            transform.localScale = Vector3.Lerp(scaling.start, scaling.end, scaling.perc);
-            transform.localPosition = Vector3.Lerp(moving.start, moving.end, moving.perc);
-            yield return null;
-        }
-    }
-
-    private IEnumerator Open()
-    {
-        LerpValue<Vector3> scaling = new LerpValue<Vector3>(closeScale, openScale, closeTime);
-        LerpValue<Vector3> moving = new LerpValue<Vector3>(closePosition, openPosition, closeTime);
-        while (scaling.Continue() && moving.Continue())
-        {
-            transform.localScale = Vector3.Lerp(scaling.start, scaling.end, scaling.perc);
-            transform.localPosition = Vector3.Lerp(moving.start, moving.end, moving.perc);
-            yield return null;
+            var seq = LeanTween.sequence();
+            seq.append(closeDelay);
+            seq.append(LeanTween.moveLocal(gameObject, closePosition, closeTime));
+            seq.append(() =>
+            {
+                DropOffItems();
+            });
+            seq.append(closeTime);
+            seq.append(LeanTween.moveLocal(gameObject, openPosition, closeTime));
+            seq.append(() =>
+            {
+                droppingOfItem = false;
+            });
         }
     }
 
@@ -128,7 +95,6 @@ public class DropPointDoor : MonoBehaviour
                 items.Remove(item);
             }
 
-            print(forms.Count);
             //remove leftover forms
             for (int i = forms.Count - 1; i >= 0; i--)
             {
