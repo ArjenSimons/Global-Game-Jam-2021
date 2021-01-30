@@ -13,7 +13,7 @@ public class Item : MonoBehaviour
     {
         foreach (MeshRenderer renderer in renderersToColor)
         {
-            renderer.material.color = color;
+            renderer.materials[renderer.materials.Length - 1].color = color;
         }
     }
 }
