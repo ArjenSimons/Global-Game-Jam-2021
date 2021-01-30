@@ -220,6 +220,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 4943738475356800204}
   grabPointLeft: {fileID: 4162628455502230474}
   grabPointRight: {fileID: 3518255930212725282}
+  crosshair: {fileID: 0}
   gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
   pauseChannel: {fileID: 11400000, guid: 13257d39a1b47ce47836ceddcb7b8c45, type: 2}
 --- !u!65 &591241237840048692
@@ -401,6 +402,10 @@ PrefabInstance:
       propertyPath: head
       value: 
       objectReference: {fileID: 4943738475356800204}
+    - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: bezierTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
       propertyPath: cameraTransform
       value: 
