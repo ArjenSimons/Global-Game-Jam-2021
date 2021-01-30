@@ -73,6 +73,8 @@ public class ItemManager : MonoBehaviour
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
+
+        nextFormBundleAmount = formAmountFirstDrop;
     }
 
     private void PopulateLists()
@@ -95,7 +97,6 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
-        nextFormBundleAmount = formAmountFirstDrop;
     }
 
     private void Update()

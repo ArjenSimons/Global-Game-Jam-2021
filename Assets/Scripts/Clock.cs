@@ -64,11 +64,14 @@ public class Clock : MonoBehaviour
 
     private void Awake()
     {
+        SetStartTime();
+    }
+
+    private void Start()
+    {
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
-
-        SetStartTime();
     }
 
     private void Update()
