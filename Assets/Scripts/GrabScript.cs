@@ -26,6 +26,9 @@ public class GrabScript : MonoBehaviour
     private AudioCueSO PaperLetGoAudioCue = null;
 
     [SerializeField]
+    private AudioCueSO ItemHeavyPickupAudioCue = null;
+
+    [SerializeField]
     private AudioConfigurationSO config = null;
 
     [Header("Channel Broadcasting on")]
@@ -105,6 +108,10 @@ public class GrabScript : MonoBehaviour
                     {
                         grabbable.IsGrabbed = true;
                         channel.RaiseEvent(config, PaperPickupAudioCue, grabbable.transform.position);
+                    }
+                    else
+                    {
+                        channel.RaiseEvent(config, ItemHeavyPickupAudioCue, transform.position);
                     }
                     break;
             }
