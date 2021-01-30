@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d19fa746b3d2d3e439f836d9dd1c947e, type: 3}
-  m_Name: RigidHit
+  m_Name: DropDoorCue
   m_EditorClassIdentifier: 
   loop: 0
-  audioClipsGroups: []
+  audioClipsGroups:
+  - sequenceMode: 0
+    audioClips:
+    - {fileID: 8300000, guid: cdd71ecab74dc3e4e8a7ce71e900dd0f, type: 3}

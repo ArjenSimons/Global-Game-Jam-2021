@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d19fa746b3d2d3e439f836d9dd1c947e, type: 3}
-  m_Name: DropDoorQue
+  m_Name: FaxCue
   m_EditorClassIdentifier: 
   loop: 0
   audioClipsGroups:
   - sequenceMode: 0
     audioClips:
-    - {fileID: 8300000, guid: cdd71ecab74dc3e4e8a7ce71e900dd0f, type: 3}
+    - {fileID: 8300000, guid: fad0e5faa22727e4a9d615d70c45b68d, type: 3}
