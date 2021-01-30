@@ -15,14 +15,44 @@ MonoBehaviour:
   startTime: 9
   endTime: 17
   durationOfOneHour: 60
+  audioCue: {fileID: 11400000, guid: b8def45b52788b244b4db636988bf615, type: 2}
+  config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
+  channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   textTime: {fileID: 6146043817486708142}
-  gameFlow: {fileID: 0}
+  gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
   onHalfHourPassed:
     m_PersistentCalls:
       m_Calls: []
+  onHourPassed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
+        m_MethodName: PrintSomeForms
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onWorkdayOver:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameFlowBackgroundFader, Assembly-CSharp
+        m_MethodName: OnWorkDayOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5951060533786304930
 GameObject:
   m_ObjectHideFlags: 0

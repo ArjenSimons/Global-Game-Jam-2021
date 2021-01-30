@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
-  m_Name: Umbrella
+  m_Script: {fileID: 11500000, guid: d19fa746b3d2d3e439f836d9dd1c947e, type: 3}
+  m_Name: FaxCue
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 2625306130920448417, guid: e7948076dc04d7746ae9663d0e68b14d, type: 3}
-  displayName: Umbrella
+  loop: 0
+  audioClipsGroups:
+  - sequenceMode: 0
+    audioClips:
+    - {fileID: 8300000, guid: fad0e5faa22727e4a9d615d70c45b68d, type: 3}
