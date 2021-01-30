@@ -65,7 +65,6 @@ public class DropPointStatusLight : MonoBehaviour
         else
         {
             //enque status if feedback is already being given
-            print($"enqueueing status ${status}");
             queuedStatusUpdates.Enqueue(status);
         }
     }
@@ -83,7 +82,6 @@ public class DropPointStatusLight : MonoBehaviour
     {
         if (queuedStatusUpdates.Count != 0)
         {
-            print("deceueing status");
             GiveFeedbackOnStatus(queuedStatusUpdates.Dequeue());
             return true;
         }
@@ -93,7 +91,6 @@ public class DropPointStatusLight : MonoBehaviour
 
     private void GiveFeedbackOnStatus(DropStatus status)
     {
-        print($"updating status ${status}");
         SetEmptyStatus();
 
         switch (status)
