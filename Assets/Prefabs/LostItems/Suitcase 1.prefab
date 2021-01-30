@@ -93,6 +93,7 @@ MonoBehaviour:
   renderersToColor:
   - {fileID: 8812174953290429216}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
+  CanTriggerDropOffButton: 1
 --- !u!1 &8812174953290429246
 GameObject:
   m_ObjectHideFlags: 0

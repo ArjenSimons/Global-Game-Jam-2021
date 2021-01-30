@@ -107,6 +107,7 @@ MonoBehaviour:
   renderersToColor:
   - {fileID: 2985314838943925893}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
+  CanTriggerDropOffButton: 1
 --- !u!1001 &4516105088885201409
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class Item : MonoBehaviour
     [SerializeField]
     private ItemSet items = null;
 
+    [Space]
+    public bool CanTriggerDropOffButton = false;
+
     public LostItem LostItem;
 
     private void Awake()
