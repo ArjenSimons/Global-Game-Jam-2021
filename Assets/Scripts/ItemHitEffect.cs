@@ -14,9 +14,8 @@ public class ItemHitEffect : MonoBehaviour
     [SerializeField]
     private AudioRequestChannelSO channel = null;
 
-    void OnCollisionEnter(Collision hit)
+    private void OnCollisionEnter(Collision hit)
     {
-        Debug.Log(hit.relativeVelocity.magnitude);
         if (hit.relativeVelocity.magnitude > 2.5f || !AudioManager.Instance.IsPlayingAudioCue(audioCue))
         {
             float tempVol = config.volume;

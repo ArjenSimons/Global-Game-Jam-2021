@@ -38,9 +38,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform grabPointRight;
 
+    [SerializeField]
+    private GameObject crosshair;
+
     [Header("Project References")]
     [SerializeField]
     private GameFlowSettings gameFlow = null;
+
+    [SerializeField]
+    private BoolChannel pauseChannel = null;
 
     private Vector3 playerVelocity = Vector3.zero;
 
@@ -56,15 +62,32 @@ public class PlayerController : MonoBehaviour
     private Vector3 startLocalCameraEulerAngles;
     private Vector3 startWorldPosition;
     private Vector3 startLocalEulerAngles;
+    private bool _canGrab;
+
+    public GrabScript LeftHand => grabScriptLeftHand;
+    public GrabScript RightHand => grabScriptRightHand;
+    public bool CanGrab
+    {
+        get
+        {
+            return _canGrab;
+        }
+        set
+        {
+            _canGrab = value;
+            crosshair.SetActive(_canGrab);
+        }
+    }
 
     private void Awake()
     {
-        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnTutorialStart += OnTutorialStart;
         gameFlow.OnGameEnd += OnGameEnd;
 
+        SetGameCursorActiveState(false);
+        pauseChannel.OnEventRaised += OnGamePause;
+
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         playerSpeed *= playerRigidbody.mass / 2;
 
         localCameraEulerAngles = cameraTransform.localEulerAngles;
@@ -72,6 +95,12 @@ public class PlayerController : MonoBehaviour
         startLocalCameraEulerAngles = localCameraEulerAngles;
         startWorldPosition = transform.position;
         startLocalEulerAngles = transform.localEulerAngles;
+    }
+
+    private void SetGameCursorActiveState(bool value)
+    {
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = value;
     }
 
     private void OnGameEnd()
@@ -93,7 +122,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnGameStart()
+    private void OnGamePause(bool value)
+    {
+        SetGameCursorActiveState(value);
+        Enable(!value);
+    }
+    
+    private void OnTutorialStart()
     {
         Enable(true);
     }
@@ -107,7 +142,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseMovement(cameraTransform);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && CanGrab)
         {
             grabScriptLeftHand.SelectItem();
         }
@@ -117,7 +152,7 @@ public class PlayerController : MonoBehaviour
             grabScriptLeftHand.DeselectItem();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && CanGrab)
         {
             grabScriptRightHand.SelectItem();
         }
@@ -131,11 +166,6 @@ public class PlayerController : MonoBehaviour
         {
             grabScriptLeftHand.ThrowItemsAway(throwingForce);
             grabScriptRightHand.ThrowItemsAway(throwingForce);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
         }
 
         if (Input.GetKey(KeyCode.W))

@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
-  m_Name: Jacket
+  m_Script: {fileID: 11500000, guid: 39c3ed26e51705b47892483a0df9cd28, type: 3}
+  m_Name: PauseChannel
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 3702940176441049158, guid: 9b07e7904e9005d44bb283296bc8d861, type: 3}
-  displayName: Jacket

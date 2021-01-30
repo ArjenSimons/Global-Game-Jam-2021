@@ -40,6 +40,22 @@ public class ItemManager : MonoBehaviour
     [SerializeField, Range(0f, 100f)]
     private float fillerDropPercentage = 40;
 
+    [Header("Tutorial Settings")]
+    [SerializeField]
+    private LostItem tutorialLostItem = default;
+
+    [SerializeField]
+    private GameObject prefabForm = null;
+
+    [SerializeField]
+    private Vector3 tutorialItemPosition = Vector3.zero;
+
+    [SerializeField]
+    private Vector3 tutorialFormPosition = Vector3.zero;
+
+    [SerializeField]
+    private Vector3 tutorialItemRotation = Vector3.zero;
+
     [Header("Sound")]
     [SerializeField]
     private AudioCueSO audioCue = null;
@@ -81,6 +97,7 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
+        gameFlow.OnTutorialStart += OnTutorialStart;
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
@@ -90,6 +107,11 @@ public class ItemManager : MonoBehaviour
 
     private void PopulateLists()
     {
+        fillerItems.Clear();
+        spawnableItems.Clear();
+        droppedItems.Clear();
+        requestedItems.Clear();
+
         foreach (ItemType type in itemTypes.Types)
         {
             foreach (ItemColor color in itemColors.Colors)
@@ -118,6 +140,37 @@ public class ItemManager : MonoBehaviour
             DropRandomItem();
         }
 #endif
+    }
+
+    private void OnTutorialStart()
+    {
+        spawnableItems.Add(tutorialLostItem);
+
+        // spawn this item and it's form. Reposition them
+        DropRandomItem(true);
+        LostItem lostItem = droppedItems[UnityEngine.Random.Range(0, droppedItems.Count)];
+        SpawnTutorialForm(lostItem);
+        Form form = formSet.GetMatchWithLostItem(lostItem);
+        Item item = itemSet.GetMatchWithLostItem(lostItem);
+
+        form.transform.position = tutorialFormPosition;
+        item.transform.position = tutorialItemPosition;
+        item.transform.rotation = Quaternion.Euler(tutorialItemRotation);
+    }
+
+    private void SpawnTutorialForm(LostItem lostItem)
+    {
+        Form form = Instantiate(prefabForm, Vector3.zero, transform.rotation).GetComponent<Form>();
+        form.SetText("John Doe", lostItem);
+        form.EnablePaper();
+        form.transform.position = tutorialFormPosition;
+    }
+
+    public void RespawnTutorialItem()
+    {
+        DropRandomItem(true);
+        LostItem lostItem = droppedItems[UnityEngine.Random.Range(0, droppedItems.Count)];
+        itemRequestedChannel.RaiseEvent(lostItem);
     }
 
     private void OnGameStart()

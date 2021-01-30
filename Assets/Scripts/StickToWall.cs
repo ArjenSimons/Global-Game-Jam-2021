@@ -15,8 +15,14 @@ public class StickToWall : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < grabbablesOnWall.Count; i++)
+        for (int i = grabbablesOnWall.Count - 1; i >= 0; i--)
         {
+            // remove potentially removed grabbables from list
+            if (grabbablesOnWall[i] == null)
+            {
+                grabbablesOnWall.RemoveAt(i);
+                continue;
+            }
             HandleStick(grabbablesOnWall[i], paperMinOffset + OffsetIncrement * i);
         }
     }
