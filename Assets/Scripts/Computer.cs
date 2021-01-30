@@ -62,6 +62,7 @@ public class Computer : MonoBehaviour
         scoresUpdatedChannel.OnEventRaised += SetTexts;
 
         gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameRestart += OnGameRestart;
     }
 
     private void OnGameEnd()
@@ -71,6 +72,14 @@ public class Computer : MonoBehaviour
         ApplyGamePlayResultsToEndGameText();
 
         isInEndGameScreen = true;
+    }
+
+    private void OnGameRestart()
+    {
+        ClearScreen();
+        SetupStartMenuFlow();
+
+        isInEndGameScreen = false;
     }
 
     private void Update()
@@ -92,12 +101,7 @@ public class Computer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            ClearScreen();
-            SetupStartMenuFlow();
-
             gameFlow.RaiseStartRestartEvent();
-
-            isInEndGameScreen = false;
         }
     }
 

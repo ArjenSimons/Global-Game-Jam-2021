@@ -61,10 +61,12 @@ public class Clock : MonoBehaviour
             onWorkdayOver.Invoke();
         }
 
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             onWorkdayOver.Invoke();
         }
+#endif
     }
 
     private void OnGameStart()
