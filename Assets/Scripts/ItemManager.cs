@@ -30,8 +30,13 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private float dropBurstInterval = 0.125f;
 
-    [SerializeField]
-    [Range(0f, 100f)]
+    [SerializeField, Min(1)]
+    private int formAmountFirstDrop = 2;
+
+    [SerializeField, Min(1)]
+    private float formAmountIncreaseRatio = 1.1f;
+
+    [SerializeField, Range(0f, 100f)]
     private float fillerDropPercentage = 40;
 
     [Header("Scene References")]
@@ -57,6 +62,7 @@ public class ItemManager : MonoBehaviour
     public List<LostItem> RequestedItems => requestedItems;
 
     private bool dropping;
+    private float nextFormBundleAmount;
 
     private void Awake()
     {
@@ -83,6 +89,7 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
+        nextFormBundleAmount = formAmountFirstDrop;
     }
 
     private void Update()
@@ -108,17 +115,13 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private bool DropRandomItem()
+    private bool DropRandomItem(bool forceSpawnNonFiller = false)
     {
-        if (UnityEngine.Random.Range(0f, 100f) < fillerDropPercentage)
-        {
-            LostItem item = GetRandomFillerItem();
-            thrashShute.DropItem(item);
-        }
-        else
+        if (forceSpawnNonFiller || UnityEngine.Random.Range(0f, 100f) > fillerDropPercentage)
         {
             if (spawnableItems.Count <= 0)
             {
+                Debug.LogWarning("There are not enough spawnable items to drop a new item!");
                 return false;
             }
 
@@ -126,12 +129,39 @@ public class ItemManager : MonoBehaviour
             spawnableItems.Remove(item);
             droppedItems.Add(item);
             thrashShute.DropItem(item);
-
-            //TODO: make sure this happens at random interfals
-            itemRequestedChannel.RaiseEvent(item);
+        }
+        else
+        {
+            LostItem item = GetRandomFillerItem();
+            thrashShute.DropItem(item);
         }
 
         return true;
+    }
+
+    public void PrintSomeForms()
+    {
+        // Spawn extra luggage if there isn't enough for the amount of new forms
+        int amountOfForms = (int)nextFormBundleAmount;
+        if (nextFormBundleAmount > droppedItems.Count)
+        {
+            for (int i = 0; i < amountOfForms - droppedItems.Count; i++)
+            {
+                DropRandomItem(true);
+            }
+            
+            amountOfForms = Mathf.Min(amountOfForms, droppedItems.Count);
+        }
+
+        // Print next few forms
+        for (int i = 0; i < amountOfForms; i++)
+        {
+            LostItem item = droppedItems[UnityEngine.Random.Range(0, droppedItems.Count)];
+            itemRequestedChannel.RaiseEvent(item);
+        }
+
+        // Increase amount of next form drop
+        nextFormBundleAmount *= formAmountIncreaseRatio;
     }
 
     public void RequestItem(LostItem item)
