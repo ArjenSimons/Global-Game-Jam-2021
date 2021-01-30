@@ -11,37 +11,81 @@ public class GrabScript : MonoBehaviour
     [SerializeField, Range(.1f, 10f)]
     private float maxRayDistance = 2f;
 
+    [SerializeField, Range(.1f, 1f)]
+    private float itemSlerpRotationSpeed = .1f;
+
+    [SerializeField]
+    private bool alwaysKeepDefaultRotation = false;
+
     [Header("References")]
     [SerializeField]
     private Transform grabStartPoint;
 
     [SerializeField]
+    private Transform grabEmptyPoint;
+
+    [SerializeField]
+    private Transform formTransform;
+
+    [SerializeField]
+    private GameObject player;
+
+    private BoxCollider playerCollider;
+    private Rigidbody playerRigidbody;
+
+    [SerializeField]
     private GameObject currentlyGrabbedObject = null;
+
+    void Awake()
+    {
+        if (player)
+        {
+            playerCollider = player.GetComponent<BoxCollider>();
+            playerRigidbody = player.GetComponent<Rigidbody>();
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        HandleSelectedItem();
+        if (!currentlyGrabbedObject) return;
+
+        if (currentlyGrabbedObject.TryGetComponent(out Form form))
+        {
+            HandleSelectedItem(formTransform, true);
+        } 
+        else
+        {
+            HandleSelectedItem(grabEmptyPoint);
+        }
     }
 
     // Handles what should happen when an item is in its selected list
-    private void HandleSelectedItem()
+    private void HandleSelectedItem(Transform transform, bool forceRotation = false)
     {
-        if (currentlyGrabbedObject)
+        Rigidbody currentObjectRigidbody = currentlyGrabbedObject.GetComponent<Rigidbody>();
+
+        if (alwaysKeepDefaultRotation || forceRotation )
         {
-            currentlyGrabbedObject.GetComponent<Rigidbody>().velocity = (transform.position - (currentlyGrabbedObject.transform.position + currentlyGrabbedObject.GetComponent<Rigidbody>().centerOfMass)) * magneticForce * Time.deltaTime;
+            SetItemRotationToDefault(transform);
         }
+
+        currentObjectRigidbody.velocity = (transform.position - (currentlyGrabbedObject.transform.position + currentObjectRigidbody.centerOfMass)) * magneticForce * Time.deltaTime + playerRigidbody.velocity;
+        currentObjectRigidbody.angularVelocity = Vector3.zero;
     }
 
     // When item needs to be selected
     public void SelectItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(grabStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, maxRayDistance))
+        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, maxRayDistance))
         {
-            if (hit.transform.tag == "PickupableItem")
+            switch (hit.transform.tag)
             {
-                currentlyGrabbedObject = hit.transform.gameObject;
+                case "PickupableItem":
+                    Physics.IgnoreCollision(playerCollider, hit.collider, true);
+                    currentlyGrabbedObject = hit.transform.gameObject;
+                    break;
             }
         }
     }
@@ -51,12 +95,24 @@ public class GrabScript : MonoBehaviour
     {
         if (!currentlyGrabbedObject) return;
 
+        Physics.IgnoreCollision(playerCollider, currentlyGrabbedObject.GetComponent<Collider>(), false);
         currentlyGrabbedObject = null;
+    }
+
+    public void SetItemRotationToDefault(Transform transform)
+    {
+        if (!currentlyGrabbedObject) return;
+
+        Quaternion defaultRotation = transform.rotation;
+
+        currentlyGrabbedObject.transform.rotation = Quaternion.Slerp(currentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed*10) * Time.deltaTime);
     }
 
     void OnDrawGizmos()
     {
+        if (!grabEmptyPoint || !grabStartPoint) return;
+
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(grabStartPoint.position, transform.TransformDirection(Vector3.forward) * maxRayDistance);
+        Gizmos.DrawRay(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward) * maxRayDistance);
     }
 }
