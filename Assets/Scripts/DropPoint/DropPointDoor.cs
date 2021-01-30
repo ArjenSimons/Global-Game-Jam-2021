@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DropPointDoor : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class DropPointDoor : MonoBehaviour
     [SerializeField]
     private EmptyChannel incrementIncorrectFormsChannel = null;
 
+    [Header("Unity Events")]
+    [SerializeField]
+    private ItemDeliveredEvent itemDelivered = null;
+
     private Vector3 openScale;
 
     private Vector3 openPosition;
@@ -54,10 +59,7 @@ public class DropPointDoor : MonoBehaviour
             var seq = LeanTween.sequence();
             seq.append(closeDelay);
             seq.append(LeanTween.moveLocal(gameObject, closePosition, closeTime));
-            seq.append(() =>
-            {
-                DropOffItems();
-            });
+            seq.append(DropOffItems);
             seq.append(closeTime);
             seq.append(LeanTween.moveLocal(gameObject, openPosition, closeTime));
             seq.append(() =>
@@ -135,5 +137,9 @@ public class DropPointDoor : MonoBehaviour
             itemManager.ReturnItem(item.LostItem);
         }
 
+        itemDelivered.Invoke(item, succes);
     }
+
+    [System.Serializable]
+    public class ItemDeliveredEvent : UnityEvent<Item, bool> { }
 }
