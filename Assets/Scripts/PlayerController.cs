@@ -41,12 +41,18 @@ public class PlayerController : MonoBehaviour
     private Vector2 rotation = new Vector2(0, 90);
     private Rigidbody playerRigidbody;
 
+    private bool pressW = false;
+    private bool pressA = false;
+    private bool pressS = false;
+    private bool pressD = false;
+
 
     void Awake()
     {
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerSpeed *= playerRigidbody.mass / 2;
 
     }
 
@@ -87,23 +93,62 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W)) 
         {
-            playerVelocity.x = 1;
-        } else if (Input.GetKey(KeyCode.S))
+            if (!pressW || !pressS)
+            {
+                playerVelocity.x = 1;
+            }
+            pressW = true;
+        }
+        else
         {
-            playerVelocity.x = -1;
-        } else
+            pressW = false;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (!pressS || !pressW)
+            {
+                playerVelocity.x = -1;
+            }
+            pressS = true;
+        }
+        else
+        {
+            pressS = false;
+        }
+
+        if (!(pressW ^ pressS))
         {
             playerVelocity.x = 0;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            playerVelocity.z = -1;
-        } else if (Input.GetKey(KeyCode.D))
-        {
-            playerVelocity.z = 1;
+            if (!pressA || !pressD)
+            {
+                playerVelocity.z = -1;
+            }
+            pressA = true;
         }
         else
+        {
+            pressA = false;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (!pressD || !pressA)
+            {
+                playerVelocity.z = 1;
+            }
+            pressD = true;
+        }
+        else
+        {
+            pressD = false;
+        }
+        
+        if (!(!pressA ^ !pressD))
         {
             playerVelocity.z = 0;
         }
