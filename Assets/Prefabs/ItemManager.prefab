@@ -50,6 +50,8 @@ MonoBehaviour:
   formAmountFirstDrop: 3
   formAmountIncreaseRatio: 1.4
   fillerDropPercentage: 40
+  audioCue: {fileID: 11400000, guid: c2371f377a81c2e4ea78b9630b924541, type: 2}
+  config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   thrashShute: {fileID: 0}
   itemTypes: {fileID: 11400000, guid: eb48b66ebb5daae4fb5db5f62112d1c1, type: 2}
   itemColors: {fileID: 11400000, guid: 55034f8f97d7a8d4da5d431a5a0bc713, type: 2}
@@ -57,3 +59,4 @@ MonoBehaviour:
   itemSet: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
   formSet: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
   itemRequestedChannel: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}
+  channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}

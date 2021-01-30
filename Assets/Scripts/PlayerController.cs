@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameFlowSettings gameFlow = null;
 
+    [SerializeField]
+    private BoolChannel pauseChannel = null;
+
     private Vector3 playerVelocity = Vector3.zero;
 
     private Rigidbody playerRigidbody;
@@ -62,9 +65,10 @@ public class PlayerController : MonoBehaviour
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameEnd += OnGameEnd;
 
+        SetGameCursorActiveState(false);
+        pauseChannel.OnEventRaised += OnGamePause;
+
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         playerSpeed *= playerRigidbody.mass / 2;
 
         localCameraEulerAngles = cameraTransform.localEulerAngles;
@@ -72,6 +76,12 @@ public class PlayerController : MonoBehaviour
         startLocalCameraEulerAngles = localCameraEulerAngles;
         startWorldPosition = transform.position;
         startLocalEulerAngles = transform.localEulerAngles;
+    }
+
+    private void SetGameCursorActiveState(bool value)
+    {
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = value;
     }
 
     private void OnGameEnd()
@@ -91,6 +101,12 @@ public class PlayerController : MonoBehaviour
         {
             Enable(false);
         }
+    }
+
+    private void OnGamePause(bool value)
+    {
+        SetGameCursorActiveState(value);
+        Enable(!value);
     }
 
     private void OnGameStart()
