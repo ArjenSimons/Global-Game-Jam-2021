@@ -17,6 +17,9 @@ public class Printer : MonoBehaviour
     [SerializeField]
     private FormSet forms = null;
 
+    [SerializeField]
+    private GameFlowSettings gameFlow = null;
+
     [Header("Scene References")]
     [SerializeField]
     private Transform printSpawn = null;
@@ -32,14 +35,23 @@ public class Printer : MonoBehaviour
     private void Start()
     {
         itemRequestedChannel.OnEventRaised += OnItemRequested;
+
+        if (gameFlow.StartAtComputer)
+        {
+            gameFlow.OnGameStart += OnGameStart;
+
+            PrintCredits();
+        }
     }
 
-    private void Update()
+    private void OnGameStart()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Print("John Doe", "Is anyone reading this");
-        }
+        //destroy credits
+    }
+
+    private void PrintCredits()
+    {
+        //print credits
     }
 
     private void OnItemRequested(LostItem lostItem)

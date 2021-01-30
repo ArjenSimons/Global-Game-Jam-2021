@@ -47,7 +47,9 @@ MonoBehaviour:
   dropInterval: 30
   dropRate: 15
   dropBurstInterval: 0.125
+  fillerDropPercentage: 40
   thrashShute: {fileID: 0}
   itemTypes: {fileID: 11400000, guid: eb48b66ebb5daae4fb5db5f62112d1c1, type: 2}
   itemColors: {fileID: 11400000, guid: 55034f8f97d7a8d4da5d431a5a0bc713, type: 2}
+  gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
   itemRequestedChannel: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}

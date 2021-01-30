@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    [SerializeField, Range (0f,100f)]
+    [SerializeField, Range(0f, 100f)]
     private float playerSpeed = .1f;
 
     [SerializeField, Range(0f, 20f)]
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("x component is Min & y component is Max")]
     private Vector2 clampAnglesY = new Vector2(0, 0);
 
-    [Header("References")]
+    [Header("Scene References")]
     [SerializeField]
     private GrabScript grabScriptLeftHand;
 
@@ -37,21 +37,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform grabPointRight;
 
+    [Header("Project References")]
+    [SerializeField]
+    private GameFlowSettings gameFlow = null;
+
     private Vector3 playerVelocity = Vector3.zero;
     private Vector2 rotation = new Vector2(0, 90);
     private Rigidbody playerRigidbody;
 
-
-    void Awake()
+    private void Awake()
     {
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerSpeed *= playerRigidbody.mass / 2;
-
     }
 
-    void Update()
+    private void Start()
+    {
+        if (gameFlow.StartAtComputer)
+        {
+            gameFlow.OnGameStart += OnGameStart;
+            Enable(false);
+        }
+    }
+
+    private void Update()
     {
         UpdateMouseMovement(cameraTransform);
 
@@ -59,7 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             grabScriptLeftHand.SelectItem();
         }
-        
+
         if (Input.GetMouseButtonUp(0))
         {
             grabScriptLeftHand.DeselectItem();
@@ -86,13 +97,15 @@ public class PlayerController : MonoBehaviour
             Application.Quit();
         }
 
-        if (Input.GetKey(KeyCode.W)) 
+        if (Input.GetKey(KeyCode.W))
         {
             playerVelocity.x = 1;
-        } else if (Input.GetKey(KeyCode.S))
+        }
+        else if (Input.GetKey(KeyCode.S))
         {
             playerVelocity.x = -1;
-        } else
+        }
+        else
         {
             playerVelocity.x = 0;
         }
@@ -100,7 +113,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             playerVelocity.z = -1;
-        } else if (Input.GetKey(KeyCode.D))
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             playerVelocity.z = 1;
         }
@@ -110,7 +124,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void OnGameStart()
+    {
+        Enable(true);
+        rotation = cameraTransform.eulerAngles;
+    }
+
+    private void Enable(bool value)
+    {
+        enabled = value;
+    }
+
+    private void FixedUpdate()
     {
         UpdateCharacterRotation(cameraTransform.eulerAngles.y);
         //playerRigidbody.velocity += (playerVelocity * Time.deltaTime * playerSpeed);
@@ -120,9 +145,8 @@ public class PlayerController : MonoBehaviour
         //playerRigidbody.velocity = (transform.forward * Time.fixedDeltaTime * playerSpeed * playerVelocity.x) + (transform.right * Time.fixedDeltaTime * playerSpeed * playerVelocity.z);
     }
 
-    void UpdateMouseMovement(Transform mouseTransform)
+    private void UpdateMouseMovement(Transform mouseTransform)
     {
-
         rotation.y += Input.GetAxis("Mouse X") * sensitivityY;
         rotation.x += -Input.GetAxis("Mouse Y") * sensitivityX;
 
@@ -133,15 +157,15 @@ public class PlayerController : MonoBehaviour
     }
 
     // only update y axis
-    void UpdateCharacterRotation(float currentRotationY)
+    private void UpdateCharacterRotation(float currentRotationY)
     {
         playerRigidbody.transform.eulerAngles = new Vector2(playerRigidbody.transform.eulerAngles.x, currentRotationY);
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         if (!grabPointLeft || !grabPointRight) return;
-        
+
         Gizmos.color = Color.red;
 
         Gizmos.DrawSphere(grabPointRight.position, .03f);

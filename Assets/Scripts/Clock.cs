@@ -14,9 +14,13 @@ public class Clock : MonoBehaviour
     [SerializeField]
     private float durationOfOneHour = 10;
 
-    [Header("References")]
+    [Header("Scene References")]
     [SerializeField]
     private TMP_Text textTime = null;
+
+    [Header("Project References")]
+    [SerializeField]
+    private GameFlowSettings gameFlow = null;
 
     [Header("Events")]
     public UnityEvent onWorkdayOver;
@@ -31,20 +35,41 @@ public class Clock : MonoBehaviour
     private int CurrentMinutes => Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
     private bool HalfWayToNextSecond => (Time.realtimeSinceStartup % 1) >= FIFTY_PERCENT;
 
-    void Start()
+    private bool timeIsPassing;
+
+    private void Start()
     {
-        currentTime = startTime;
+        SetStartTime();
+
+        if (gameFlow.StartAtComputer)
+        {
+            gameFlow.OnGameStart += OnGameStart;
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        currentTime += Time.deltaTime / durationOfOneHour;
+        if (timeIsPassing)
+        {
+            currentTime += Time.deltaTime / durationOfOneHour;
+        }
+
         SetTime();
 
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
             onWorkdayOver.Invoke();
         }
+    }
+
+    private void OnGameStart()
+    {
+        timeIsPassing = true;
+    }
+
+    private void SetStartTime()
+    {
+        currentTime = startTime;
     }
 
     private void SetTime()
