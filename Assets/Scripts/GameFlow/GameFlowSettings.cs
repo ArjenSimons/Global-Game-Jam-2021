@@ -8,6 +8,10 @@ public class GameFlowSettings : ScriptableObject
     public bool GameHasStarted = false;
 
     public Action OnGameStart;
+
+    public Action OnGameRestart;
+    public Action OnStartGameRestart;
+
     public Action OnGameEnd;
 
     private void OnEnable()
@@ -25,6 +29,32 @@ public class GameFlowSettings : ScriptableObject
         else
         {
             Debug.LogWarning("The game start event was raised but no one was listening. Make sure the player is in" +
+                "the scene to respond");
+        }
+    }
+
+    public void RaiseRestartEvent()
+    {
+        if (OnGameRestart != null)
+        {
+            OnGameRestart();
+        }
+        else
+        {
+            Debug.LogWarning("The game restart event was raised but no one was listening. Make sure the player is in" +
+                "the scene to respond");
+        }
+    }
+
+    public void RaiseStartRestartEvent()
+    {
+        if (OnStartGameRestart != null)
+        {
+            OnStartGameRestart();
+        }
+        else
+        {
+            Debug.LogWarning("The game restart event was raised but no one was listening. Make sure the player is in" +
                 "the scene to respond");
         }
     }

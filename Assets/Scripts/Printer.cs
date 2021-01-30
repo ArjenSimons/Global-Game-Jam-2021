@@ -16,9 +16,6 @@ public class Printer : MonoBehaviour
     private GameObject prefabForm = null;
 
     [SerializeField]
-    private FormSet forms = null;
-
-    [SerializeField]
     private GameFlowSettings gameFlow = null;
 
     [Header("Scene References")]
@@ -56,6 +53,7 @@ public class Printer : MonoBehaviour
 
     private void OnGameEnd()
     {
+        queuedItems.Clear();
         printing = false;
     }
 

@@ -65,6 +65,7 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
     }
 
@@ -96,7 +97,7 @@ public class ItemManager : MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyUp(KeyCode.Return) && dropping)
         {
             DropRandomItem();
         }
@@ -117,11 +118,14 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private void OnGameEnd()
+    private void OnGameRestart()
     {
         itemSet.DestroyAll();
         formSet.DestroyAll();
+    }
 
+    private void OnGameEnd()
+    {
         StopAllCoroutines();
 
         fillerItems.Clear();

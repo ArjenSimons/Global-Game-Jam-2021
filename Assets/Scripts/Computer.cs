@@ -95,6 +95,8 @@ public class Computer : MonoBehaviour
             ClearScreen();
             SetupStartMenuFlow();
 
+            gameFlow.RaiseStartRestartEvent();
+
             isInEndGameScreen = false;
         }
     }

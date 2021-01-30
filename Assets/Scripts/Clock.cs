@@ -41,11 +41,9 @@ public class Clock : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
-    }
 
-    private void Start()
-    {
         SetStartTime();
     }
 
@@ -74,9 +72,13 @@ public class Clock : MonoBehaviour
         timeIsPassing = true;
     }
 
-    private void OnGameEnd()
+    private void OnGameRestart()
     {
         SetStartTime();
+    }
+
+    private void OnGameEnd()
+    {
         timeIsPassing = false;
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,17 @@ public class GameFlowBackgroundFader : MonoBehaviour
         img = GetComponent<Image>();
         SetTransparant();
         FadeOut();
+
+        gameFlow.OnStartGameRestart += OnStartGameRestart;
+    }
+
+    private void OnStartGameRestart()
+    {
+        FadeIn().setOnComplete(() =>
+        {
+            gameFlow.RaiseRestartEvent();
+            FadeOut();
+        });
     }
 
     private void SetTransparant()
