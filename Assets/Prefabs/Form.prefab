@@ -836,7 +836,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &6709283689592248260
@@ -851,7 +851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f2147c0a3855e48889f0a764de096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperCollider: {fileID: 0}
   rigidBody: {fileID: 5298894705740395205}
   textName: {fileID: 7189565441851285174}
   textItem: {fileID: 3163956506121805670}

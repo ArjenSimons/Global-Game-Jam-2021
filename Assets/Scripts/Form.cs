@@ -20,6 +20,8 @@ public class Form : MonoBehaviour
 
     private Collider paperCollider;
 
+    public LostItem ItemDisplaying { get; private set; }
+
     private void Start()
     {
         paperCollider = GetComponent<Collider>();
@@ -33,6 +35,12 @@ public class Form : MonoBehaviour
         textItem.text = item;
         textColor.text = color;
         textRemarks.text = remarks;
+    }
+
+    public void SetText(string name, LostItem item)
+    {
+        SetText(name, item.ItemType.DisplayName, item.ItemColor.DisplayName);
+        ItemDisplaying = item;
     }
 
     public void EnablePaper()

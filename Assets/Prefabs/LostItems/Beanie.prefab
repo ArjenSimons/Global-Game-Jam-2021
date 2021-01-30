@@ -202,9 +202,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9156520473802553067}
   - component: {fileID: 7354284944121468485}
-  - component: {fileID: 3943531374784954902}
   - component: {fileID: 8365848069502970050}
   - component: {fileID: 2347528273170457126}
+  - component: {fileID: 4731396896354340495}
   m_Layer: 0
   m_Name: Beanie
   m_TagString: PickupableItem
@@ -242,22 +242,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3943531374784954902
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8062336948308127756}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0.06, z: 0}
 --- !u!114 &8365848069502970050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +273,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objects: []
+--- !u!65 &4731396896354340495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062336948308127756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.12925403, z: 0.2}
+  m_Center: {x: 0, y: 0.07399469, z: 0}
 --- !u!1 &9036443930660750224
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DropPointDoor : MonoBehaviour
@@ -5,9 +6,6 @@ public class DropPointDoor : MonoBehaviour
     [Header("Settings")]
     [SerializeField]
     private float closeDelay = 1.0f;
-
-    [SerializeField]
-    private float timeClosed = 0.5f;
 
     [SerializeField]
     private Vector3 closePosition = new Vector3(0, 1.05f, 0.1f);
@@ -21,6 +19,22 @@ public class DropPointDoor : MonoBehaviour
 
     [SerializeField]
     private ItemManager itemManager = null;
+
+    [Header("Project References")]
+    [SerializeField]
+    private FormSet formSet = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemRequestedChannel = null;
+
+    [SerializeField]
+    private EmptyChannel incrementCorrectFormsChannel = null;
+
+    [SerializeField]
+    private EmptyChannel incrementIncorrectFormsChannel = null;
+
+    private Vector3 openScale;
 
     private Vector3 openPosition;
 
@@ -42,7 +56,7 @@ public class DropPointDoor : MonoBehaviour
             seq.append(LeanTween.moveLocal(gameObject, closePosition, closeTime));
             seq.append(() =>
             {
-                DropOffItem();
+                DropOffItems();
             });
             seq.append(closeTime);
             seq.append(LeanTween.moveLocal(gameObject, openPosition, closeTime));
@@ -53,15 +67,73 @@ public class DropPointDoor : MonoBehaviour
         }
     }
 
-    private void DropOffItem()
+    private void DropOffItems()
     {
-        if (itemDropRecognizer.HasRecogizedItem)
+        if (itemDropRecognizer.HasRecogizedItems)
         {
-            if (itemManager.ReturnItem(itemDropRecognizer.RecognizedItem.GetComponentInParent<Item>().LostItem))
+            List<Item> items = itemDropRecognizer.Items;
+            List<Form> forms = itemDropRecognizer.Forms;
+
+            //destroy each item after checking if there is a form that matches it
+            for (int i = items.Count - 1; i >= 0; i--)
             {
-                Destroy(itemDropRecognizer.RecognizedItem);
-                //TODO: Add feedback for dropping off an item
+                Item item = items[i];
+                bool wasSuccesfull = false;
+
+                for (int j = 0; j < forms.Count; j++)
+                {
+                    Form form = forms[j];
+                    LostItem lostItem = item.LostItem;
+                    if (lostItem.Equals(form.ItemDisplaying))
+                    {
+                        Destroy(form.gameObject);
+                        forms.Remove(form);
+                        formSet.Remove(form);
+
+                        wasSuccesfull = true;
+
+                        break;
+                    }
+                }
+
+                OnItemDelivered(item, wasSuccesfull);
+                Destroy(item.gameObject);
+                items.Remove(item);
+            }
+
+            //remove leftover forms
+            for (int i = forms.Count - 1; i >= 0; i--)
+            {
+                Form form = forms[i];
+
+                //request new form based since matching item is still in the scene
+                itemRequestedChannel.RaiseEvent(form.ItemDisplaying);
+
+                Destroy(form.gameObject);
+                forms.Remove(form);
+                formSet.Remove(form);
             }
         }
+    }
+
+    private void OnItemDelivered(Item item, bool succes)
+    {
+        print($"item delivered: {item.LostItem.ItemType} {(succes ? "succesfully" : "unsuccesfully")}");
+        if (!succes)
+        {
+            Form matchingForm = formSet.GetMatchWithLostItem(item.LostItem);
+            if (matchingForm != null)
+            {
+                Destroy(matchingForm.gameObject);
+                itemManager.ReturnItem(item.LostItem);
+            }
+            incrementIncorrectFormsChannel.RaiseEvent();
+        }
+        else
+        {
+            incrementCorrectFormsChannel.RaiseEvent();
+            itemManager.ReturnItem(item.LostItem);
+        }
+
     }
 }

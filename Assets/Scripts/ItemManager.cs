@@ -2,6 +2,18 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
+enum fillerType
+{
+    Trolley,
+    Suitcase
+}
+
+enum fillerColor
+{
+    Black
+}
 
 public class ItemManager : MonoBehaviour
 {
@@ -18,6 +30,9 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private float dropBurstInterval = 0.125f;
 
+    [SerializeField] [Range(0f, 100f)]
+    private float fillerDropPercentage = 40;
+
     [Header("Scene References")]
     [SerializeField] private ThrashShute thrashShute = null;
 
@@ -30,6 +45,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
 
+    private List<LostItem> fillerItems = new List<LostItem>();
     private List<LostItem> spawnableItems = new List<LostItem>();
     private List<LostItem> droppedItems = new List<LostItem>();
     private List<LostItem> requestedItems = new List<LostItem>();
@@ -44,7 +60,15 @@ public class ItemManager : MonoBehaviour
             foreach (ItemColor color in itemColors.Colors)
             {
                 LostItem lostItem = new LostItem(type, color);
-                spawnableItems.Add(lostItem);
+
+                if (Enum.GetNames(typeof(fillerType)).Contains(type.DisplayName.ToString()) && Enum.GetNames(typeof(fillerColor)).Contains(color.DisplayName.ToString()))
+                {
+                    fillerItems.Add(lostItem);
+                }
+                else
+                {
+                    spawnableItems.Add(lostItem);
+                }
             }
         }
 
@@ -63,18 +87,28 @@ public class ItemManager : MonoBehaviour
 
     private bool DropRandomItem()
     {
-        if (spawnableItems.Count <= 0)
+
+        if (UnityEngine.Random.Range(0f, 100f) < fillerDropPercentage)
         {
-            return false;
+            LostItem item = GetRandomFillerItem();
+            thrashShute.DropItem(item);
+        }
+        else
+        {
+            if (spawnableItems.Count <= 0)
+            {
+                return false;
+            }
+
+            LostItem item = GetRandomItem();
+            spawnableItems.Remove(item);
+            droppedItems.Add(item);
+            thrashShute.DropItem(item);
+
+            //TODO: make sure this happens at random interfals
+            itemRequestedChannel.RaiseEvent(item);
         }
 
-        LostItem item = GetRandomItem();
-        spawnableItems.Remove(item);
-        droppedItems.Add(item);
-        thrashShute.DropItem(item);
-
-        //TODO: make sure this happens at random interfals
-        itemRequestedChannel.RaiseEvent(item);
         return true;
     }
 
@@ -86,8 +120,6 @@ public class ItemManager : MonoBehaviour
 
     public bool ReturnItem(LostItem item)
     {
-        if (!requestedItems.Contains(item)) return false;
-
         requestedItems.Remove(item);
         spawnableItems.Add(item);
 
@@ -98,6 +130,14 @@ public class ItemManager : MonoBehaviour
     {
         int randomIndex = UnityEngine.Random.Range(0, spawnableItems.Count);
         LostItem item = spawnableItems[randomIndex];
+
+        return item;
+    }
+
+    private LostItem GetRandomFillerItem()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, fillerItems.Count);
+        LostItem item = fillerItems[randomIndex];
 
         return item;
     }
