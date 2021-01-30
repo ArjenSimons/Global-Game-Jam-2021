@@ -105,7 +105,7 @@ public class Printer : MonoBehaviour
     public void Print(string name, string text)
     {
         printing = true;
-        channel.RaiseEvent(config, audioCue, Vector3.zero);
+        channel.RaiseEvent(config, audioCue, transform.position);
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText(name, "", "", text);
@@ -117,7 +117,7 @@ public class Printer : MonoBehaviour
     public void Print(LostItem lostItem)
     {
         printing = true;
-        channel.RaiseEvent(config, audioCue, Vector3.zero);
+        channel.RaiseEvent(config, audioCue, transform.position);
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText("John Doe", lostItem);
