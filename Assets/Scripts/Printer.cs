@@ -44,7 +44,7 @@ public class Printer : MonoBehaviour
     public void Print(LostItem lostItem)
     {
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
-        form.SetText("John Doe", lostItem.ItemType.DisplayName, lostItem.ItemColor.DisplayName);
+        form.SetText("John Doe", lostItem);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
     }
 }

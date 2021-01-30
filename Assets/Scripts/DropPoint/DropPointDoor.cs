@@ -1,5 +1,6 @@
 using BWolf.Utilities;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DropPointDoor : MonoBehaviour
@@ -42,18 +43,18 @@ public class DropPointDoor : MonoBehaviour
     {
         if (!droppingOfItem)
         {
-            StartCoroutine(DropOffItemBehindDoor());
+            StartCoroutine(DropOffItemsBehindDoor());
         }
     }
 
-    private IEnumerator DropOffItemBehindDoor()
+    private IEnumerator DropOffItemsBehindDoor()
     {
         droppingOfItem = true;
 
         yield return new WaitForSeconds(closeDelay);
         yield return Close();
 
-        DropOffItem();
+        DropOffItems();
 
         yield return new WaitForSeconds(timeClosed);
         yield return Open();
@@ -85,15 +86,52 @@ public class DropPointDoor : MonoBehaviour
         }
     }
 
-    private void DropOffItem()
+    private void DropOffItems()
     {
-        if (itemDropRecognizer.HasRecogizedItem)
+        if (itemDropRecognizer.HasRecogizedItems)
         {
-            if (itemManager.ReturnItem(itemDropRecognizer.RecognizedItem.GetComponentInParent<Item>().LostItem))
+            List<Item> items = itemDropRecognizer.Items;
+            List<Form> forms = itemDropRecognizer.Forms;
+
+            //destroy each item after checking if there is a form that matches it
+            for (int i = items.Count - 1; i >= 0; i--)
             {
-                Destroy(itemDropRecognizer.RecognizedItem);
-                //TODO: Add feedback for dropping off an item
+                Item item = items[i];
+                bool wasSuccesfull = false;
+
+                for (int j = 0; j < forms.Count; j++)
+                {
+                    Form form = forms[j];
+                    LostItem lostItem = item.LostItem;
+                    if (lostItem.Equals(form.ItemDisplaying))
+                    {
+                        Destroy(form.gameObject);
+                        forms.Remove(form);
+
+                        wasSuccesfull = true;
+
+                        break;
+                    }
+                }
+
+                OnItemDelivered(item, wasSuccesfull);
+                Destroy(item.gameObject);
+                items.Remove(item);
+            }
+
+            //remove leftover forms
+            for (int i = forms.Count - 1; i >= 0; i--)
+            {
+                Form form = forms[i];
+                Destroy(form.gameObject);
+                forms.Remove(form);
             }
         }
+    }
+
+    private void OnItemDelivered(Item item, bool succes)
+    {
+        print($"delivered item: {item} : {(succes ? "succesfully" : "unsuccesfully")}");
+        //TODO: implement scoring system on computer
     }
 }

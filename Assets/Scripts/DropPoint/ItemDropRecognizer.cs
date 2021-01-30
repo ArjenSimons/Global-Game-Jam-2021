@@ -1,27 +1,53 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ItemDropRecognizer : MonoBehaviour
 {
-    public GameObject RecognizedItem { get; private set; }
+    public List<Item> Items { get; } = new List<Item>();
+    public List<Form> Forms { get; } = new List<Form>();
 
-    public bool HasRecogizedItem
+    public bool HasRecogizedItems
     {
-        get { return RecognizedItem != null; }
+        get { return Items.Count != 0; }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PickupableItem"))
         {
-            RecognizedItem = other.gameObject;
+            Item item = other.GetComponent<Item>();
+            if (item != null)
+            {
+                Items.Add(item);
+            }
+            else
+            {
+                Form form = other.GetComponent<Form>();
+                if (form != null)
+                {
+                    Forms.Add(form);
+                }
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("PickupableItem") && other.gameObject == RecognizedItem)
+        if (other.CompareTag("PickupableItem"))
         {
-            RecognizedItem = null;
+            Item item = other.GetComponent<Item>();
+            if (item != null && Items.Contains(item))
+            {
+                Items.Remove(item);
+            }
+            else
+            {
+                Form form = other.GetComponent<Form>();
+                if (form != null && Forms.Contains(form))
+                {
+                    Forms.Remove(form);
+                }
+            }
         }
     }
 }

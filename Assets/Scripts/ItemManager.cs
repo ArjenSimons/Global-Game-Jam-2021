@@ -86,6 +86,7 @@ public class ItemManager : MonoBehaviour
 
     public bool ReturnItem(LostItem item)
     {
+        print($"returned:{item.ItemType.DisplayName}, {item.ItemColor.DisplayName}");
         if (!requestedItems.Contains(item)) return false;
 
         requestedItems.Remove(item);
