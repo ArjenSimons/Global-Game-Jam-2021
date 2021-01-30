@@ -75,7 +75,6 @@ public class Printer : MonoBehaviour
 
     private void OnItemRequested(LostItem lostItem)
     {
-        print("Test");
         if (!printing)
         {
             //if we are not printing, print the lost item immediately
