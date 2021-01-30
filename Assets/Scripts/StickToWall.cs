@@ -3,34 +3,35 @@ using UnityEngine;
 
 public class StickToWall : MonoBehaviour
 {
-    private Dictionary<Grabbable, float> grabbablesOnWall = new Dictionary<Grabbable, float>();
+    private List<Grabbable> grabbablesOnWall = new List<Grabbable>();
 
     [SerializeField, Min(0)]
-    private float paperDefaultOffset = 0.01f;
+    private float paperMinOffset = 0.01f;
 
     [SerializeField, Min(0)]
-    private float paperVariableOffset = 0.05f;
+    private float paperMaxOffset = 0.05f;
+
+    private float OffsetIncrement => (paperMaxOffset - paperMinOffset) / grabbablesOnWall.Count;
 
     private void Update()
     {
-        foreach (var pair in grabbablesOnWall)
+        for (int i = 0; i < grabbablesOnWall.Count; i++)
         {
-            HandleStick(pair.Key, pair.Value);
+            HandleStick(grabbablesOnWall[i], paperMinOffset + OffsetIncrement * i);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Form form = other.GetComponent<Form>();
-
         if (form == null)
         {
             return;
         }
 
         Grabbable grabbable = other.GetComponent<Grabbable>();
-        float offset = paperDefaultOffset + Random.Range(0, paperVariableOffset);
-        grabbablesOnWall.Add(grabbable, offset);
+        float offset = paperMinOffset + Random.Range(0, paperMaxOffset);
+        grabbablesOnWall.Add(grabbable);
         HandleStick(grabbable, offset);
 
     }
@@ -38,15 +39,13 @@ public class StickToWall : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Form form = other.GetComponent<Form>();
-
         if (form == null)
         {
             return;
         }
 
         Grabbable grabbable = other.GetComponent<Grabbable>();
-        float offset = grabbablesOnWall[grabbable];
-        HandleStick(grabbable, offset);
+        HandleStick(grabbable, paperMaxOffset);
         grabbablesOnWall.Remove(grabbable);
     }
 
