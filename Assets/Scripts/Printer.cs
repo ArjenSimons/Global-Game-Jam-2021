@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Printer : MonoBehaviour
 {
@@ -24,9 +25,13 @@ public class Printer : MonoBehaviour
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
 
+    private Queue<LostItem> queuedItems = new Queue<LostItem>();
+
+    private bool printing;
+
     private void Start()
     {
-        itemRequestedChannel.OnEventRaised += Print;
+        itemRequestedChannel.OnEventRaised += OnItemRequested;
     }
 
     private void Update()
@@ -37,19 +42,62 @@ public class Printer : MonoBehaviour
         }
     }
 
+    private void OnItemRequested(LostItem lostItem)
+    {
+        if (!printing)
+        {
+            //if we are not printing, print the lost item immediately
+            Print(lostItem);
+        }
+        else
+        {
+            //if the printer is already printing, enque the lost item
+            queuedItems.Enqueue(lostItem);
+        }
+    }
+
+    private void OnFormPrinted(Form form)
+    {
+        form.EnablePaper();
+
+        if (!TryDequeLostItem())
+        {
+            //if no lost items can be dequed, stop printing
+            printing = false;
+        }
+    }
+
+    private bool TryDequeLostItem()
+    {
+        if (queuedItems.Count != 0)
+        {
+            //if there are queued items to be dequed, dequeue a lost item to be printed
+            Print(queuedItems.Dequeue());
+            return true;
+        }
+
+        return false;
+    }
+
     public void Print(string name, string text)
     {
+        printing = true;
+
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText(name, "", "", text);
         forms.Add(form);
-        LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
+        LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration)
+            .setOnComplete(() => OnFormPrinted(form));
     }
 
     public void Print(LostItem lostItem)
     {
+        printing = true;
+
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText("John Doe", lostItem);
         forms.Add(form);
-        LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
+        LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration)
+            .setOnComplete(() => OnFormPrinted(form));
     }
 }
