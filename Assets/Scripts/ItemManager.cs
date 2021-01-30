@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using BWolf.Utilities.AudioPlaying;
 
 internal enum fillerType
 {
@@ -55,6 +56,13 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private Vector3 tutorialItemRotation = Vector3.zero;
 
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO audioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
     [Header("Scene References")]
     [SerializeField] private ThrashShute thrashShute = null;
 
@@ -72,6 +80,9 @@ public class ItemManager : MonoBehaviour
     [Header("Channel Broadcasting on")]
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
+
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     private List<LostItem> fillerItems = new List<LostItem>();
     private List<LostItem> spawnableItems = new List<LostItem>();
@@ -286,6 +297,10 @@ public class ItemManager : MonoBehaviour
 
     private IEnumerator DropItemsInBurst(int count)
     {
+        channel.RaiseEvent(config, audioCue, thrashShute.transform.position);
+
+        yield return new WaitForSeconds(1f);
+
         while (count != 0 && DropRandomItem())
         {
             yield return new WaitForSeconds(dropBurstInterval);

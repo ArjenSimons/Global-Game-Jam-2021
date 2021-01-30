@@ -569,8 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30c714181e851d44939e946f53aad67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperDefaultOffset: 0.01
-  paperVariableOffset: 0.05
+  paperMinOffset: 0.01
+  paperMaxOffset: 0.05
 --- !u!1 &3297574045251930574
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,8 +947,8 @@ MonoBehaviour:
 
     Maybe you can get Employee of the month!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 476fd16417c5cf643872e9a4e0a90a21, type: 2}
+  m_sharedMaterial: {fileID: 1073033316282894870, guid: 476fd16417c5cf643872e9a4e0a90a21, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

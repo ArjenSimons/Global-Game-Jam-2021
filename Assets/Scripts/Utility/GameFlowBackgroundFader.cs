@@ -32,11 +32,29 @@ public class GameFlowBackgroundFader : MonoBehaviour
         });
     }
 
-    private void SetTransparant()
+    public void SetTransparant()
     {
         Color color = img.color;
         color.a = 0;
         img.color = color;
+    }
+
+    public LTDescr FadeToTarget(float value, float time)
+    {
+        float clamped = Mathf.Clamp01(value);
+        float current = img.color.a;
+
+        LTSeq seq = LeanTween.sequence();
+        LTDescr fade = LeanTween.value(current, clamped, time).setOnUpdate(perc =>
+        {
+            Color color = img.color;
+            color.a = perc;
+            img.color = color;
+        });
+
+        seq.append(fade);
+
+        return fade;
     }
 
     public void FadeOut()

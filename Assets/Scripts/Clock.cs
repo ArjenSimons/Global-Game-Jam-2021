@@ -1,3 +1,4 @@
+using BWolf.Utilities.AudioPlaying;
 using System;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,17 @@ public class Clock : MonoBehaviour
 
     [SerializeField]
     private float durationOfOneHour = 10;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO audioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     [Header("Scene References")]
     [SerializeField]
@@ -72,6 +84,7 @@ public class Clock : MonoBehaviour
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameRestart += OnGameRestart;
         gameFlow.OnGameEnd += OnGameEnd;
+        //onWorkdayOver.AddListener(PlayEndGameAlarm);
     }
 
     private void Update()
@@ -113,6 +126,10 @@ public class Clock : MonoBehaviour
         {
             onHourPassed.Invoke();
         }
+        if (CurrentHours == endTime - 1 && CurrentMinutes == 58)
+        {
+            PlayEndGameAlarm();
+        }
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
             onWorkdayOver.Invoke();
@@ -140,5 +157,10 @@ public class Clock : MonoBehaviour
         string minutes = (CurrentMinutes < SINGLE_DIGIT_LIMIT ? "0" : string.Empty) + CurrentMinutes;
         string connector = HalfWayToNextSecond ? ":" : " ";
         textTime.text = hours + connector + minutes;
+    }
+
+    private void PlayEndGameAlarm()
+    {
+        channel.RaiseEvent(config, audioCue, transform.position);
     }
 }

@@ -37,6 +37,20 @@ namespace BWolf.Utilities.AudioPlaying
         [SerializeField]
         private AudioProfileSO[] profiles = null;
 
+        private static AudioManager instance = null;
+
+        public static AudioManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = GameObject.FindObjectOfType<AudioManager>(); ;
+                }
+                return instance;
+            }
+        }
+
         //A list containg emitters than are playing or pausing audio, which can be stopped, paused or resumed at any point
         private List<AudioEmitter> activeEmitters = new List<AudioEmitter>();
 
@@ -60,6 +74,19 @@ namespace BWolf.Utilities.AudioPlaying
             {
                 profile.LoadGroupVolumesFromFile();
             }
+        }
+
+        public bool IsPlayingAudioCue(AudioCueSO audioCue)
+        {
+            foreach(AudioEmitter emitter in activeEmitters)
+            {
+                if (audioCue.IsEmittedBy(emitter))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

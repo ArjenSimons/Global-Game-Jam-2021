@@ -39,7 +39,7 @@ public class GameFlowSettings : ScriptableObject
         if (OnGameStart != null)
         {
             OnGameStart();
-            GameHasStarted = false;
+            GameHasStarted = true;
         }
         else
         {

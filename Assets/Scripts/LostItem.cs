@@ -9,4 +9,9 @@ public struct LostItem
         ItemType = itemType;
         ItemColor = itemColor;
     }
+
+    public override string ToString()
+    {
+        return string.Format("{0} {1}", ItemColor.DisplayName, ItemType.DisplayName);
+    }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
   m_Name: Beanie
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 8062336948308127756, guid: 772e24684484fb84491f91b78e834a27, type: 3}
+  prefabItem: {fileID: 67591932327314466, guid: 781ba8694f6387e488b9b69631fc56a6, type: 3}
   displayName: Beanie
