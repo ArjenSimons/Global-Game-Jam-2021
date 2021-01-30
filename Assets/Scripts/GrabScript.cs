@@ -33,8 +33,7 @@ public class GrabScript : MonoBehaviour
     private BoxCollider playerCollider;
     private Rigidbody playerRigidbody;
 
-    [SerializeField]
-    private GameObject currentlyGrabbedObject = null;
+    public GameObject CurrentlyGrabbedObject { get; private set; }
 
     void Awake()
     {
@@ -48,9 +47,9 @@ public class GrabScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!currentlyGrabbedObject) return;
+        if (!CurrentlyGrabbedObject) return;
 
-        if (currentlyGrabbedObject.TryGetComponent(out Form form))
+        if (CurrentlyGrabbedObject.TryGetComponent(out Form form))
         {
             HandleSelectedItem(formTransform, true);
         } 
@@ -63,14 +62,14 @@ public class GrabScript : MonoBehaviour
     // Handles what should happen when an item is in its selected list
     private void HandleSelectedItem(Transform transform, bool forceRotation = false)
     {
-        Rigidbody currentObjectRigidbody = currentlyGrabbedObject.GetComponent<Rigidbody>();
+        Rigidbody currentObjectRigidbody = CurrentlyGrabbedObject.GetComponent<Rigidbody>();
 
         if (alwaysKeepDefaultRotation || forceRotation )
         {
             SetItemRotationToDefault(transform);
         }
 
-        currentObjectRigidbody.velocity = (transform.position - (currentlyGrabbedObject.transform.position + currentObjectRigidbody.centerOfMass)) * magneticForce * Time.fixedDeltaTime + playerRigidbody.velocity;
+        currentObjectRigidbody.velocity = (transform.position - (CurrentlyGrabbedObject.transform.position + currentObjectRigidbody.centerOfMass)) * magneticForce * Time.fixedDeltaTime + playerRigidbody.velocity;
         currentObjectRigidbody.angularVelocity = Vector3.zero;
     }
 
@@ -84,7 +83,13 @@ public class GrabScript : MonoBehaviour
             {
                 case "PickupableItem":
                     Physics.IgnoreCollision(playerCollider, hit.collider, true);
-                    currentlyGrabbedObject = hit.transform.gameObject;
+                    CurrentlyGrabbedObject = hit.transform.gameObject;
+
+                    Grabbable grabbable = CurrentlyGrabbedObject.GetComponent<Grabbable>();
+                    if (grabbable != null)
+                    {
+                        grabbable.IsGrabbed = true;
+                    }
                     break;
             }
         }
@@ -93,28 +98,38 @@ public class GrabScript : MonoBehaviour
     // When item needs to be deselected
     public void DeselectItem()
     {
-        if (!currentlyGrabbedObject) return;
+        if (!CurrentlyGrabbedObject) return;
 
-        Physics.IgnoreCollision(playerCollider, currentlyGrabbedObject.GetComponent<Collider>(), false);
-        currentlyGrabbedObject = null;
+        Physics.IgnoreCollision(playerCollider, CurrentlyGrabbedObject.GetComponent<Collider>(), false);
+        Grabbable grabbable = CurrentlyGrabbedObject.GetComponent<Grabbable>();
+        if (grabbable != null)
+        {
+            grabbable.IsGrabbed = false;
+        }
+        CurrentlyGrabbedObject = null;
     }
 
     public void ThrowItemsAway(float throwingForce)
     {
-        if (!currentlyGrabbedObject) return;
+        if (!CurrentlyGrabbedObject) return;
 
-        currentlyGrabbedObject.GetComponent<Rigidbody>().AddForce(grabStartPoint.TransformDirection(Vector3.forward) * throwingForce, ForceMode.VelocityChange);
-        Physics.IgnoreCollision(playerCollider, currentlyGrabbedObject.GetComponent<Collider>(), false);
-        currentlyGrabbedObject = null;
+        CurrentlyGrabbedObject.GetComponent<Rigidbody>().AddForce(grabStartPoint.TransformDirection(Vector3.forward) * throwingForce, ForceMode.VelocityChange);
+        Physics.IgnoreCollision(playerCollider, CurrentlyGrabbedObject.GetComponent<Collider>(), false);
+        Grabbable grabbable = CurrentlyGrabbedObject.GetComponent<Grabbable>();
+        if (grabbable != null)
+        {
+            grabbable.IsGrabbed = false;
+        }
+        CurrentlyGrabbedObject = null;
     }
 
     public void SetItemRotationToDefault(Transform transform)
     {
-        if (!currentlyGrabbedObject) return;
+        if (!CurrentlyGrabbedObject) return;
 
         Quaternion defaultRotation = transform.rotation;
 
-        currentlyGrabbedObject.transform.rotation = Quaternion.Slerp(currentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed*10) * Time.deltaTime);
+        CurrentlyGrabbedObject.transform.rotation = Quaternion.Slerp(CurrentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed*10) * Time.deltaTime);
     }
 
     void OnDrawGizmos()
