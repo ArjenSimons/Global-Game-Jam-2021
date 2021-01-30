@@ -14,6 +14,7 @@ public class Computer : MonoBehaviour
     private TMP_Text textIncorrectForms = null;
 
     [Header("Scene references")]
+    [SerializeField]
     private ScoresManager scoreManager = null;
 
     [Header("Channel Broadcasting on")]
