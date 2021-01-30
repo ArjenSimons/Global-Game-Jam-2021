@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magneticForce: 646
   maxRayDistance: 3
+  itemSlerpRotationSpeed: 0.6
   alwaysKeepDefaultRotation: 1
   grabStartPoint: {fileID: 3518255929231078291}
   grabEmptyPoint: {fileID: 3518255930212725282}
@@ -513,6 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magneticForce: 646
   maxRayDistance: 3
+  itemSlerpRotationSpeed: 0.6
   alwaysKeepDefaultRotation: 1
   grabStartPoint: {fileID: 3518255929231078291}
   grabEmptyPoint: {fileID: 4162628455502230474}

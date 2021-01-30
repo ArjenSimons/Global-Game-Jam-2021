@@ -11,6 +11,9 @@ public class GrabScript : MonoBehaviour
     [SerializeField, Range(.1f, 10f)]
     private float maxRayDistance = 2f;
 
+    [SerializeField, Range(.1f, 1f)]
+    private float itemSlerpRotationSpeed = .1f;
+
     [SerializeField]
     private bool alwaysKeepDefaultRotation = false;
 
@@ -82,7 +85,6 @@ public class GrabScript : MonoBehaviour
                 case "PickupableItem":
                     Physics.IgnoreCollision(playerCollider, hit.collider, true);
                     currentlyGrabbedObject = hit.transform.gameObject;
-                    SetItemRotationToDefault(grabEmptyPoint);
                     break;
             }
         }
@@ -101,9 +103,9 @@ public class GrabScript : MonoBehaviour
     {
         if (!currentlyGrabbedObject) return;
 
-        Vector3 defaultRotation = transform.eulerAngles;
+        Quaternion defaultRotation = transform.rotation;
 
-        currentlyGrabbedObject.transform.eulerAngles = defaultRotation;
+        currentlyGrabbedObject.transform.rotation = Quaternion.Slerp(currentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed*10) * Time.deltaTime);
     }
 
     void OnDrawGizmos()
