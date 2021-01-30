@@ -75,11 +75,6 @@ public class ItemManager : MonoBehaviour
         gameFlow.OnGameEnd += OnGameEnd;
     }
 
-    private void Start()
-    {
-        itemRequestedChannel.OnEventRaised += RequestItem;
-    }
-
     private void PopulateLists()
     {
         foreach (ItemType type in itemTypes.Types)
@@ -126,8 +121,6 @@ public class ItemManager : MonoBehaviour
             Debug.LogWarning("the item manager already started dropping items");
         }
     }
-
-<<<<<<< HEAD
 
     private void OnGameRestart()
     {
