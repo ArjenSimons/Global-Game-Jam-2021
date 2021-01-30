@@ -17,6 +17,9 @@ public class GrabScript : MonoBehaviour
     [SerializeField]
     private bool alwaysKeepDefaultRotation = false;
 
+    [SerializeField]
+    private LayerMask grabRayLayermask = 0;
+
     [Header("References")]
     [SerializeField]
     private Transform grabStartPoint;
@@ -78,7 +81,7 @@ public class GrabScript : MonoBehaviour
     public void SelectItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, maxRayDistance))
+        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, maxRayDistance, grabRayLayermask))
         {
             switch (hit.transform.tag)
             {
