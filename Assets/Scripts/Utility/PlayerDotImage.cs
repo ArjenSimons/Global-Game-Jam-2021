@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnableImageOnGameStart : MonoBehaviour
+public class PlayerDotImage : MonoBehaviour
 {
     [SerializeField]
     private GameFlowSettings gameFlow = null;
+
+    [SerializeField]
+    private BoolChannel pauseChannel = null;
 
     private Image img;
 
@@ -15,15 +18,27 @@ public class EnableImageOnGameStart : MonoBehaviour
 
         gameFlow.OnGameStart += OnGameStart;
         gameFlow.OnGameEnd += OnGameEnd;
+
+        pauseChannel.OnEventRaised += OnGamePause;
+    }
+
+    private void OnGamePause(bool value)
+    {
+        EnableImage(!value);
     }
 
     private void OnGameEnd()
     {
-        img.enabled = false;
+        EnableImage(false);
     }
 
     private void OnGameStart()
     {
-        img.enabled = true;
+        EnableImage(true);
+    }
+
+    private void EnableImage(bool value)
+    {
+        img.enabled = value;
     }
 }
