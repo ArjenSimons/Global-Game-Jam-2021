@@ -7,7 +7,20 @@ public class Item : MonoBehaviour
     [SerializeField]
     private List<MeshRenderer> renderersToColor = null;
 
+    [SerializeField]
+    private ItemSet items = null;
+
     public LostItem LostItem;
+
+    private void Awake()
+    {
+        items.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        items.Remove(this);
+    }
 
     public void SetColor(Color color)
     {

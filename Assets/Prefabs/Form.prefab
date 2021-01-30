@@ -858,6 +858,7 @@ MonoBehaviour:
   textItem: {fileID: 3163956506121805670}
   textColor: {fileID: 3410014719009461647}
   textRemarks: {fileID: 4583463994389239110}
+  formSet: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
 --- !u!114 &-4189910323730010801
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +14,12 @@ public class EnableImageOnGameStart : MonoBehaviour
         img.enabled = false;
 
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        img.enabled = false;
     }
 
     private void OnGameStart()

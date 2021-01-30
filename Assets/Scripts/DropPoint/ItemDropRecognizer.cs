@@ -16,14 +16,14 @@ public class ItemDropRecognizer : MonoBehaviour
         if (other.CompareTag("PickupableItem"))
         {
             Item item = other.GetComponent<Item>();
-            if (item != null)
+            if (item != null && !Items.Contains(item))
             {
                 Items.Add(item);
             }
             else
             {
                 Form form = other.GetComponent<Form>();
-                if (form != null)
+                if (form != null && !Forms.Contains(form))
                 {
                     Forms.Add(form);
                 }

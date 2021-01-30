@@ -49,6 +49,10 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private GameFlowSettings gameFlow = null;
 
+    [SerializeField] private ItemSet itemSet = null;
+
+    [SerializeField] private FormSet formSet = null;
+
     [Header("Channel Broadcasting on")]
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
@@ -67,9 +71,13 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameRestart += OnGameRestart;
+        gameFlow.OnGameEnd += OnGameEnd;
+
+        nextFormBundleAmount = formAmountFirstDrop;
     }
 
-    private void Start()
+    private void PopulateLists()
     {
         foreach (ItemType type in itemTypes.Types)
         {
@@ -89,13 +97,12 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
-        nextFormBundleAmount = formAmountFirstDrop;
     }
 
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyUp(KeyCode.Return) && dropping)
         {
             DropRandomItem();
         }
@@ -107,12 +114,31 @@ public class ItemManager : MonoBehaviour
         if (!dropping)
         {
             dropping = true;
+            PopulateLists();
             StartCoroutine(DropAtInterval());
         }
         else
         {
             Debug.LogWarning("the item manager already started dropping items");
         }
+    }
+
+    private void OnGameRestart()
+    {
+        itemSet.DestroyAll();
+        formSet.DestroyAll();
+    }
+
+    private void OnGameEnd()
+    {
+        StopAllCoroutines();
+
+        fillerItems.Clear();
+        spawnableItems.Clear();
+        droppedItems.Clear();
+        requestedItems.Clear();
+
+        dropping = false;
     }
 
     private bool DropRandomItem(bool forceSpawnNonFiller = false)
@@ -145,11 +171,11 @@ public class ItemManager : MonoBehaviour
         int amountOfForms = (int)nextFormBundleAmount;
         if (nextFormBundleAmount > droppedItems.Count)
         {
-            for (int i = 0; i < amountOfForms - droppedItems.Count; i++)
+            int amount = amountOfForms - droppedItems.Count;
+            for (int i = 0; i < amount; i++)
             {
                 DropRandomItem(true);
             }
-            
             amountOfForms = Mathf.Min(amountOfForms, droppedItems.Count);
         }
 
@@ -200,14 +226,13 @@ public class ItemManager : MonoBehaviour
 
         while (true)
         {
-            yield return DropItemsInBurst();
+            yield return DropItemsInBurst(dropRate);
             yield return new WaitForSeconds(dropInterval);
         }
     }
 
-    private IEnumerator DropItemsInBurst()
+    private IEnumerator DropItemsInBurst(int count)
     {
-        int count = dropRate;
         while (count != 0 && DropRandomItem())
         {
             yield return new WaitForSeconds(dropBurstInterval);

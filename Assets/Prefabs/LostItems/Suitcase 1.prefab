@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8812174952400255057}
   - component: {fileID: 8812174952400255056}
   - component: {fileID: 5280807879443779235}
-  - component: {fileID: 1004717193966179046}
+  - component: {fileID: 1083569314645981485}
   m_Layer: 0
   m_Name: Suitcase 1
   m_TagString: PickupableItem
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8812174952400255087}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.19, y: 0.587, z: 1.161}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8812174953290429218}
@@ -93,7 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderersToColor:
   - {fileID: 8812174953290429216}
---- !u!114 &1004717193966179046
+  items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
+--- !u!114 &1083569314645981485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

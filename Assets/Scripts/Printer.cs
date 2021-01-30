@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 using BWolf.Utilities.AudioPlaying;
 
 public class Printer : MonoBehaviour
@@ -23,9 +24,6 @@ public class Printer : MonoBehaviour
     private GameObject prefabForm = null;
 
     [SerializeField]
-    private FormSet forms = null;
-
-    [SerializeField]
     private GameFlowSettings gameFlow = null;
 
     [Header("Scene References")]
@@ -43,14 +41,18 @@ public class Printer : MonoBehaviour
 
     private bool printing;
 
+    private void Awake()
+    {
+        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
     private void Start()
     {
         itemRequestedChannel.OnEventRaised += OnItemRequested;
 
         if (gameFlow.StartAtComputer)
         {
-            gameFlow.OnGameStart += OnGameStart;
-
             PrintCredits();
         }
     }
@@ -58,6 +60,12 @@ public class Printer : MonoBehaviour
     private void OnGameStart()
     {
         //destroy credits
+    }
+
+    private void OnGameEnd()
+    {
+        queuedItems.Clear();
+        printing = false;
     }
 
     private void PrintCredits()
@@ -109,7 +117,6 @@ public class Printer : MonoBehaviour
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText(name, "", "", text);
-        forms.Add(form);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration)
             .setOnComplete(() => OnFormPrinted(form));
     }
@@ -121,7 +128,6 @@ public class Printer : MonoBehaviour
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText("John Doe", lostItem);
-        forms.Add(form);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration)
             .setOnComplete(() => OnFormPrinted(form));
     }
