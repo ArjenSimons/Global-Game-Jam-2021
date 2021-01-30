@@ -112,6 +112,7 @@ public class DropPointDoor : MonoBehaviour
 
     private void OnItemDelivered(Item item, bool succes)
     {
+        print($"item delivered: {item.LostItem.ItemType} {(succes ? "succesfully" : "unsuccesfully")}");
         if (!succes)
         {
             Form matchingForm = formSet.GetMatchWithLostItem(item.LostItem);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "RuntimeSets/Forms")]
@@ -9,7 +7,6 @@ public class FormSet : RuntimeSet<Form>
     {
         foreach (Form form in set)
         {
-            Debug.Log(form);
             if (lostItem.Equals(form.ItemDisplaying))
             {
                 return form;
