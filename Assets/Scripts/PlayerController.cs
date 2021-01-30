@@ -168,11 +168,6 @@ public class PlayerController : MonoBehaviour
             grabScriptRightHand.ThrowItemsAway(throwingForce);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
         if (Input.GetKey(KeyCode.W))
         {
             if (!pressW || !pressS)
