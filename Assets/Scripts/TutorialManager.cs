@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AnsweringMachine : MonoBehaviour
+public class TutorialManager : MonoBehaviour
 {
     [SerializeField]
     private GameFlowSettings gameFlowSettings = null;
