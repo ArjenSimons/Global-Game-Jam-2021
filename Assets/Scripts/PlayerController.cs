@@ -19,13 +19,19 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    private GrabScript grabScript;
+    private GrabScript grabScriptLeftHand;
+
+    [SerializeField]
+    private GrabScript grabScriptRightHand;
 
     [SerializeField]
     private Transform cameraTransform;
 
     [SerializeField]
-    private Transform grabPoint;
+    private Transform grabPointLeft;
+
+    [SerializeField]
+    private Transform grabPointRight;
 
     private Vector3 playerVelocity = Vector3.zero;
     private Vector2 rotation = new Vector2(0, 90);
@@ -35,33 +41,43 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
     }
 
     void Update()
     {
         UpdateMouseMovement(cameraTransform);
 
-
         if (Input.GetMouseButtonDown(0))
         {
-            grabScript.SelectItem();
+            grabScriptLeftHand.SelectItem();
         }
         
         if (Input.GetMouseButtonUp(0))
         {
-            grabScript.DeselectItem();
+            grabScriptLeftHand.DeselectItem();
         }
 
-
-        // Unlock and show cursor when right mouse button released
         if (Input.GetMouseButtonDown(1))
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            grabScriptRightHand.SelectItem();
         }
+
         if (Input.GetMouseButtonUp(1))
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            grabScriptRightHand.DeselectItem();
+        }
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    grabScriptLeftHand.SetItemRotationToDefault();
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
 
         if (Input.GetKey(KeyCode.W)) 
@@ -97,19 +113,6 @@ public class PlayerController : MonoBehaviour
         //playerRigidbody.velocity = (transform.forward * Time.fixedDeltaTime * playerSpeed * playerVelocity.x) + (transform.right * Time.fixedDeltaTime * playerSpeed * playerVelocity.z);
     }
 
-    void SetPlayerVelocity(string directionName, int directionScalar)
-    {
-        if (directionName == "x")
-        {
-            playerVelocity.x = directionScalar;
-        }
-        
-        if (directionName == "z")
-        {
-            playerVelocity.z = directionScalar;
-        }
-    }
-
     void UpdateMouseMovement(Transform mouseTransform)
     {
 
@@ -130,8 +133,11 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (!grabPointLeft || !grabPointRight) return;
+        
         Gizmos.color = Color.red;
 
-        Gizmos.DrawSphere(grabPoint.position, .1f);
+        Gizmos.DrawSphere(grabPointRight.position, .1f);
+        Gizmos.DrawSphere(grabPointLeft.position, .1f);
     }
 }

@@ -24,6 +24,9 @@ public class DropPointDoor : MonoBehaviour
     [SerializeField]
     private ItemDropRecognizer itemDropRecognizer = null;
 
+    [SerializeField]
+    private ItemManager itemManager = null;
+
     private Vector3 openScale;
     private Vector3 openPosition;
 
@@ -86,7 +89,11 @@ public class DropPointDoor : MonoBehaviour
     {
         if (itemDropRecognizer.HasRecogizedItem)
         {
-            Destroy(itemDropRecognizer.RecognizedItem); //TODO: implement actual drop off logic
+            if (itemManager.ReturnItem(itemDropRecognizer.RecognizedItem.GetComponentInParent<Item>().LostItem))
+            {
+                Destroy(itemDropRecognizer.RecognizedItem);
+                //TODO: Add feedback for dropping off an item
+            }
         }
     }
 }

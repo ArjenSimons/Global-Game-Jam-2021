@@ -26,14 +26,16 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private ItemColors itemColors = null;
 
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemRequestedChannel = null;
+
     private List<LostItem> spawnableItems = new List<LostItem>();
     private List<LostItem> droppedItems = new List<LostItem>();
     private List<LostItem> requestedItems = new List<LostItem>();
 
     public List<LostItem> DroppedItems => droppedItems;
     public List<LostItem> RequestedItems => requestedItems;
-
-    public event Action OnItemDrop;
 
     private void Start()
     {
@@ -45,6 +47,8 @@ public class ItemManager : MonoBehaviour
                 spawnableItems.Add(lostItem);
             }
         }
+
+        itemRequestedChannel.OnEventRaised += RequestItem;
 
         StartCoroutine(DropAtInterval());
     }
@@ -68,19 +72,26 @@ public class ItemManager : MonoBehaviour
         spawnableItems.Remove(item);
         droppedItems.Add(item);
         thrashShute.DropItem(item);
+
+        //TODO: make sure this happens at random interfals
+        itemRequestedChannel.RaiseEvent(item);
         return true;
     }
 
-    private void RequestItem(LostItem item)
+    public void RequestItem(LostItem item)
     {
         droppedItems.Remove(item);
         requestedItems.Add(item);
     }
 
-    private void ReturnItem(LostItem item)
+    public bool ReturnItem(LostItem item)
     {
+        if (!requestedItems.Contains(item)) return false;
+
         requestedItems.Remove(item);
         spawnableItems.Add(item);
+
+        return true;
     }
 
     private LostItem GetRandomItem()
