@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
   m_Name: Cap
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 2100868686056283616, guid: cdb9bb69b78040c4f83bccacf2972626, type: 3}
+  prefabItem: {fileID: 2562296957824027846, guid: f239c28b5298f814ba7c059e7b663be3, type: 3}
   displayName: Cap
