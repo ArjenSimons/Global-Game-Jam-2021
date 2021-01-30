@@ -17,7 +17,7 @@ public class ItemHitEffect : MonoBehaviour
     void OnCollisionEnter(Collision hit)
     {
         Debug.Log(hit.relativeVelocity.magnitude);
-        if (hit.relativeVelocity.magnitude > 2)
+        if (hit.relativeVelocity.magnitude > 2.5f)
         {
             float tempVol = config.volume;
 
