@@ -17,7 +17,7 @@ public class ItemHitEffect : MonoBehaviour
     void OnCollisionEnter(Collision hit)
     {
         Debug.Log(hit.relativeVelocity.magnitude);
-        if (hit.relativeVelocity.magnitude > 2.5f)
+        if (hit.relativeVelocity.magnitude > 2.5f || !AudioManager.Instance.IsPlayingAudioCue(audioCue))
         {
             float tempVol = config.volume;
 

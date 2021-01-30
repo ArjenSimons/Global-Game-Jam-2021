@@ -54,8 +54,6 @@ namespace BWolf.Utilities.AudioPlaying
         //A list containg emitters than are playing or pausing audio, which can be stopped, paused or resumed at any point
         private List<AudioEmitter> activeEmitters = new List<AudioEmitter>();
 
-        public List<AudioEmitter> ActiveEmitters => activeEmitters;
-
         private void Awake()
         {
             sfxChannel.OnRequestRaised += PlayAudioCue;
@@ -76,6 +74,19 @@ namespace BWolf.Utilities.AudioPlaying
             {
                 profile.LoadGroupVolumesFromFile();
             }
+        }
+
+        public bool IsPlayingAudioCue(AudioCueSO audioCue)
+        {
+            foreach(AudioEmitter emitter in activeEmitters)
+            {
+                if (audioCue.IsEmittedBy(emitter))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
