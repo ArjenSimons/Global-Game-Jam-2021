@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,6 +25,7 @@ public class Clock : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onHalfHourPassed;
+
     public UnityEvent onHourPassed;
     public UnityEvent onWorkdayOver;
 
@@ -35,6 +37,7 @@ public class Clock : MonoBehaviour
     private const float SINGLE_DIGIT_LIMIT = 10;
 
     private int CurrentHours => Mathf.FloorToInt(currentTime);
+
     private int CurrentMinutes
     {
         get
@@ -54,18 +57,21 @@ public class Clock : MonoBehaviour
             CheckEvents();
         }
     }
+
     private bool HalfWayToNextSecond => (Time.realtimeSinceStartup % 1) >= FIFTY_PERCENT;
 
     private bool timeIsPassing;
 
-    private void Start()
+    private void Awake()
     {
         SetStartTime();
+    }
 
-        if (gameFlow.StartAtComputer)
-        {
-            gameFlow.OnGameStart += OnGameStart;
-        }
+    private void Start()
+    {
+        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameRestart += OnGameRestart;
+        gameFlow.OnGameEnd += OnGameEnd;
     }
 
     private void Update()
@@ -77,6 +83,18 @@ public class Clock : MonoBehaviour
         }
 
         SetTime();
+
+        if (CurrentHours == endTime && CurrentMinutes == 0)
+        {
+            onWorkdayOver.Invoke();
+        }
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            onWorkdayOver.Invoke();
+        }
+#endif
     }
 
     private void OnGameStart()
@@ -99,6 +117,16 @@ public class Clock : MonoBehaviour
         {
             onWorkdayOver.Invoke();
         }
+    }
+
+    private void OnGameRestart()
+    {
+        SetStartTime();
+    }
+
+    private void OnGameEnd()
+    {
+        timeIsPassing = false;
     }
 
     private void SetStartTime()

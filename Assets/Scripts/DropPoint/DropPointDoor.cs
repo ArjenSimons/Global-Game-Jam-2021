@@ -93,7 +93,6 @@ public class DropPointDoor : MonoBehaviour
         {
             List<Item> items = itemDropRecognizer.Items;
             List<Form> forms = itemDropRecognizer.Forms;
-
             //destroy each item after checking if there is a form that matches it
             for (int i = items.Count - 1; i >= 0; i--)
             {
@@ -108,7 +107,6 @@ public class DropPointDoor : MonoBehaviour
                     {
                         Destroy(form.gameObject);
                         forms.Remove(form);
-                        formSet.Remove(form);
 
                         wasSuccesfull = true;
 
@@ -131,14 +129,13 @@ public class DropPointDoor : MonoBehaviour
 
                 Destroy(form.gameObject);
                 forms.Remove(form);
-                formSet.Remove(form);
             }
         }
     }
 
     private void OnItemDelivered(Item item, bool succes)
     {
-        print($"item delivered: {item.LostItem.ItemType} {(succes ? "succesfully" : "unsuccesfully")}");
+        print($"item delivered: {item.LostItem} {(succes ? "succesfully" : "unsuccesfully")}");
         if (!succes)
         {
             Form matchingForm = formSet.GetMatchWithLostItem(item.LostItem);

@@ -307,6 +307,8 @@ MonoBehaviour:
   - {fileID: 688285537693119951}
   - {fileID: 5509564307755215126}
   - {fileID: 4564881381795313430}
+  items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
+  CanTriggerDropOffButton: 1
 --- !u!114 &2568561615252307275
 MonoBehaviour:
   m_ObjectHideFlags: 0

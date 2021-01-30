@@ -15,4 +15,13 @@ public class FormSet : RuntimeSet<Form>
 
         return null;
     }
+
+    public void DestroyAll()
+    {
+        for (int i = set.Count - 1; i >= 0; i--)
+        {
+            Destroy(set[i].gameObject);
+            set.RemoveAt(i);
+        }
+    }
 }

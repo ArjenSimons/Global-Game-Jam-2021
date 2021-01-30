@@ -49,6 +49,10 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private GameFlowSettings gameFlow = null;
 
+    [SerializeField] private ItemSet itemSet = null;
+
+    [SerializeField] private FormSet formSet = null;
+
     [Header("Channel Broadcasting on")]
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
@@ -67,9 +71,13 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameRestart += OnGameRestart;
+        gameFlow.OnGameEnd += OnGameEnd;
+
+        nextFormBundleAmount = formAmountFirstDrop;
     }
 
-    private void Start()
+    private void PopulateLists()
     {
         foreach (ItemType type in itemTypes.Types)
         {
@@ -89,13 +97,12 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
-        nextFormBundleAmount = formAmountFirstDrop;
     }
 
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.Return) && dropping)
         {
             DropRandomItem();
         }
@@ -107,12 +114,31 @@ public class ItemManager : MonoBehaviour
         if (!dropping)
         {
             dropping = true;
+            PopulateLists();
             StartCoroutine(DropAtInterval());
         }
         else
         {
             Debug.LogWarning("the item manager already started dropping items");
         }
+    }
+
+    private void OnGameRestart()
+    {
+        itemSet.DestroyAll();
+        formSet.DestroyAll();
+    }
+
+    private void OnGameEnd()
+    {
+        StopAllCoroutines();
+
+        fillerItems.Clear();
+        spawnableItems.Clear();
+        droppedItems.Clear();
+        requestedItems.Clear();
+
+        dropping = false;
     }
 
     private bool DropRandomItem(bool forceSpawnNonFiller = false)

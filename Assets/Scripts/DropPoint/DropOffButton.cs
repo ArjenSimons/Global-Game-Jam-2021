@@ -16,6 +16,9 @@ public class DropOffButton : MonoBehaviour
     [SerializeField]
     private float minRangeForInteraction = 2.0f;
 
+    [SerializeField]
+    private float minRangeForObjectTrigger = 0.5f;
+
     [Header("Events")]
     [SerializeField]
     private UnityEvent OnPress = null;
@@ -24,6 +27,7 @@ public class DropOffButton : MonoBehaviour
     private bool isBeingPressed;
 
     private float sqrMinRangeForInteraction;
+    private float sqrMinRangeForObjectTrigger;
 
     private Transform tfMainCamera;
 
@@ -32,13 +36,14 @@ public class DropOffButton : MonoBehaviour
         tfMainCamera = Camera.main.transform;
 
         sqrMinRangeForInteraction = minRangeForInteraction * minRangeForInteraction;
+        sqrMinRangeForObjectTrigger = minRangeForObjectTrigger * minRangeForObjectTrigger;
     }
 
     private void Update()
     {
-        if (!isBeingPressed && hasFocus && Input.GetMouseButtonDown(0))
+        if (hasFocus && Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(Press());
+            TryPress();
         }
     }
 
@@ -55,12 +60,34 @@ public class DropOffButton : MonoBehaviour
         hasFocus = false;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Item item = collision.gameObject.GetComponentInParent<Item>();
+        if (item != null && item.CanTriggerDropOffButton && IsInObjectTriggerRange(item.transform.position))
+        {
+            TryPress();
+        }
+    }
+
+    private bool IsInObjectTriggerRange(Vector3 position)
+    {
+        return (position - transform.position).sqrMagnitude < sqrMinRangeForObjectTrigger;
+    }
+
     private bool CameraIsInRange()
     {
         return (tfMainCamera.position - transform.position).sqrMagnitude < sqrMinRangeForInteraction;
     }
 
-    private IEnumerator Press()
+    private void TryPress()
+    {
+        if (!isBeingPressed)
+        {
+            StartCoroutine(DoPress());
+        }
+    }
+
+    private IEnumerator DoPress()
     {
         isBeingPressed = true;
 

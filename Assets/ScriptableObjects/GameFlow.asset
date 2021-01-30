@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameFlow
   m_EditorClassIdentifier: 
   StartAtComputer: 1
+  GameHasStarted: 0
