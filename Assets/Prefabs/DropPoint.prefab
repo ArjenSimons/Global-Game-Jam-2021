@@ -582,10 +582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c158151ce3f1d44c83b786c4a686366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeDelay: 1
+  closeDelay: 0.1
   timeClosed: 0.5
-  closePosition: {x: 0.374, y: 1.2655, z: 1.232}
-  closeScale: {x: 0.1, y: 1.22852, z: 1.25}
+  closePosition: {x: 0, y: 1.05, z: 0.1}
   closeTime: 1
   itemDropRecognizer: {fileID: 1922752638180124639}
   itemManager: {fileID: 0}
