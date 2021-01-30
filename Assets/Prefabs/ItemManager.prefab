@@ -47,6 +47,8 @@ MonoBehaviour:
   dropInterval: 30
   dropRate: 15
   dropBurstInterval: 0.125
+  formAmountFirstDrop: 3
+  formAmountIncreaseRatio: 1.4
   fillerDropPercentage: 40
   thrashShute: {fileID: 0}
   itemTypes: {fileID: 11400000, guid: eb48b66ebb5daae4fb5db5f62112d1c1, type: 2}

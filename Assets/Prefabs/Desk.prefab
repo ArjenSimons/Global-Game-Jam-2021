@@ -16,6 +16,10 @@ MonoBehaviour:
   endTime: 17
   durationOfOneHour: 60
   textTime: {fileID: 6146043817486708142}
+  gameFlow: {fileID: 0}
+  onHalfHourPassed:
+    m_PersistentCalls:
+      m_Calls: []
   onWorkdayOver:
     m_PersistentCalls:
       m_Calls: []

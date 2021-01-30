@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using BWolf.Utilities.AudioPlaying;
 
 public class Printer : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class Printer : MonoBehaviour
 
     [SerializeField]
     private float tweenDuration = 3f;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO audioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
 
     [Header("Project References")]
     [SerializeField]
@@ -25,6 +33,9 @@ public class Printer : MonoBehaviour
     [Header("Channel Listening to")]
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
+
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     private Queue<LostItem> queuedItems = new Queue<LostItem>();
 
@@ -102,6 +113,7 @@ public class Printer : MonoBehaviour
     public void Print(string name, string text)
     {
         printing = true;
+        channel.RaiseEvent(config, audioCue, transform.position);
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText(name, "", "", text);
@@ -112,6 +124,7 @@ public class Printer : MonoBehaviour
     public void Print(LostItem lostItem)
     {
         printing = true;
+        channel.RaiseEvent(config, audioCue, transform.position);
 
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText("John Doe", lostItem);
