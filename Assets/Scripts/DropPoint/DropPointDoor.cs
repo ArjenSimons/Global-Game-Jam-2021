@@ -118,7 +118,6 @@ public class DropPointDoor : MonoBehaviour
 
     private void OnItemDelivered(Item item, bool succes)
     {
-        itemManager.ReturnItem(item.LostItem);
         print($"item delivered: {item.LostItem.ItemType} {(succes ? "succesfully" : "unsuccesfully")}");
         if (!succes)
         {
@@ -126,17 +125,14 @@ public class DropPointDoor : MonoBehaviour
             if (matchingForm != null)
             {
                 Destroy(matchingForm.gameObject);
-            }
-            else
-            {
-                Debug.LogWarning("an item was destroyed without a matching form found in the world :: this is not intended!");
+                itemManager.ReturnItem(item.LostItem);
             }
             incrementIncorrectFormsChannel.RaiseEvent();
-
         }
         else
         {
             incrementCorrectFormsChannel.RaiseEvent();
+            itemManager.ReturnItem(item.LostItem);
         }
 
     }
