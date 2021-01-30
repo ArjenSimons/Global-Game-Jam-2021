@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     public GrabScript LeftHand => grabScriptLeftHand;
     public GrabScript RightHand => grabScriptRightHand;
+
     public bool CanGrab
     {
         get
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
         SetGameCursorActiveState(value);
         Enable(!value);
     }
-    
+
     private void OnTutorialStart()
     {
         Enable(true);

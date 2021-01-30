@@ -31,7 +31,7 @@ public class MenuFlowController : MonoBehaviour
 
     private void Awake()
     {
-        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnTutorialStart += OnTutorialStart;
         gameFlow.OnGameEnd += OnGameEnd;
     }
 
@@ -48,7 +48,7 @@ public class MenuFlowController : MonoBehaviour
         }
     }
 
-    private void OnGameStart()
+    private void OnTutorialStart()
     {
         MoveCameraTowardsHead();
     }
