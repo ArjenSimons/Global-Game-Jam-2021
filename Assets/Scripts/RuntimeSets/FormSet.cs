@@ -16,6 +16,11 @@ public class FormSet : RuntimeSet<Form>
         return null;
     }
 
+    public Form GetFirstFormInSet()
+    {
+        return set.Count > 0 ? set[0] : null;
+    }
+
     public void DestroyAll()
     {
         for (int i = set.Count - 1; i >= 0; i--)

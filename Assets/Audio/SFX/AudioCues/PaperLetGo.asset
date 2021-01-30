@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
-  m_Name: Jacket
+  m_Script: {fileID: 11500000, guid: d19fa746b3d2d3e439f836d9dd1c947e, type: 3}
+  m_Name: PaperLetGo
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 3702940176441049158, guid: 9b07e7904e9005d44bb283296bc8d861, type: 3}
-  displayName: Jacket
+  loop: 0
+  audioClipsGroups:
+  - sequenceMode: 0
+    audioClips:
+    - {fileID: 8300000, guid: cff98baa59a559c44b91573e6ea90c4e, type: 3}

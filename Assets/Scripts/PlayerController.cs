@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform grabPointRight;
 
+    [SerializeField]
+    private GameObject crosshair;
+
     [Header("Project References")]
     [SerializeField]
     private GameFlowSettings gameFlow = null;
@@ -59,12 +62,28 @@ public class PlayerController : MonoBehaviour
     private Vector3 startLocalCameraEulerAngles;
     private Vector3 startWorldPosition;
     private Vector3 startLocalEulerAngles;
+    private bool _canGrab;
+
+    public GrabScript LeftHand => grabScriptLeftHand;
+    public GrabScript RightHand => grabScriptRightHand;
+    public bool CanGrab
+    {
+        get
+        {
+            return _canGrab;
+        }
+        set
+        {
+            _canGrab = value;
+            crosshair.SetActive(_canGrab);
+        }
+    }
 
     private bool hasCameraAttachedToHead;
 
     private void Awake()
     {
-        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnTutorialStart += OnTutorialStart;
         gameFlow.OnGameEnd += OnGameEnd;
 
         SetGameCursorActiveState(false);
@@ -115,8 +134,8 @@ public class PlayerController : MonoBehaviour
         SetGameCursorActiveState(value);
         Enable(!value);
     }
-
-    private void OnGameStart()
+    
+    private void OnTutorialStart()
     {
         Enable(true);
     }
@@ -135,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
         UpdateMouseMovement(cameraTransform);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && CanGrab)
         {
             grabScriptLeftHand.SelectItem();
         }
@@ -145,7 +164,7 @@ public class PlayerController : MonoBehaviour
             grabScriptLeftHand.DeselectItem();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && CanGrab)
         {
             grabScriptRightHand.SelectItem();
         }
@@ -159,11 +178,6 @@ public class PlayerController : MonoBehaviour
         {
             grabScriptLeftHand.ThrowItemsAway(throwingForce);
             grabScriptRightHand.ThrowItemsAway(throwingForce);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
         }
 
         if (Input.GetKey(KeyCode.W))

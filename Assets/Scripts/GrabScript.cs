@@ -1,3 +1,4 @@
+using BWolf.Utilities.AudioPlaying;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,20 @@ public class GrabScript : MonoBehaviour
 
     [SerializeField]
     private bool alwaysKeepDefaultRotation = false;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO PaperPickupAudioCue = null;
+
+    [SerializeField]
+    private AudioCueSO PaperLetGoAudioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     [Header("References")]
     [SerializeField]
@@ -89,6 +104,7 @@ public class GrabScript : MonoBehaviour
                     if (grabbable != null)
                     {
                         grabbable.IsGrabbed = true;
+                        channel.RaiseEvent(config, PaperPickupAudioCue, grabbable.transform.position);
                     }
                     break;
             }
@@ -105,6 +121,7 @@ public class GrabScript : MonoBehaviour
         if (grabbable != null)
         {
             grabbable.IsGrabbed = false;
+            channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
         }
         CurrentlyGrabbedObject = null;
     }
@@ -119,6 +136,7 @@ public class GrabScript : MonoBehaviour
         if (grabbable != null)
         {
             grabbable.IsGrabbed = false;
+            channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
         }
         CurrentlyGrabbedObject = null;
     }

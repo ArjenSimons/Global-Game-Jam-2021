@@ -19,24 +19,18 @@ public class Form : MonoBehaviour
     [SerializeField]
     private TMP_Text textRemarks = null;
 
+    [SerializeField]
+    private Collider paperCollider = null;
+
     [Header("Project References")]
     [SerializeField]
     private FormSet formSet = null;
-
-    private Collider paperCollider;
 
     public LostItem ItemDisplaying { get; private set; }
 
     private void Awake()
     {
         formSet.Add(this);
-    }
-
-    private void Start()
-    {
-        paperCollider = GetComponent<Collider>();
-        paperCollider.enabled = false;
-        //TODO: make object not grabbable by player
     }
 
     private void OnDestroy()
@@ -62,6 +56,5 @@ public class Form : MonoBehaviour
     {
         paperCollider.enabled = true;
         rigidBody.isKinematic = false;
-        //TODO: make object grabbable by player
     }
 }
