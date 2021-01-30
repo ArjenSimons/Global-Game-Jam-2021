@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,14 +38,15 @@ public class Clock : MonoBehaviour
 
     private bool timeIsPassing;
 
+    private void Awake()
+    {
+        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
     private void Start()
     {
         SetStartTime();
-
-        if (gameFlow.StartAtComputer)
-        {
-            gameFlow.OnGameStart += OnGameStart;
-        }
     }
 
     private void Update()
@@ -60,11 +62,22 @@ public class Clock : MonoBehaviour
         {
             onWorkdayOver.Invoke();
         }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            onWorkdayOver.Invoke();
+        }
     }
 
     private void OnGameStart()
     {
         timeIsPassing = true;
+    }
+
+    private void OnGameEnd()
+    {
+        SetStartTime();
+        timeIsPassing = false;
     }
 
     private void SetStartTime()

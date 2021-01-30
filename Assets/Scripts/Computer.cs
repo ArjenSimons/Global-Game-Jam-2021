@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,16 @@ public class Computer : MonoBehaviour
     [SerializeField]
     private Button btnExit = null;
 
+    [Header("End Menu Flow references")]
+    [SerializeField]
+    private Button btnBackToMenu = null;
+
+    [SerializeField]
+    private TMP_Text textEndingCorrectForms = null;
+
+    [SerializeField]
+    private TMP_Text textEndingIncorrectForms = null;
+
     [Header("Scene references")]
     [SerializeField]
     private ScoresManager scoreManager = null;
@@ -32,8 +43,12 @@ public class Computer : MonoBehaviour
 
     private StartMenuButton focusedButton;
 
+    private bool isInEndGameScreen;
+
     private void Start()
     {
+        ClearScreen();
+
         if (gameFlow.StartAtComputer)
         {
             //show menu
@@ -45,36 +60,91 @@ public class Computer : MonoBehaviour
         }
 
         scoresUpdatedChannel.OnEventRaised += SetTexts;
+
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        ClearScreen();
+        SetupEndGameFlow();
+        ApplyGamePlayResultsToEndGameText();
+
+        isInEndGameScreen = true;
     }
 
     private void Update()
     {
         if (!gameFlow.GameHasStarted)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (isInEndGameScreen)
             {
-                CycleThroughStartMenu(CycleDirection.Down);
+                CheckForEndMenuInput();
             }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            else
             {
-                CycleThroughStartMenu(CycleDirection.Up);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                switch (focusedButton)
-                {
-                    case StartMenuButton.Start:
-                        SetupGameplayFlow();
-                        break;
-
-                    case StartMenuButton.Exit:
-                        OnExitButtonPress();
-                        break;
-                }
+                CheckForStartMenuInput();
             }
         }
+    }
+
+    private void CheckForEndMenuInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ClearScreen();
+            SetupStartMenuFlow();
+
+            isInEndGameScreen = false;
+        }
+    }
+
+    private void CheckForStartMenuInput()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            CycleThroughStartMenu(CycleDirection.Down);
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            CycleThroughStartMenu(CycleDirection.Up);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            switch (focusedButton)
+            {
+                case StartMenuButton.Start:
+                    ClearScreen();
+                    SetupGameplayFlow();
+                    break;
+
+                case StartMenuButton.Exit:
+                    OnExitButtonPress();
+                    break;
+            }
+        }
+    }
+
+    private void ClearScreen()
+    {
+        btnStart.gameObject.SetActive(false);
+        btnExit.gameObject.SetActive(false);
+
+        textCorrectForms.gameObject.SetActive(false);
+        textIncorrectForms.gameObject.SetActive(false);
+
+        btnBackToMenu.gameObject.SetActive(false);
+
+        textEndingCorrectForms.gameObject.SetActive(false);
+        textEndingIncorrectForms.gameObject.SetActive(false);
+    }
+
+    private void ApplyGamePlayResultsToEndGameText()
+    {
+        textEndingCorrectForms.text = textCorrectForms.text;
+        textEndingIncorrectForms.text = textIncorrectForms.text;
     }
 
     private void OnExitButtonPress()
@@ -127,9 +197,6 @@ public class Computer : MonoBehaviour
 
     private void SetupStartMenuFlow()
     {
-        textCorrectForms.gameObject.SetActive(false);
-        textIncorrectForms.gameObject.SetActive(false);
-
         btnStart.gameObject.SetActive(true);
         btnExit.gameObject.SetActive(true);
 
@@ -138,15 +205,20 @@ public class Computer : MonoBehaviour
 
     private void SetupGameplayFlow()
     {
-        btnStart.gameObject.SetActive(false);
-        btnExit.gameObject.SetActive(false);
-
         textCorrectForms.gameObject.SetActive(true);
         textIncorrectForms.gameObject.SetActive(true);
 
         SetTexts();
 
         gameFlow.RaiseGameStartEvent();
+    }
+
+    private void SetupEndGameFlow()
+    {
+        btnBackToMenu.gameObject.SetActive(true);
+
+        textEndingCorrectForms.gameObject.SetActive(true);
+        textEndingIncorrectForms.gameObject.SetActive(true);
     }
 
     private void SetTexts()

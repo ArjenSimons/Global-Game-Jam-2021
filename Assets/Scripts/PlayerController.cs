@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private GameFlowSettings gameFlow = null;
 
     private Vector3 playerVelocity = Vector3.zero;
-    private Vector2 rotation = new Vector2(0, 90);
+
     private Rigidbody playerRigidbody;
 
     private bool pressW = false;
@@ -50,21 +51,44 @@ public class PlayerController : MonoBehaviour
     private bool pressS = false;
     private bool pressD = false;
 
+    private Vector3 localCameraEulerAngles;
+
+    private Vector3 startLocalCameraEulerAngles;
+    private Vector3 startWorldPosition;
+    private Vector3 startLocalEulerAngles;
+
     private void Awake()
     {
+        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameEnd += OnGameEnd;
+
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerSpeed *= playerRigidbody.mass / 2;
 
-        rotation = cameraTransform.eulerAngles;
+        localCameraEulerAngles = cameraTransform.localEulerAngles;
+
+        startLocalCameraEulerAngles = localCameraEulerAngles;
+        startWorldPosition = transform.position;
+        startLocalEulerAngles = transform.localEulerAngles;
+    }
+
+    private void OnGameEnd()
+    {
+        Enable(false);
+
+        transform.position = startWorldPosition;
+        transform.localEulerAngles = startLocalEulerAngles;
+        cameraTransform.localEulerAngles = startLocalCameraEulerAngles;
+
+        localCameraEulerAngles = cameraTransform.localEulerAngles;
     }
 
     private void Start()
     {
         if (gameFlow.StartAtComputer)
         {
-            gameFlow.OnGameStart += OnGameStart;
             Enable(false);
         }
     }
@@ -189,13 +213,13 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMouseMovement(Transform mouseTransform)
     {
-        rotation.y += Input.GetAxis("Mouse X") * sensitivityY;
-        rotation.x += -Input.GetAxis("Mouse Y") * sensitivityX;
+        localCameraEulerAngles.y += Input.GetAxis("Mouse X") * sensitivityY;
+        localCameraEulerAngles.x += -Input.GetAxis("Mouse Y") * sensitivityX;
 
         // Clamp mouse between max values to prevent camera issues
-        rotation.x = Mathf.Clamp(rotation.x, clampAnglesY.x, clampAnglesY.y);
+        localCameraEulerAngles.x = Mathf.Clamp(localCameraEulerAngles.x, clampAnglesY.x, clampAnglesY.y);
         //mouseTransform.eulerAngles = new Vector2(ClampAngle(-rotation.x, ClampAnglesY.x, ClampAnglesY.y), rotation.y);
-        mouseTransform.eulerAngles = new Vector2(rotation.x, rotation.y);
+        mouseTransform.eulerAngles = new Vector2(localCameraEulerAngles.x, localCameraEulerAngles.y);
     }
 
     // only update y axis

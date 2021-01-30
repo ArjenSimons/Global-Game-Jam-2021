@@ -90,7 +90,6 @@ public class DropPointDoor : MonoBehaviour
                     {
                         Destroy(form.gameObject);
                         forms.Remove(form);
-                        formSet.Remove(form);
 
                         wasSuccesfull = true;
 
@@ -113,7 +112,6 @@ public class DropPointDoor : MonoBehaviour
 
                 Destroy(form.gameObject);
                 forms.Remove(form);
-                formSet.Remove(form);
             }
         }
     }

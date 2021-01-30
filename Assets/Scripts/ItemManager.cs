@@ -44,6 +44,10 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private GameFlowSettings gameFlow = null;
 
+    [SerializeField] private ItemSet itemSet = null;
+
+    [SerializeField] private FormSet formSet = null;
+
     [Header("Channel Broadcasting on")]
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
@@ -61,9 +65,15 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnGameEnd += OnGameEnd;
     }
 
     private void Start()
+    {
+        itemRequestedChannel.OnEventRaised += RequestItem;
+    }
+
+    private void PopulateLists()
     {
         foreach (ItemType type in itemTypes.Types)
         {
@@ -81,8 +91,6 @@ public class ItemManager : MonoBehaviour
                 }
             }
         }
-
-        itemRequestedChannel.OnEventRaised += RequestItem;
     }
 
     private void Update()
@@ -100,12 +108,28 @@ public class ItemManager : MonoBehaviour
         if (!dropping)
         {
             dropping = true;
+            PopulateLists();
             StartCoroutine(DropAtInterval());
         }
         else
         {
             Debug.LogWarning("the item manager already started dropping items");
         }
+    }
+
+    private void OnGameEnd()
+    {
+        itemSet.DestroyAll();
+        formSet.DestroyAll();
+
+        StopAllCoroutines();
+
+        fillerItems.Clear();
+        spawnableItems.Clear();
+        droppedItems.Clear();
+        requestedItems.Clear();
+
+        dropping = false;
     }
 
     private bool DropRandomItem()

@@ -8,6 +8,7 @@ public class GameFlowSettings : ScriptableObject
     public bool GameHasStarted = false;
 
     public Action OnGameStart;
+    public Action OnGameEnd;
 
     private void OnEnable()
     {
@@ -27,4 +28,25 @@ public class GameFlowSettings : ScriptableObject
                 "the scene to respond");
         }
     }
+
+    public void RaiseGameEndEvent()
+    {
+        if (OnGameEnd != null)
+        {
+            OnGameEnd();
+            GameHasStarted = false;
+        }
+        else
+        {
+            Debug.LogWarning("The game end event was raised but no one was listening. Make sure the player is in" +
+                "the scene to respond");
+        }
+    }
+}
+
+public enum GameState
+{
+    StartMenu,
+    GameStarted,
+    GameEnded,
 }

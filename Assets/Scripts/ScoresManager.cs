@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class ScoresManager : MonoBehaviour
     [Header("Scene References")]
     [SerializeField]
     private Computer computer;
+
+    [Header("Project References")]
+    [SerializeField]
+    private GameFlowSettings gameFlow = null;
 
     [Header("Channel Broadcasting on")]
     [SerializeField]
@@ -23,6 +28,17 @@ public class ScoresManager : MonoBehaviour
 
     public int CorrectForms => correctForms;
     public int IncorrectForms => incorrectForms;
+
+    private void Awake()
+    {
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        correctForms = 0;
+        incorrectForms = 0;
+    }
 
     private void Start()
     {
