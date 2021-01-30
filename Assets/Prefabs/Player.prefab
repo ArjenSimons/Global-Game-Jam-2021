@@ -24,15 +24,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264173634438100991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3518255930212725282}
   - {fileID: 3567583152879253740}
   m_Father: {fileID: 4943738475356800204}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!114 &3047768640337450108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   alwaysKeepDefaultRotation: 1
   PaperPickupAudioCue: {fileID: 11400000, guid: a660b4f10f71bd742bf3c7eff0be4243, type: 2}
   PaperLetGoAudioCue: {fileID: 11400000, guid: 9ff7c34b097d7a84b8405619e29da97e, type: 2}
+  ItemHeavyPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   grabStartPoint: {fileID: 3518255929231078291}
@@ -320,15 +321,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7659805149693173712}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.13052624, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4162628455502230474}
   - {fileID: 3045028253143702490}
   m_Father: {fileID: 4943738475356800204}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -15, z: 0}
 --- !u!114 &2348958861946401727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +348,7 @@ MonoBehaviour:
   alwaysKeepDefaultRotation: 1
   PaperPickupAudioCue: {fileID: 11400000, guid: a660b4f10f71bd742bf3c7eff0be4243, type: 2}
   PaperLetGoAudioCue: {fileID: 11400000, guid: 9ff7c34b097d7a84b8405619e29da97e, type: 2}
+  ItemHeavyPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   grabStartPoint: {fileID: 3518255929231078291}
@@ -376,7 +378,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7736654026141690373}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.15712395, y: 0, z: 0, w: 0.9875789}
   m_LocalPosition: {x: 0, y: 1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -386,7 +388,7 @@ Transform:
   - {fileID: 3051349707734775647}
   m_Father: {fileID: 3518255930515403197}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.08, y: 0, z: 0}
 --- !u!1001 &8521315486893240650
 PrefabInstance:
   m_ObjectHideFlags: 0
