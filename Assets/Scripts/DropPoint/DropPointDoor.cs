@@ -1,3 +1,4 @@
+using BWolf.Utilities.AudioPlaying;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,13 @@ public class DropPointDoor : MonoBehaviour
 
     [SerializeField]
     private float closeTime = 1.0f;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO audioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
 
     [Header("Scene References")]
     [SerializeField]
@@ -35,6 +43,9 @@ public class DropPointDoor : MonoBehaviour
     [SerializeField]
     private EmptyChannel incrementIncorrectFormsChannel = null;
 
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
+
     [Header("Unity Events")]
     [SerializeField]
     private ItemDeliveredEvent itemDelivered = null;
@@ -55,12 +66,19 @@ public class DropPointDoor : MonoBehaviour
         if (!droppingOfItem)
         {
             droppingOfItem = true;
-
             var seq = LeanTween.sequence();
             seq.append(closeDelay);
+            seq.append(() =>
+            {
+                channel.RaiseEvent(config, audioCue, transform.position);
+            });
             seq.append(LeanTween.moveLocal(gameObject, closePosition, closeTime));
             seq.append(DropOffItems);
             seq.append(closeTime);
+            seq.append(() =>
+            {
+                channel.RaiseEvent(config, audioCue, transform.position);
+            });
             seq.append(LeanTween.moveLocal(gameObject, openPosition, closeTime));
             seq.append(() =>
             {
