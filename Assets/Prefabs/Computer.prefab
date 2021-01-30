@@ -1003,7 +1003,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textTime: {fileID: 4154937210547816024}
-  textForms: {fileID: 4994592915895860307}
+  textCorrectForms: {fileID: 4154937210547816024}
+  textIncorrectForms: {fileID: 4994592915895860307}
+  scoresUpdatedChannel: {fileID: 11400000, guid: 348f7000924bed645912106afb2ac359, type: 2}
 --- !u!1 &2504461063047906668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1118,7 @@ GameObject:
   - component: {fileID: 1777089393698119053}
   - component: {fileID: 4994592915895860307}
   m_Layer: 0
-  m_Name: FormsText
+  m_Name: IncorrectForms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1169,7 +1171,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: x forms completed
+  m_text: x mistakes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1250,7 +1252,7 @@ GameObject:
   - component: {fileID: 1479466318154480288}
   - component: {fileID: 4154937210547816024}
   m_Layer: 0
-  m_Name: TimeText
+  m_Name: CorrectForms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1303,7 +1305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 17:30
+  m_text: x forms completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1330,8 +1332,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4.06
-  m_fontSizeBase: 4.06
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
