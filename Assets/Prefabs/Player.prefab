@@ -393,6 +393,10 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1512504720061232340, guid: 765be6e33009e28449c00294df76c159, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7863281649710088899, guid: 765be6e33009e28449c00294df76c159, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -436,6 +440,10 @@ PrefabInstance:
     - target: {fileID: 7863281649710088899, guid: 765be6e33009e28449c00294df76c159, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863281649710088900, guid: 765be6e33009e28449c00294df76c159, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7863281649710088902, guid: 765be6e33009e28449c00294df76c159, type: 3}
       propertyPath: m_Name
