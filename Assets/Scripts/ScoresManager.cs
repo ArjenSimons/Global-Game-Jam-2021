@@ -31,13 +31,15 @@ public class ScoresManager : MonoBehaviour
 
     private void Awake()
     {
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStart += ResetCounts;
+        gameFlow.OnGameEnd += ResetCounts;
     }
 
-    private void OnGameEnd()
+    private void ResetCounts()
     {
         correctForms = 0;
         incorrectForms = 0;
+        scoresUpdatedChannel.RaiseEvent();
     }
 
     private void Start()

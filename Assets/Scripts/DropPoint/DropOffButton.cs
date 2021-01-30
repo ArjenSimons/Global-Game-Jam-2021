@@ -24,8 +24,8 @@ public class DropOffButton : MonoBehaviour
     private bool isBeingPressed;
 
     private float sqrMinRangeForInteraction;
-
     private Transform tfMainCamera;
+    public bool AllowPress { get; set; }
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class DropOffButton : MonoBehaviour
 
     private void Update()
     {
-        if (!isBeingPressed && hasFocus && Input.GetMouseButtonDown(0))
+        if (!isBeingPressed && hasFocus && Input.GetMouseButtonDown(0) && AllowPress)
         {
             StartCoroutine(Press());
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnableImageOnGameStart : MonoBehaviour
+public class EnableImageOnTutorialStart : MonoBehaviour
 {
     [SerializeField]
     private GameFlowSettings gameFlow = null;
@@ -13,7 +13,7 @@ public class EnableImageOnGameStart : MonoBehaviour
         img = GetComponent<Image>();
         img.enabled = false;
 
-        gameFlow.OnGameStart += OnGameStart;
+        gameFlow.OnTutorialStart += OnTutorialStart;
         gameFlow.OnGameEnd += OnGameEnd;
     }
 
@@ -22,7 +22,7 @@ public class EnableImageOnGameStart : MonoBehaviour
         img.enabled = false;
     }
 
-    private void OnGameStart()
+    private void OnTutorialStart()
     {
         img.enabled = true;
     }

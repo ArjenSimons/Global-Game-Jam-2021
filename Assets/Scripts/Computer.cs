@@ -216,7 +216,7 @@ public class Computer : MonoBehaviour
 
         SetTexts();
 
-        gameFlow.RaiseGameStartEvent();
+        gameFlow.RaiseTutorialStartEvent();
     }
 
     private void SetupEndGameFlow()

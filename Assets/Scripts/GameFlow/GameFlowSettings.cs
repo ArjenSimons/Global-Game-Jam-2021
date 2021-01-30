@@ -7,6 +7,7 @@ public class GameFlowSettings : ScriptableObject
     public bool StartAtComputer = true;
     public bool GameHasStarted = false;
 
+    public Action OnTutorialStart;
     public Action OnGameStart;
 
     public Action OnGameRestart;
@@ -17,6 +18,20 @@ public class GameFlowSettings : ScriptableObject
     private void OnEnable()
     {
         GameHasStarted = !StartAtComputer;
+    }
+
+    public void RaiseTutorialStartEvent()
+    {
+        if (OnTutorialStart != null)
+        {
+            OnTutorialStart();
+            GameHasStarted = false;
+        }
+        else
+        {
+            Debug.LogWarning("The tutorial start event was raised but no one was listening. Make sure the player is in" +
+                "the scene to respond");
+        }
     }
 
     public void RaiseGameStartEvent()

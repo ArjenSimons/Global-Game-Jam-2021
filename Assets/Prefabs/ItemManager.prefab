@@ -50,6 +50,13 @@ MonoBehaviour:
   formAmountFirstDrop: 3
   formAmountIncreaseRatio: 1.4
   fillerDropPercentage: 40
+  tutorialLostItem:
+    ItemType: {fileID: 11400000, guid: 1c2853291cc92c544949bce729dfcdc4, type: 2}
+    ItemColor: {fileID: 11400000, guid: 04c005640045c134fa38ac6c85e97a86, type: 2}
+  prefabForm: {fileID: 4225498123614416929, guid: b449246b50f7f2544b46d5912bde821e, type: 3}
+  tutorialItemPosition: {x: -1.623, y: 0.38, z: 3.299}
+  tutorialFormPosition: {x: -0.972, y: 1.503, z: 4.95}
+  tutorialItemRotation: {x: 0, y: -60, z: 0}
   thrashShute: {fileID: 0}
   itemTypes: {fileID: 11400000, guid: eb48b66ebb5daae4fb5db5f62112d1c1, type: 2}
   itemColors: {fileID: 11400000, guid: 55034f8f97d7a8d4da5d431a5a0bc713, type: 2}

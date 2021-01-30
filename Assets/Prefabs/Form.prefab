@@ -858,6 +858,7 @@ MonoBehaviour:
   textItem: {fileID: 3163956506121805670}
   textColor: {fileID: 3410014719009461647}
   textRemarks: {fileID: 4583463994389239110}
+  paperCollider: {fileID: 1353535920287133567}
   formSet: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
 --- !u!114 &-4189910323730010801
 MonoBehaviour:
@@ -880,7 +881,7 @@ BoxCollider:
   m_GameObject: {fileID: 4225498123614416929}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.21, y: 0.005, z: 0.297}
   m_Center: {x: 0, y: 0, z: 0}
