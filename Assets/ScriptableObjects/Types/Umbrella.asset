@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494afbd11dcbdcb41836a3a99c043bfa, type: 3}
   m_Name: Umbrella
   m_EditorClassIdentifier: 
-  prefabItem: {fileID: 3222709179295407131, guid: 2e33da24bb6326943814e0ee958e0993, type: 3}
+  prefabItem: {fileID: 2625306130920448417, guid: e7948076dc04d7746ae9663d0e68b14d, type: 3}
   displayName: Umbrella
