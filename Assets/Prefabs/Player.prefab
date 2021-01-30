@@ -216,6 +216,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 4943738475356800204}
   grabPointLeft: {fileID: 4162628455502230474}
   grabPointRight: {fileID: 3518255930212725282}
+  gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
 --- !u!65 &591241237840048692
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-enum fillerType
+internal enum fillerType
 {
     Trolley,
     Suitcase
 }
 
-enum fillerColor
+internal enum fillerColor
 {
     Black
 }
@@ -30,7 +30,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private float dropBurstInterval = 0.125f;
 
-    [SerializeField] [Range(0f, 100f)]
+    [SerializeField]
+    [Range(0f, 100f)]
     private float fillerDropPercentage = 40;
 
     [Header("Scene References")]
@@ -40,6 +41,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ItemTypes itemTypes = null;
 
     [SerializeField] private ItemColors itemColors = null;
+
+    [SerializeField] private GameFlowSettings gameFlow = null;
 
     [Header("Channel Broadcasting on")]
     [SerializeField]
@@ -52,6 +55,13 @@ public class ItemManager : MonoBehaviour
 
     public List<LostItem> DroppedItems => droppedItems;
     public List<LostItem> RequestedItems => requestedItems;
+
+    private bool dropping;
+
+    private void Awake()
+    {
+        gameFlow.OnGameStart += OnGameStart;
+    }
 
     private void Start()
     {
@@ -73,21 +83,33 @@ public class ItemManager : MonoBehaviour
         }
 
         itemRequestedChannel.OnEventRaised += RequestItem;
-
-        StartCoroutine(DropAtInterval());
     }
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyUp(KeyCode.Return))
         {
             DropRandomItem();
+        }
+#endif
+    }
+
+    private void OnGameStart()
+    {
+        if (!dropping)
+        {
+            dropping = true;
+            StartCoroutine(DropAtInterval());
+        }
+        else
+        {
+            Debug.LogWarning("the item manager already started dropping items");
         }
     }
 
     private bool DropRandomItem()
     {
-
         if (UnityEngine.Random.Range(0f, 100f) < fillerDropPercentage)
         {
             LostItem item = GetRandomFillerItem();
