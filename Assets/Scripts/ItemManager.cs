@@ -86,8 +86,6 @@ public class ItemManager : MonoBehaviour
 
     public bool ReturnItem(LostItem item)
     {
-        if (!requestedItems.Contains(item)) return false;
-
         requestedItems.Remove(item);
         spawnableItems.Add(item);
 

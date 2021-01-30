@@ -28,6 +28,12 @@ public class DropPointDoor : MonoBehaviour
     [SerializeField]
     private LostItemChannel itemRequestedChannel = null;
 
+    [SerializeField]
+    private EmptyChannel incrementCorrectFormsChannel = null;
+
+    [SerializeField]
+    private EmptyChannel incrementIncorrectFormsChannel = null;
+
     private Vector3 openScale;
 
     private Vector3 openPosition;
@@ -112,6 +118,7 @@ public class DropPointDoor : MonoBehaviour
 
     private void OnItemDelivered(Item item, bool succes)
     {
+        itemManager.ReturnItem(item.LostItem);
         print($"item delivered: {item.LostItem.ItemType} {(succes ? "succesfully" : "unsuccesfully")}");
         if (!succes)
         {
@@ -124,8 +131,13 @@ public class DropPointDoor : MonoBehaviour
             {
                 Debug.LogWarning("an item was destroyed without a matching form found in the world :: this is not intended!");
             }
+            incrementIncorrectFormsChannel.RaiseEvent();
+
+        }
+        else
+        {
+            incrementCorrectFormsChannel.RaiseEvent();
         }
 
-        //TODO: implement scoring system on computer
     }
 }
