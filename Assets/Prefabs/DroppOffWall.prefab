@@ -991,6 +991,7 @@ MonoBehaviour:
   closeScale: {x: 0.1, y: 1.22852, z: 1.25}
   closeTime: 1
   itemDropRecognizer: {fileID: 1922752638180124639}
+  itemManager: {fileID: 0}
 --- !u!1 &1922752638180124626
 GameObject:
   m_ObjectHideFlags: 0

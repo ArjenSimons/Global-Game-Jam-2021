@@ -940,10 +940,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed73bf417137fe4aa3595526d7ff940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabForm: {fileID: 4225498123614416929, guid: b449246b50f7f2544b46d5912bde821e, type: 3}
-  printSpawn: {fileID: 1546844471513833156}
   tweenDistance: 0.38
   tweenDuration: 3
+  prefabForm: {fileID: 4225498123614416929, guid: b449246b50f7f2544b46d5912bde821e, type: 3}
+  forms: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
+  printSpawn: {fileID: 1546844471513833156}
+  itemRequestedChannel: {fileID: 0}
 --- !u!1 &2973400234519065382
 GameObject:
   m_ObjectHideFlags: 0

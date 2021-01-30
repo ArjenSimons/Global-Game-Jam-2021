@@ -13,6 +13,9 @@ public class Printer : MonoBehaviour
     [SerializeField]
     private GameObject prefabForm = null;
 
+    [SerializeField]
+    private FormSet forms = null;
+
     [Header("Scene References")]
     [SerializeField]
     private Transform printSpawn = null;
@@ -38,6 +41,7 @@ public class Printer : MonoBehaviour
     {
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText(name, "", "", text);
+        forms.Add(form);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
     }
 
@@ -45,6 +49,7 @@ public class Printer : MonoBehaviour
     {
         Form form = Instantiate(prefabForm, printSpawn.position, transform.rotation).GetComponent<Form>();
         form.SetText("John Doe", lostItem);
+        forms.Add(form);
         LeanTween.move(form.gameObject, printSpawn.position - printSpawn.forward * tweenDistance, tweenDuration).setOnComplete(() => form.EnablePaper());
     }
 }

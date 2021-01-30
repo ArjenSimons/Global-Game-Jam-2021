@@ -8,7 +8,7 @@ public class ItemDropRecognizer : MonoBehaviour
 
     public bool HasRecogizedItems
     {
-        get { return Items.Count != 0; }
+        get { return Items.Count != 0 || Forms.Count != 0; }
     }
 
     private void OnTriggerEnter(Collider other)

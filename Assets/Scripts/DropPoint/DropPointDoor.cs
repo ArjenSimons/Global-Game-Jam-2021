@@ -28,6 +28,14 @@ public class DropPointDoor : MonoBehaviour
     [SerializeField]
     private ItemManager itemManager = null;
 
+    [Header("Project References")]
+    [SerializeField]
+    private FormSet formSet = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private LostItemChannel itemRequestedChannel = null;
+
     private Vector3 openScale;
     private Vector3 openPosition;
 
@@ -107,6 +115,7 @@ public class DropPointDoor : MonoBehaviour
                     {
                         Destroy(form.gameObject);
                         forms.Remove(form);
+                        formSet.Remove(form);
 
                         wasSuccesfull = true;
 
@@ -119,19 +128,37 @@ public class DropPointDoor : MonoBehaviour
                 items.Remove(item);
             }
 
+            print(forms.Count);
             //remove leftover forms
             for (int i = forms.Count - 1; i >= 0; i--)
             {
                 Form form = forms[i];
+
+                //request new form based since matching item is still in the scene
+                itemRequestedChannel.RaiseEvent(form.ItemDisplaying);
+
                 Destroy(form.gameObject);
                 forms.Remove(form);
+                formSet.Remove(form);
             }
         }
     }
 
     private void OnItemDelivered(Item item, bool succes)
     {
-        print($"delivered item: {item} : {(succes ? "succesfully" : "unsuccesfully")}");
+        if (!succes)
+        {
+            Form matchingForm = formSet.GetMatchWithLostItem(item.LostItem);
+            if (matchingForm != null)
+            {
+                Destroy(matchingForm.gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("an item was destroyed without a matching form found in the world :: this is not intended!");
+            }
+        }
+
         //TODO: implement scoring system on computer
     }
 }
