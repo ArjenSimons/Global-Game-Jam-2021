@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerSpeed *= playerRigidbody.mass / 2;
 
     }
 
