@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 startWorldPosition;
     private Vector3 startLocalEulerAngles;
 
+    private bool hasCameraAttachedToHead;
+
     private void Awake()
     {
         gameFlow.OnGameStart += OnGameStart;
@@ -78,6 +80,19 @@ public class PlayerController : MonoBehaviour
         startLocalEulerAngles = transform.localEulerAngles;
     }
 
+    private void Start()
+    {
+        if (gameFlow.StartAtComputer)
+        {
+            Enable(false);
+        }
+    }
+
+    public void SetCameraAttachedToHead(bool value)
+    {
+        hasCameraAttachedToHead = value;
+    }
+
     private void SetGameCursorActiveState(bool value)
     {
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
@@ -93,14 +108,6 @@ public class PlayerController : MonoBehaviour
         cameraTransform.localEulerAngles = startLocalCameraEulerAngles;
 
         localCameraEulerAngles = cameraTransform.localEulerAngles;
-    }
-
-    private void Start()
-    {
-        if (gameFlow.StartAtComputer)
-        {
-            Enable(false);
-        }
     }
 
     private void OnGamePause(bool value)
@@ -121,6 +128,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!hasCameraAttachedToHead)
+        {
+            return;
+        }
+
         UpdateMouseMovement(cameraTransform);
 
         if (Input.GetMouseButtonDown(0))

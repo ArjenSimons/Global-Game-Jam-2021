@@ -8,6 +8,9 @@ public class GameFlowBackgroundFader : MonoBehaviour
     [SerializeField]
     private float fadeTime = 1.0f;
 
+    [SerializeField]
+    private float fadeDelay = 0.35f;
+
     [Header("Project Reference")]
     [SerializeField]
     private GameFlowSettings gameFlow = null;
@@ -25,7 +28,7 @@ public class GameFlowBackgroundFader : MonoBehaviour
 
     private void OnStartGameRestart()
     {
-        FadeIn().setOnComplete(() =>
+        FadeIn().append(() =>
         {
             gameFlow.RaiseRestartEvent();
             FadeOut();
@@ -70,25 +73,23 @@ public class GameFlowBackgroundFader : MonoBehaviour
 
     public void OnWorkDayOver()
     {
-        FadeIn().setOnComplete(() =>
+        FadeIn().append(fadeDelay).append(() =>
         {
             FadeOut();
             gameFlow.RaiseGameEndEvent();
         });
     }
 
-    public LTDescr FadeIn()
+    public LTSeq FadeIn()
     {
         LTSeq seq = LeanTween.sequence();
-        LTDescr fadeIn = LeanTween.value(0, 1, fadeTime).setOnUpdate(perc =>
+        seq.append(LeanTween.value(0, 1, fadeTime).setOnUpdate(perc =>
         {
             Color color = img.color;
             color.a = perc;
             img.color = color;
-        });
+        }));
 
-        seq.append(fadeIn);
-
-        return fadeIn;
+        return seq;
     }
 }
