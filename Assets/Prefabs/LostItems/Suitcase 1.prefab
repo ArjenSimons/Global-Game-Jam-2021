@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8812174952400255057}
   - component: {fileID: 8812174952400255056}
   - component: {fileID: 5280807879443779235}
-  - component: {fileID: 1083569314645981485}
+  - component: {fileID: -3763201059502898123}
   m_Layer: 0
   m_Name: Suitcase 1
   m_TagString: PickupableItem
@@ -94,7 +94,8 @@ MonoBehaviour:
   renderersToColor:
   - {fileID: 8812174953290429216}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
---- !u!114 &1083569314645981485
+  CanTriggerDropOffButton: 1
+--- !u!114 &-3763201059502898123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

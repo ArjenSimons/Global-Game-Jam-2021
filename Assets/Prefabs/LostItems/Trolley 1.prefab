@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 4516105089770720121}
   - component: {fileID: 4516105089770720120}
   - component: {fileID: 3999577432272364235}
-  - component: {fileID: 3580810926764865304}
+  - component: {fileID: 2800614296536007759}
   m_Layer: 0
   m_Name: Trolley 1
   m_TagString: PickupableItem
@@ -108,7 +108,8 @@ MonoBehaviour:
   renderersToColor:
   - {fileID: 2985314838943925893}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
---- !u!114 &3580810926764865304
+  CanTriggerDropOffButton: 1
+--- !u!114 &2800614296536007759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
