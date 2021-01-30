@@ -17,9 +17,6 @@ public class GrabScript : MonoBehaviour
     [SerializeField]
     private bool alwaysKeepDefaultRotation = false;
 
-    [SerializeField]
-    private LayerMask grabRayLayermask = 0;
-
     [Header("References")]
     [SerializeField]
     private Transform grabStartPoint;
@@ -73,7 +70,7 @@ public class GrabScript : MonoBehaviour
             SetItemRotationToDefault(transform);
         }
 
-        currentObjectRigidbody.velocity = (transform.position - (currentlyGrabbedObject.transform.position + currentObjectRigidbody.centerOfMass)) * magneticForce * Time.deltaTime + playerRigidbody.velocity;
+        currentObjectRigidbody.velocity = (transform.position - (currentlyGrabbedObject.transform.position + currentObjectRigidbody.centerOfMass)) * magneticForce * Time.fixedDeltaTime + playerRigidbody.velocity;
         currentObjectRigidbody.angularVelocity = Vector3.zero;
     }
 
@@ -81,7 +78,7 @@ public class GrabScript : MonoBehaviour
     public void SelectItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, maxRayDistance, grabRayLayermask))
+        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, maxRayDistance))
         {
             switch (hit.transform.tag)
             {
@@ -98,6 +95,15 @@ public class GrabScript : MonoBehaviour
     {
         if (!currentlyGrabbedObject) return;
 
+        Physics.IgnoreCollision(playerCollider, currentlyGrabbedObject.GetComponent<Collider>(), false);
+        currentlyGrabbedObject = null;
+    }
+
+    public void ThrowItemsAway(float throwingForce)
+    {
+        if (!currentlyGrabbedObject) return;
+
+        currentlyGrabbedObject.GetComponent<Rigidbody>().AddForce(grabStartPoint.TransformDirection(Vector3.forward) * throwingForce, ForceMode.VelocityChange);
         Physics.IgnoreCollision(playerCollider, currentlyGrabbedObject.GetComponent<Collider>(), false);
         currentlyGrabbedObject = null;
     }

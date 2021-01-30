@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("Player Settings")]
     [SerializeField, Range (0f,100f)]
     private float playerSpeed = .1f;
 
+    [SerializeField, Range(0f, 20f)]
+    private float throwingForce = 10f;
+
+    [Header("Camera Settings")]
     [SerializeField, Range(0f, 10f)]
     private float sensitivityX = 1f;
 
@@ -70,10 +74,11 @@ public class PlayerController : MonoBehaviour
             grabScriptRightHand.DeselectItem();
         }
 
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    grabScriptLeftHand.SetItemRotationToDefault();
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            grabScriptLeftHand.ThrowItemsAway(throwingForce);
+            grabScriptRightHand.ThrowItemsAway(throwingForce);
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -138,7 +143,7 @@ public class PlayerController : MonoBehaviour
         
         Gizmos.color = Color.red;
 
-        Gizmos.DrawSphere(grabPointRight.position, .1f);
-        Gizmos.DrawSphere(grabPointLeft.position, .1f);
+        Gizmos.DrawSphere(grabPointRight.position, .03f);
+        Gizmos.DrawSphere(grabPointLeft.position, .03f);
     }
 }
