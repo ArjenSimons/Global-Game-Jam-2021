@@ -31,6 +31,8 @@ public class DropOffButton : MonoBehaviour
 
     private Transform tfMainCamera;
 
+    public bool AllowPress { get; set; }
+
     private void Start()
     {
         tfMainCamera = Camera.main.transform;
@@ -41,7 +43,7 @@ public class DropOffButton : MonoBehaviour
 
     private void Update()
     {
-        if (hasFocus && Input.GetMouseButtonDown(0))
+        if (hasFocus && Input.GetMouseButtonDown(0) && AllowPress)
         {
             TryPress();
         }
