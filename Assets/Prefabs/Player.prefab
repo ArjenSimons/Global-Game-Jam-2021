@@ -51,7 +51,8 @@ MonoBehaviour:
   alwaysKeepDefaultRotation: 1
   PaperPickupAudioCue: {fileID: 11400000, guid: a660b4f10f71bd742bf3c7eff0be4243, type: 2}
   PaperLetGoAudioCue: {fileID: 11400000, guid: 9ff7c34b097d7a84b8405619e29da97e, type: 2}
-  ItemHeavyPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
+  ItemPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
+  ItemLetGoAudioCue: {fileID: 11400000, guid: eedf3e87f394b7e4ba348e8de2c6bc21, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   grabStartPoint: {fileID: 3518255929231078291}
@@ -348,7 +349,8 @@ MonoBehaviour:
   alwaysKeepDefaultRotation: 1
   PaperPickupAudioCue: {fileID: 11400000, guid: a660b4f10f71bd742bf3c7eff0be4243, type: 2}
   PaperLetGoAudioCue: {fileID: 11400000, guid: 9ff7c34b097d7a84b8405619e29da97e, type: 2}
-  ItemHeavyPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
+  ItemPickupAudioCue: {fileID: 11400000, guid: 7e75ded350eabca4eb1ba854a7501a0b, type: 2}
+  ItemLetGoAudioCue: {fileID: 11400000, guid: eedf3e87f394b7e4ba348e8de2c6bc21, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   grabStartPoint: {fileID: 3518255929231078291}
