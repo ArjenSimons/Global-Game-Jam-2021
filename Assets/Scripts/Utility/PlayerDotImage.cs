@@ -16,8 +16,7 @@ public class PlayerDotImage : MonoBehaviour
         img = GetComponent<Image>();
         img.enabled = false;
 
-        gameFlow.OnTutorialStart += OnTutorialStart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
 
         pauseChannel.OnEventRaised += OnGamePause;
     }
@@ -27,7 +26,24 @@ public class PlayerDotImage : MonoBehaviour
         EnableImage(!value);
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.TutorialStarted:
+                OnTutorialStart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void OnGameEnd()
     {
         EnableImage(false);
     }

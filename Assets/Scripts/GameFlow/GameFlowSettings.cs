@@ -4,28 +4,66 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GameFlow/Settings")]
 public class GameFlowSettings : ScriptableObject
 {
+    [Header("Developer Settings")]
     public bool StartAtComputer = true;
+
+    public bool SkipTutorial = true;
+
+    [Header("Game State Settings")]
     public bool GameHasStarted = false;
 
-    public Action OnTutorialStart;
-    public Action OnGameStart;
+    public bool IsInTutorial = false;
 
-    public Action OnGameRestart;
-    public Action OnStartGameRestart;
+    [Space]
+    public GameEndState GameEndState;
 
-    public Action<bool> OnGameEnd;
+    public Action<GameStateChange> OnGameStateChanged;
 
     private void OnEnable()
     {
-        GameHasStarted = !StartAtComputer;
+        GameHasStarted = false;
+        IsInTutorial = false;
     }
 
-    public void RaiseTutorialStartEvent()
+    public void RaiseGameStateEvent(GameStateChange change)
     {
-        if (OnTutorialStart != null)
+        switch (change)
         {
-            OnTutorialStart();
-            GameHasStarted = false;
+            case GameStateChange.TutorialStarted:
+                RaiseTutorialStartEvent();
+                break;
+
+            case GameStateChange.TutorialEnded:
+                RaiseTutorialEndEvent();
+                break;
+
+            case GameStateChange.GameStarted:
+                RaiseGameStartEvent();
+                break;
+
+            case GameStateChange.GameRestartStarted:
+                RaiseRestartEvent();
+                break;
+
+            case GameStateChange.GameRestarted:
+                RaiseStartRestartEvent();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                RaiseGameEndEvent();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void RaiseTutorialStartEvent()
+    {
+        if (OnGameStateChanged != null)
+        {
+            OnGameStateChanged(GameStateChange.TutorialStarted);
+            IsInTutorial = true;
         }
         else
         {
@@ -34,11 +72,11 @@ public class GameFlowSettings : ScriptableObject
         }
     }
 
-    public void RaiseGameStartEvent()
+    private void RaiseGameStartEvent()
     {
-        if (OnGameStart != null)
+        if (OnGameStateChanged != null)
         {
-            OnGameStart();
+            OnGameStateChanged(GameStateChange.GameStarted);
             GameHasStarted = true;
         }
         else
@@ -48,11 +86,11 @@ public class GameFlowSettings : ScriptableObject
         }
     }
 
-    public void RaiseRestartEvent()
+    private void RaiseRestartEvent()
     {
-        if (OnGameRestart != null)
+        if (OnGameStateChanged != null)
         {
-            OnGameRestart();
+            OnGameStateChanged(GameStateChange.GameRestarted);
         }
         else
         {
@@ -61,11 +99,11 @@ public class GameFlowSettings : ScriptableObject
         }
     }
 
-    public void RaiseStartRestartEvent()
+    private void RaiseStartRestartEvent()
     {
-        if (OnStartGameRestart != null)
+        if (OnGameStateChanged != null)
         {
-            OnStartGameRestart();
+            OnGameStateChanged(GameStateChange.GameRestartStarted);
         }
         else
         {
@@ -74,12 +112,13 @@ public class GameFlowSettings : ScriptableObject
         }
     }
 
-    public void RaiseGameEndEvent(bool quitted)
+    private void RaiseGameEndEvent()
     {
-        if (OnGameEnd != null)
+        if (OnGameStateChanged != null)
         {
-            OnGameEnd(quitted);
+            OnGameStateChanged(GameStateChange.OnGameEnd);
             GameHasStarted = false;
+            SkipTutorial = true;
         }
         else
         {
@@ -87,11 +126,18 @@ public class GameFlowSettings : ScriptableObject
                 "the scene to respond");
         }
     }
-}
 
-public enum GameState
-{
-    StartMenu,
-    GameStarted,
-    GameEnded,
+    private void RaiseTutorialEndEvent()
+    {
+        if (OnGameStateChanged != null)
+        {
+            OnGameStateChanged(GameStateChange.TutorialEnded);
+            IsInTutorial = false;
+        }
+        else
+        {
+            Debug.LogWarning("The tutorial end event was raised but no one was listening. Make sure the player is in" +
+                "the scene to respond");
+        }
+    }
 }

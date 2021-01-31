@@ -83,12 +83,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool hasCameraAttachedToHead;
+    public bool HasCameraAttachedToHead { get; private set; }
 
     private void Awake()
     {
-        gameFlow.OnTutorialStart += OnTutorialStart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
 
         SetGameCursorActiveState(false);
         pauseChannel.OnEventRaised += OnGamePause;
@@ -123,6 +122,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.TutorialStarted:
+                OnTutorialStart();
+                break;
+
+            case GameStateChange.GameStarted:
+                OnGameStart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public bool IsInGrabRange(Vector3 positionOfObject)
     {
         return RightHand.IsInGrabRange(positionOfObject) || LeftHand.IsInGrabRange(positionOfObject);
@@ -130,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetCameraAttachedToHead(bool value)
     {
-        hasCameraAttachedToHead = value;
+        HasCameraAttachedToHead = value;
     }
 
     private void SetGameCursorActiveState(bool value)
@@ -139,7 +159,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = value;
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameEnd()
     {
         Enable(false);
 
@@ -161,6 +181,16 @@ public class PlayerController : MonoBehaviour
         Enable(true);
     }
 
+    private void OnGameStart()
+    {
+        Enable(true);
+
+        if (!_canGrab)
+        {
+            CanGrab = true;
+        }
+    }
+
     private void Enable(bool value)
     {
         enabled = value;
@@ -168,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!hasCameraAttachedToHead)
+        if (!HasCameraAttachedToHead)
         {
             return;
         }

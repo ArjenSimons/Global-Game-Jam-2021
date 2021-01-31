@@ -61,24 +61,44 @@ public class Computer : MonoBehaviour
 
         scoresUpdatedChannel.OnEventRaised += SetTexts;
 
-        gameFlow.OnGameEnd += OnGameEnd;
-        gameFlow.OnGameRestart += OnGameRestart;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.GameRestarted:
+                OnGameRestart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void OnGameEnd()
     {
         ClearScreen();
 
-        if (quitted)
+        switch (gameFlow.GameEndState)
         {
-            SetupStartMenuFlow();
-        }
-        else
-        {
-            SetupEndGameFlow();
-            ApplyGamePlayResultsToEndGameText();
+            case GameEndState.PauseMenuQuit:
+                SetupStartMenuFlow();
+                break;
 
-            isInEndGameScreen = true;
+            case GameEndState.WorkDayOver:
+                SetupEndGameFlow();
+                ApplyGamePlayResultsToEndGameText();
+                isInEndGameScreen = true;
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -92,7 +112,7 @@ public class Computer : MonoBehaviour
 
     private void Update()
     {
-        if (!gameFlow.GameHasStarted)
+        if (!gameFlow.GameHasStarted && !gameFlow.IsInTutorial)
         {
             if (isInEndGameScreen)
             {
@@ -109,7 +129,7 @@ public class Computer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            gameFlow.RaiseStartRestartEvent();
+            gameFlow.RaiseGameStateEvent(GameStateChange.GameRestartStarted);
         }
     }
 
@@ -224,7 +244,14 @@ public class Computer : MonoBehaviour
 
         SetTexts();
 
-        gameFlow.RaiseTutorialStartEvent();
+        if (gameFlow.SkipTutorial)
+        {
+            gameFlow.RaiseGameStateEvent(GameStateChange.GameStarted);
+        }
+        else
+        {
+            gameFlow.RaiseGameStateEvent(GameStateChange.TutorialStarted);
+        }
     }
 
     private void SetupEndGameFlow()

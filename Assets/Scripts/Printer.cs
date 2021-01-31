@@ -43,8 +43,7 @@ public class Printer : MonoBehaviour
 
     private void Awake()
     {
-        gameFlow.OnGameStart += OnGameStart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
@@ -57,12 +56,29 @@ public class Printer : MonoBehaviour
         }
     }
 
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.GameStarted:
+                OnGameStart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
     private void OnGameStart()
     {
         //destroy credits
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameEnd()
     {
         queuedItems.Clear();
         printing = false;

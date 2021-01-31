@@ -42,9 +42,12 @@ public class TutorialManager : MonoBehaviour
     private bool waitForGrabForm;
     private Grabbable formGrabbable;
 
+    private bool isBusy;
+
     private void Start()
     {
-        gameFlowSettings.OnTutorialStart += StartTutorial;
+        gameFlowSettings.OnGameStateChanged += OnGameStateChanged;
+
         incrementCorrectFormsChannel.OnEventRaised += ReceivedAPoint;
         incrementIncorrectFormsChannel.OnEventRaised += MissingForm;
     }
@@ -61,6 +64,40 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.TutorialStarted:
+                StartTutorial();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void OnGameEnd()
+    {
+        if (isBusy)
+        {
+            isBusy = false;
+
+            StopAllCoroutines();
+
+            dropOffButton.AllowPress = true;
+            playerController.CanGrab = true;
+
+            subtitles.ForceDisable();
+
+            gameFlowSettings.RaiseGameStateEvent(GameStateChange.TutorialEnded);
+        }
+    }
+
     private void StartTutorial()
     {
         StartCoroutine(BeginTutorial());
@@ -70,6 +107,8 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator BeginTutorial()
     {
+        isBusy = true;
+
         yield return new WaitForSeconds(delayBeforeStartTutorial);
         Text1();
     }
@@ -164,6 +203,10 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator EndTutorial()
     {
         yield return new WaitForSeconds(delayBeforeStartGame);
-        gameFlowSettings.RaiseGameStartEvent();
+
+        isBusy = false;
+
+        gameFlowSettings.RaiseGameStateEvent(GameStateChange.TutorialEnded);
+        gameFlowSettings.RaiseGameStateEvent(GameStateChange.GameStarted);
     }
 }
