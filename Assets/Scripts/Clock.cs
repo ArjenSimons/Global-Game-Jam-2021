@@ -149,6 +149,7 @@ public class Clock : MonoBehaviour
     private void SetStartTime()
     {
         currentTime = startTime;
+        CurrentMinutes = Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
     }
 
     private void SetTime()

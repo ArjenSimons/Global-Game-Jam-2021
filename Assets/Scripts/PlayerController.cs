@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     public GrabScript LeftHand => grabScriptLeftHand;
     public GrabScript RightHand => grabScriptRightHand;
+
     public bool CanGrab
     {
         get
@@ -78,6 +79,8 @@ public class PlayerController : MonoBehaviour
             crosshair.SetActive(_canGrab);
         }
     }
+
+    private bool hasCameraAttachedToHead;
 
     private void Awake()
     {
@@ -97,6 +100,19 @@ public class PlayerController : MonoBehaviour
         startLocalEulerAngles = transform.localEulerAngles;
     }
 
+    private void Start()
+    {
+        if (gameFlow.StartAtComputer)
+        {
+            Enable(false);
+        }
+    }
+
+    public void SetCameraAttachedToHead(bool value)
+    {
+        hasCameraAttachedToHead = value;
+    }
+
     private void SetGameCursorActiveState(bool value)
     {
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
@@ -114,20 +130,12 @@ public class PlayerController : MonoBehaviour
         localCameraEulerAngles = cameraTransform.localEulerAngles;
     }
 
-    private void Start()
-    {
-        if (gameFlow.StartAtComputer)
-        {
-            Enable(false);
-        }
-    }
-
     private void OnGamePause(bool value)
     {
         SetGameCursorActiveState(value);
         Enable(!value);
     }
-    
+
     private void OnTutorialStart()
     {
         Enable(true);
@@ -140,6 +148,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!hasCameraAttachedToHead)
+        {
+            return;
+        }
+
         UpdateMouseMovement(cameraTransform);
 
         if (Input.GetMouseButtonDown(0) && CanGrab)

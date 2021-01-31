@@ -39,9 +39,6 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private TrackPos marker3DButton = null;
 
-    [SerializeField]
-    private ScoresManager scoresManager = null;
-
     private bool waitForGrabForm;
     private Grabbable formGrabbable;
 
