@@ -74,7 +74,8 @@ public class Clock : MonoBehaviour
 
     private bool HalfWayToNextSecond => (Time.realtimeSinceStartup % 1) >= FIFTY_PERCENT;
 
-    private bool timeIsPassing;
+    private bool timeCanIncrease;
+    private bool workdayOver;
 
     private void Awake()
     {
@@ -110,30 +111,35 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        if (timeIsPassing)
+        if (!workdayOver)
         {
-            currentTime += Time.deltaTime / durationOfOneHour;
-            CurrentMinutes = Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
+            //if there is work to be done and time is passing, update time
+            if (timeCanIncrease)
+            {
+                currentTime += Time.deltaTime / durationOfOneHour;
+                CurrentMinutes = Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
+            }
+
+            if (CurrentHours == endTime && CurrentMinutes == 0)
+            {
+                OnWorkDayOver(false);
+            }
         }
 
         SetTime();
 
-        if (CurrentHours == endTime && CurrentMinutes == 0)
-        {
-            workdayOverChannel.RaiseEvent(false);
-        }
-
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            workdayOverChannel.RaiseEvent(false);
+            OnWorkDayOver(false);
         }
 #endif
     }
 
     private void OnGameStart()
     {
-        timeIsPassing = true;
+        timeCanIncrease = true;
+        workdayOver = false;
         CheckEvents();
     }
 
@@ -153,18 +159,26 @@ public class Clock : MonoBehaviour
         }
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
-            workdayOverChannel.RaiseEvent(false);
+            OnWorkDayOver(false);
         }
+    }
+
+    private void OnWorkDayOver(bool quitted)
+    {
+        timeCanIncrease = false;
+        workdayOver = true;
+        workdayOverChannel.RaiseEvent(quitted);
     }
 
     private void OnGameRestart()
     {
         SetStartTime();
+        SetTime();
     }
 
     private void OnGameEnd()
     {
-        timeIsPassing = false;
+        timeCanIncrease = false;
         if (gameFlow.GameEndState == GameEndState.PauseMenuQuit)
         {
             OnGameRestart();
