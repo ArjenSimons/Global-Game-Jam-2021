@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb16280894c12f54da2a65eaad2aaddf, type: 3}
   m_Name: UI_SFXConfig
   m_EditorClassIdentifier: 
-  outputAudioMixerGroup: {fileID: -2934306166281812369, guid: f9ced5b549cd588489a42be26acd0cab,
-    type: 2}
-  volume: 1
+  outputAudioMixerGroup: {fileID: -2934306166281812369, guid: f9ced5b549cd588489a42be26acd0cab, type: 2}
+  spatialBlend: 1
+  volume: 0.562
