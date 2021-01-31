@@ -26,7 +26,15 @@ public class Subtitles : MonoBehaviour
         {
             StopCoroutine(disableTextRoutine); //TODO: Check if OntextDone should be invoked if the previous text ended early, maybe make it a UnityEvent<bool>
         }
+
         disableTextRoutine = StartCoroutine(DisableText(seconds));
+    }
+
+    public void ForceDisable()
+    {
+        StopCoroutine(disableTextRoutine);
+        textSubtitles.text = string.Empty;
+        textSubtitles.enabled = false;
     }
 
     private IEnumerator DisableText(float seconds)

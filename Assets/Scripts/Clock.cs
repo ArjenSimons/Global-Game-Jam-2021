@@ -83,10 +83,29 @@ public class Clock : MonoBehaviour
 
     private void Start()
     {
-        gameFlow.OnGameStart += OnGameStart;
-        gameFlow.OnGameRestart += OnGameRestart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
         //onWorkdayOver.AddListener(PlayEndGameAlarm);
+    }
+
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.GameStarted:
+                OnGameStart();
+                break;
+
+            case GameStateChange.GameRestarted:
+                OnGameRestart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void Update()
@@ -107,7 +126,7 @@ public class Clock : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            workdayOverChannel.RaiseEvent(true);
+            workdayOverChannel.RaiseEvent(false);
         }
 #endif
     }
@@ -143,10 +162,10 @@ public class Clock : MonoBehaviour
         SetStartTime();
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameEnd()
     {
         timeIsPassing = false;
-        if (quitted)
+        if (gameFlow.GameEndState == GameEndState.PauseMenuQuit)
         {
             OnGameRestart();
         }

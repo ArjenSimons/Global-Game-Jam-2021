@@ -26,15 +26,28 @@ public class GameFlowBackgroundFader : MonoBehaviour
         SetTransparant();
         FadeOut();
 
-        gameFlow.OnStartGameRestart += OnStartGameRestart;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
         workdayOverChannel.OnEventRaised += OnWorkDayOver;
+    }
+
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.GameRestartStarted:
+                OnStartGameRestart();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void OnStartGameRestart()
     {
         FadeIn().append(() =>
         {
-            gameFlow.RaiseRestartEvent();
+            gameFlow.RaiseGameStateEvent(GameStateChange.GameRestarted);
             FadeOut();
         });
     }
@@ -80,7 +93,8 @@ public class GameFlowBackgroundFader : MonoBehaviour
         FadeIn().append(fadeDelay).append(() =>
         {
             FadeOut();
-            gameFlow.RaiseGameEndEvent(quitted);
+            gameFlow.GameEndState = quitted ? GameEndState.PauseMenuQuit : GameEndState.WorkDayOver;
+            gameFlow.RaiseGameStateEvent(GameStateChange.OnGameEnd);
         });
     }
 

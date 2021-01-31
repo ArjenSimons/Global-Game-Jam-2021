@@ -30,8 +30,9 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameFlow.GameHasStarted)
+        if (!(gameFlow.GameHasStarted || gameFlow.IsInTutorial))
         {
+            //if the player is not playing and not in tutorial, don't provide  option to pause game
             return;
         }
 

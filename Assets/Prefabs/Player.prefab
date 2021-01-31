@@ -428,6 +428,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: moveController
+      value: 
+      objectReference: {fileID: 3518255930515403184}
+    - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1157588519006081762}

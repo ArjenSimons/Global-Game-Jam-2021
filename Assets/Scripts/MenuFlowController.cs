@@ -21,21 +21,48 @@ public class MenuFlowController : MonoBehaviour
     [SerializeField]
     private Transform bezierTransform = null;
 
+    [SerializeField]
+    private PlayerController moveController = null;
+
     [Header("Project References")]
     [SerializeField]
     private GameFlowSettings gameFlow = null;
 
-    [Header("Events")]
-    [SerializeField]
-    private CameraAttachedToHeadEvent cameraAttachedToHead = null;
-
     private void Awake()
     {
-        gameFlow.OnTutorialStart += OnTutorialStart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.TutorialStarted:
+                OnTutorialStart();
+                break;
+
+            case GameStateChange.GameStarted:
+                OnGameStart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void OnGameStart()
+    {
+        if (!moveController.HasCameraAttachedToHead)
+        {
+            MoveCameraTowardsHead();
+        }
+    }
+
+    private void OnGameEnd()
     {
         PlaceCameraAtComputerPosition();
     }
@@ -56,7 +83,7 @@ public class MenuFlowController : MonoBehaviour
     private void PlaceCameraAtComputerPosition()
     {
         cameraTransform.position = menuTransform.position;
-        cameraAttachedToHead.Invoke(false);
+        moveController.SetCameraAttachedToHead(false);
     }
 
     private void MoveCameraTowardsHead()
@@ -65,7 +92,7 @@ public class MenuFlowController : MonoBehaviour
 
         LeanTween.move(cameraTransform.gameObject, path, bezierTime)
             .setEaseInOutSine()
-            .setOnComplete(() => cameraAttachedToHead.Invoke(true));
+            .setOnComplete(() => moveController.SetCameraAttachedToHead(true));
     }
 
     [System.Serializable]
