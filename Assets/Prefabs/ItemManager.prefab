@@ -48,7 +48,7 @@ MonoBehaviour:
   dropRate: 15
   dropBurstInterval: 0.125
   formAmountFirstDrop: 3
-  formAmountIncreaseRatio: 1.4
+  formAmountIncreaseRatio: 1.25
   fillerDropPercentage: 40
   tutorialLostItem:
     ItemType: {fileID: 11400000, guid: 1c2853291cc92c544949bce729dfcdc4, type: 2}
