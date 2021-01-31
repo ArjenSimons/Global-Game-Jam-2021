@@ -84,6 +84,12 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private AudioRequestChannelSO channel = null;
 
+    [SerializeField]
+    private EmptyChannel newFormsPrintedChannel = null;
+
+    [SerializeField]
+    private EmptyChannel openChuteChannel = null;
+
     private List<LostItem> fillerItems = new List<LostItem>();
     private List<LostItem> spawnableItems = new List<LostItem>();
     private List<LostItem> droppedItems = new List<LostItem>();
@@ -277,6 +283,9 @@ public class ItemManager : MonoBehaviour
             itemRequestedChannel.RaiseEvent(item);
         }
 
+        // Raise event
+        newFormsPrintedChannel.RaiseEvent();
+
         // Increase amount of next form drop
         nextFormBundleAmount *= formAmountIncreaseRatio;
     }
@@ -325,6 +334,7 @@ public class ItemManager : MonoBehaviour
     private IEnumerator DropItemsInBurst(int count)
     {
         channel.RaiseEvent(config, audioCue, thrashShute.transform.position);
+        openChuteChannel.RaiseEvent();
 
         yield return new WaitForSeconds(2.8f);
 

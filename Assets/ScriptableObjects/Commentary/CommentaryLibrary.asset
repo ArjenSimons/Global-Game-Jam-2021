@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc1f052cf9ed5429c2e62c65cfab53, type: 3}
+  m_Name: CommentaryLibrary
+  m_EditorClassIdentifier: 
+  commentaryGroups:
+  - {fileID: 11400000, guid: 75d7026c007478441819f45e6baf0795, type: 2}
+  - {fileID: 11400000, guid: 7f749cc70a47c2948a194c64918383ad, type: 2}
+  - {fileID: 11400000, guid: 0a68a878019818e468d8c010b705a8eb, type: 2}
+  - {fileID: 11400000, guid: 38b1d10f2ba759f43bb707e2a5e70803, type: 2}

@@ -1,3 +1,4 @@
+using BWolf.Utilities.AudioPlaying;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, Tooltip("x component is Min & y component is Max")]
     private Vector2 clampAnglesY = new Vector2(0, 0);
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO audioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     [Header("References")]
     [SerializeField]
@@ -59,6 +71,11 @@ public class PlayerController : MonoBehaviour
     private bool pressA = false;
     private bool pressS = false;
     private bool pressD = false;
+
+    private int walkTimer;
+
+    private Vector3 lastPos;
+    private float walkSpeed = 0;
 
     private Vector3 localCameraEulerAngles;
 
@@ -302,6 +319,38 @@ public class PlayerController : MonoBehaviour
         Vector3 newVelocity = playerVelocity.normalized;
         playerRigidbody.AddForce((transform.forward * playerSpeed * newVelocity.x) + (transform.right * playerSpeed * newVelocity.z));
         //playerRigidbody.velocity = (transform.forward * Time.fixedDeltaTime * playerSpeed * playerVelocity.x) + (transform.right * Time.fixedDeltaTime * playerSpeed * playerVelocity.z);
+
+        float playerVel = Mathf.Abs(playerVelocity.x) + Mathf.Abs(playerVelocity.z);
+
+        float dPosY = Mathf.Abs(lastPos.y - transform.position.y);
+        float dPosX = Mathf.Abs(lastPos.x - transform.position.x);
+        float dPosZ = Mathf.Abs(lastPos.z - transform.position.z);
+
+        walkSpeed = dPosX + dPosZ;
+
+        lastPos = transform.position;
+        Debug.Log(walkSpeed);
+
+        if (walkSpeed > 0.05f)
+        {
+            walkTimer++;
+
+            if (walkTimer >= 23)
+            {
+                float tempVol = config.volume;
+                config.volume = tempVol / 2 * (Mathf.Min(walkSpeed, 2) * 10);
+
+                channel.RaiseEvent(config, audioCue, transform.position - Vector3.down * 1.5f);
+
+                config.volume = tempVol;
+
+                walkTimer = 0;
+            }
+        }
+        else
+        {
+            walkTimer = 15;
+        }
     }
 
     private void UpdateMouseMovement(Transform mouseTransform)
