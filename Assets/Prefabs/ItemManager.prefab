@@ -67,3 +67,5 @@ MonoBehaviour:
   formSet: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
   itemRequestedChannel: {fileID: 11400000, guid: b1ca7521b0a38cb4888a072ce7f56b47, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
+  newFormsPrintedChannel: {fileID: 11400000, guid: bcfd7ad3d01efda49b614a7aa1d21255, type: 2}
+  openChuteChannel: {fileID: 11400000, guid: 5e95fae74e248ab4e8b8c23b2be34592, type: 2}
