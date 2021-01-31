@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 4516105089770720120}
   - component: {fileID: 3999577432272364235}
   - component: {fileID: 2800614296536007759}
+  - component: {fileID: -1541801829787632913}
   m_Layer: 0
   m_Name: Trolley 1
   m_TagString: PickupableItem
@@ -130,6 +131,18 @@ MonoBehaviour:
   audioCue: {fileID: 11400000, guid: 05046061cb1af7b48a160e95deac1ea2, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
+--- !u!114 &-1541801829787632913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4516105089770720118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26a61949557df444b33152d7a8f7165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4516105088885201409
 PrefabInstance:
   m_ObjectHideFlags: 0
