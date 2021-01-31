@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: DarkBlue
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.37212983, b: 0.754717, a: 1}
+  color: {r: 0, g: 0.15686275, b: 0.4509804, a: 1}
   displayName: Dark Blue
