@@ -13,11 +13,18 @@ public class CommentaryManager : MonoBehaviour
     [SerializeField, Range(0f, 1f), Tooltip("Chance for the next event to trigger a message")]
     private float commentChance = 0.5f;
 
+    [Header("Channels")]
     [SerializeField]
     private EmptyChannel incrementCorrectFormsChannel = null;
 
     [SerializeField]
     private EmptyChannel incrementIncorrectFormsChannel = null;
+
+    [SerializeField]
+    private EmptyChannel newFormsPrintedChannel = null;
+
+    [SerializeField]
+    private EmptyChannel openChuteChannel = null;
 
     [Header("References")]
     [SerializeField]
@@ -57,7 +64,10 @@ public class CommentaryManager : MonoBehaviour
 
     private void Start()
     {
-        incrementCorrectFormsChannel.OnEventRaised += CommentOnIncrementCorrectForms;
+        incrementCorrectFormsChannel.OnEventRaised += OnIncrementCorrectForms;
+        incrementIncorrectFormsChannel.OnEventRaised += OnIncremenIncorrectForms;
+        newFormsPrintedChannel.OnEventRaised += OnNewFormsPrinted;
+        openChuteChannel.OnEventRaised += OnOpenChute;
         gameFlowSettings.OnGameStart += EnableCommentary;
         gameFlowSettings.OnGameEnd += DisableCommentary;
         minDelayPassed = true;
@@ -67,18 +77,71 @@ public class CommentaryManager : MonoBehaviour
     private void EnableCommentary()
     {
         CanComment = true;
+        if (CountDownRoutine != null)
+        {
+            StopCoroutine(CountDownRoutine);
+        }
+        CountDownRoutine = StartCoroutine(CountDownDelays());
     }
 
     private void DisableCommentary(bool quitted)
     {
         CanComment = false;
+        minDelayPassed = false;
+        minDelayBeforeForcePassed = false;
     }
 
-    private void CommentOnIncrementCorrectForms()
+    private void OnIncrementCorrectForms()
     {
         if (ShouldComment)
         {
-            Commentary commentary = commentaryLibrary.GetCommentary();
+            Debug.Log("comment OnIncrementCorrectForms");
+            Commentary commentary = commentaryLibrary.GetCommentary(CommentaryType.CorrectMatch);
+            if (commentary == null)
+            {
+                return;
+            }
+
+            TriggerMessage(commentary);
+        }
+    }
+
+    private void OnIncremenIncorrectForms()
+    {
+        if (ShouldComment)
+        {
+            Debug.Log("comment OnIncremenIncorrectForms");
+            Commentary commentary = commentaryLibrary.GetCommentary(CommentaryType.IncorrectMatch);
+            if (commentary == null)
+            {
+                return;
+            }
+
+            TriggerMessage(commentary);
+        }
+    }
+
+    private void OnNewFormsPrinted()
+    {
+        if (ShouldComment)
+        {
+            Debug.Log("comment OnOpenChute");
+            Commentary commentary = commentaryLibrary.GetCommentary(CommentaryType.NewFormsPrinted);
+            if (commentary == null)
+            {
+                return;
+            }
+
+            TriggerMessage(commentary);
+        }
+    }
+
+    private void OnOpenChute()
+    {
+        if (ShouldComment)
+        {
+            Debug.Log("comment OnOpenChute");
+            Commentary commentary = commentaryLibrary.GetCommentary(CommentaryType.OpenChute);
             if (commentary == null)
             {
                 return;
@@ -92,6 +155,8 @@ public class CommentaryManager : MonoBehaviour
     {
         subtitles.ShowText(commentary.Text, commentary.SpeakDuration);
         subtitles.OnTextDone.AddListener(TextDone);
+        minDelayPassed = false;
+        minDelayBeforeForcePassed = false;
     }
 
     private void TextDone()
@@ -106,9 +171,6 @@ public class CommentaryManager : MonoBehaviour
 
     private IEnumerator CountDownDelays()
     {
-        minDelayPassed = false;
-        minDelayBeforeForcePassed = false;
-
         yield return new WaitForSeconds(minDelay);
         minDelayPassed = true;
 

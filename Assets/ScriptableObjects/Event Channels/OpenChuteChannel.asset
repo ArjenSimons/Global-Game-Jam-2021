@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77dc1f052cf9ed5429c2e62c65cfab53, type: 3}
-  m_Name: CommentaryLibrary
+  m_Script: {fileID: 11500000, guid: f75070c4b47a6004aac268453e76a205, type: 3}
+  m_Name: OpenChuteChannel
   m_EditorClassIdentifier: 
-  commentaryList:
-  - Text: Test commentary
-    SpeakDuration: 2
