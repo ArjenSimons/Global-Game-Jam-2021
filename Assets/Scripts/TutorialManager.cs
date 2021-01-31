@@ -121,13 +121,13 @@ public class TutorialManager : MonoBehaviour
     private void Text7()
     {
         subtitles.OnTextDone.RemoveListener(Text7);
-        subtitles.OnTextDone.AddListener(EnableButton);
-        subtitles.ShowText("Go ahead and do it. After that you can start your job right away!", 4f);
+        StartCoroutine(EnableButton());
+        subtitles.ShowText("Go ahead and do it.", 2f);
     }
 
-    private void EnableButton()
+    private IEnumerator EnableButton()
     {
-        subtitles.OnTextDone.RemoveListener(EnableButton);
+        yield return new WaitForSeconds(1f);
         dropOffButton.AllowPress = true;
         marker3DButton.TrackedObject = dropOffButton.transform;
     }
@@ -149,9 +149,16 @@ public class TutorialManager : MonoBehaviour
     {
         incrementIncorrectFormsChannel.OnEventRaised -= MissingForm;
         incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
-        subtitles.ShowText("That's it, good luck Bob!", 3f);
+        subtitles.OnTextDone.AddListener(ReceivedAPoint2);
+        subtitles.ShowText("That's it, well done!", 3f);
         marker3DButton.TrackedObject = null;
         StartCoroutine(EndTutorial());
+    }
+
+    private void ReceivedAPoint2()
+    {
+        subtitles.OnTextDone.RemoveListener(ReceivedAPoint2);
+        subtitles.ShowText("Let's get to work! I've opened the chute.", 4f);
     }
 
     private IEnumerator EndTutorial()

@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 6709283689592248260}
   - component: {fileID: -4189910323730010801}
   - component: {fileID: 1353535920287133567}
+  - component: {fileID: -1590442538034525063}
   - component: {fileID: 5130040334943187802}
   m_Layer: 7
   m_Name: Form
@@ -885,6 +886,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21, y: 0.005, z: 0.297}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1590442538034525063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4225498123614416929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
+  objects:
+  - {fileID: 5130040334943187802}
 --- !u!114 &5130040334943187802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,6 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 1
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
 --- !u!1 &4239557814091149008
 GameObject:
   m_ObjectHideFlags: 0

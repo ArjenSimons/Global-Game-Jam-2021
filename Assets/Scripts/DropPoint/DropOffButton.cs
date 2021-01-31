@@ -1,4 +1,5 @@
 using BWolf.Utilities;
+using BWolf.Utilities.AudioPlaying;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,20 @@ public class DropOffButton : MonoBehaviour
 
     [SerializeField]
     private float minRangeForObjectTrigger = 0.5f;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO buttonPressCue = null;
+
+    [SerializeField]
+    private AudioCueSO mechanicalButtonPressCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     [Header("Events")]
     [SerializeField]
@@ -92,6 +107,8 @@ public class DropOffButton : MonoBehaviour
     private IEnumerator DoPress()
     {
         isBeingPressed = true;
+        channel.RaiseEvent(config, buttonPressCue, transform.position);
+        channel.RaiseEvent(config, mechanicalButtonPressCue, transform.position);
 
         float scaleY = transform.localScale.y;
         PingPongValue press = new PingPongValue(scaleY / pressFactor, scaleY, 1, pressSpeed, false, 1.0f);

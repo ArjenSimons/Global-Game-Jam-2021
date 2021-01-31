@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GrabScript : MonoBehaviour
 {
-    [Header("Setting"), Range(0f,1000f)]
+    [Header("Setting"), Range(0f, 1000f)]
     [SerializeField]
     private float magneticForce = 1f;
 
@@ -59,7 +59,9 @@ public class GrabScript : MonoBehaviour
     private Quaternion lastRot;
     private float rotSpeed = 0;
 
-    void Awake()
+    private float sqrMaxRayDistance;
+
+    private void Awake()
     {
         if (player)
         {
@@ -69,17 +71,18 @@ public class GrabScript : MonoBehaviour
 
         lastRot = transform.rotation;
 
+        sqrMaxRayDistance = maxRayDistance * maxRayDistance;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!CurrentlyGrabbedObject) return;
 
         if (CurrentlyGrabbedObject.TryGetComponent(out Form form))
         {
             HandleSelectedItem(formTransform, true);
-        } 
+        }
         else
         {
             HandleSelectedItem(grabEmptyPoint);
@@ -94,12 +97,17 @@ public class GrabScript : MonoBehaviour
         lastRot = transform.rotation;
     }
 
+    public bool IsInGrabRange(Vector3 position)
+    {
+        return (position - transform.position).sqrMagnitude < sqrMaxRayDistance;
+    }
+
     // Handles what should happen when an item is in its selected list
     private void HandleSelectedItem(Transform transform, bool forceRotation = false)
     {
         Rigidbody currentObjectRigidbody = CurrentlyGrabbedObject.GetComponent<Rigidbody>();
 
-        if (alwaysKeepDefaultRotation || forceRotation )
+        if (alwaysKeepDefaultRotation || forceRotation)
         {
             SetItemRotationToDefault(transform);
         }
@@ -185,10 +193,10 @@ public class GrabScript : MonoBehaviour
 
         Quaternion defaultRotation = transform.rotation;
 
-        CurrentlyGrabbedObject.transform.rotation = Quaternion.Slerp(CurrentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed*10) * Time.deltaTime);
+        CurrentlyGrabbedObject.transform.rotation = Quaternion.Slerp(CurrentlyGrabbedObject.transform.rotation, defaultRotation, (itemSlerpRotationSpeed * 10) * Time.deltaTime);
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         if (!grabEmptyPoint || !grabStartPoint) return;
 

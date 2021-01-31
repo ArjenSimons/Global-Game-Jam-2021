@@ -224,6 +224,7 @@ MonoBehaviour:
   grabPointRight: {fileID: 3518255930212725282}
   crosshair: {fileID: 0}
   gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
+  sharedData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
   pauseChannel: {fileID: 11400000, guid: 13257d39a1b47ce47836ceddcb7b8c45, type: 2}
 --- !u!65 &591241237840048692
 BoxCollider:
