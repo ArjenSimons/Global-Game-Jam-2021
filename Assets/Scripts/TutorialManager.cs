@@ -196,7 +196,13 @@ public class TutorialManager : MonoBehaviour
     private void Text7()
     {
         subtitles.OnTextDone.RemoveListener(Text7);
+        subtitles.OnTextDone.AddListener(AllowGrabTrolley);
         subtitles.ShowText("Grab the red trolley in your other hand!", 3f);
+    }
+
+    private void AllowGrabTrolley()
+    {
+        subtitles.OnTextDone.RemoveListener(AllowGrabTrolley);
         trolleyGrabbable = itemSet.GetMatchWithLostItem(formSet.GetFirstFormInSet().ItemDisplaying).GetComponent<Grabbable>();
         waitForGrabTrolley = true;
         marker3DTrolley.TrackedObject = trolleyGrabbable.transform;
