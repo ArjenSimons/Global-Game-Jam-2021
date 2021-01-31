@@ -29,7 +29,7 @@ public class TrackPos : MonoBehaviour
     {
         if (TrackedObject != null)
         {
-            screenPosition = Camera.main.WorldToScreenPoint(TrackedObject.position);
+            screenPosition = Vector3.Lerp(transform.position, Camera.main.WorldToScreenPoint(TrackedObject.position), 0.55f);
             transform.position = screenPosition;
             viewportPosition = Camera.main.WorldToViewportPoint(TrackedObject.transform.position);
         }
