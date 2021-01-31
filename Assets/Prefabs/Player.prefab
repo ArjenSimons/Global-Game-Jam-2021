@@ -400,6 +400,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3518255930515403197}
     m_Modifications:
+    - target: {fileID: 113738805387866884, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.347
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531386293220872439, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.398
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531386293220872439, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.065
+      objectReference: {fileID: 0}
     - target: {fileID: 1640076983260332197, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
       propertyPath: m_Name
       value: MenuFlow
