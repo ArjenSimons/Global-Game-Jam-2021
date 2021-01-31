@@ -25,15 +25,18 @@ public class TrackPos : MonoBehaviour
 
     public Transform TrackedObject { get; set; }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (TrackedObject != null)
         {
-            screenPosition = Vector3.Lerp(screenPosition, Camera.main.WorldToScreenPoint(TrackedObject.position), 0.5f);
+            screenPosition = Camera.main.WorldToScreenPoint(TrackedObject.position);
             transform.position = screenPosition;
             viewportPosition = Camera.main.WorldToViewportPoint(TrackedObject.transform.position);
         }
+    }
 
+    private void Update()
+    {
         bool atCenter = viewportPosition.x > 0.45f && viewportPosition.x < 0.55f && viewportPosition.y > 0.45f && viewportPosition.y < 0.55f
             && viewportPosition.z > 0;
 
