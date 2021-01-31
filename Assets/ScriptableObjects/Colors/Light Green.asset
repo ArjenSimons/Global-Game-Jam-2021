@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: Light Green
   m_EditorClassIdentifier: 
-  color: {r: 0.14651024, g: 1, b: 0.0141509175, a: 1}
+  color: {r: 0.22352941, g: 0.7254902, b: 0.14117648, a: 1}
   displayName: Light Green
