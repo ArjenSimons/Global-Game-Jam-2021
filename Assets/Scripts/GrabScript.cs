@@ -48,7 +48,7 @@ public class GrabScript : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    private BoxCollider playerCollider;
+    private Collider playerCollider;
     private Rigidbody playerRigidbody;
 
     public GameObject CurrentlyGrabbedObject { get; private set; }
@@ -57,7 +57,7 @@ public class GrabScript : MonoBehaviour
     {
         if (player)
         {
-            playerCollider = player.GetComponent<BoxCollider>();
+            playerCollider = player.GetComponent<Collider>();
             playerRigidbody = player.GetComponent<Rigidbody>();
         }
     }
