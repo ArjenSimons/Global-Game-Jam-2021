@@ -194,8 +194,11 @@ public class ItemManager : MonoBehaviour
         form.transform.position = tutorialFormPosition;
     }
 
-    public void RespawnTutorialItem()
+    public IEnumerator RespawnTutorialItem()
     {
+        channel.RaiseEvent(config, audioCue, thrashShute.transform.position);
+        yield return new WaitForSeconds(2.8f);
+
         DropRandomItem(true);
         LostItem lostItem = droppedItems[UnityEngine.Random.Range(0, droppedItems.Count)];
         itemRequestedChannel.RaiseEvent(lostItem);

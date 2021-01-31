@@ -14,6 +14,11 @@ public class GameFlowSettings : ScriptableObject
 
     public bool IsInTutorial = false;
 
+    public bool CanPlay
+    {
+        get { return IsInTutorial || GameHasStarted; }
+    }
+
     [Space]
     public GameEndState GameEndState;
 

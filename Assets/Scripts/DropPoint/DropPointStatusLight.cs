@@ -1,3 +1,4 @@
+using BWolf.Utilities.AudioPlaying;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,20 @@ public class DropPointStatusLight : MonoBehaviour
 
     [SerializeField]
     private Color emptyStatusColor = Color.black;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioCueSO correctAudioCue = null;
+
+    [SerializeField]
+    private AudioCueSO wrongAudioCue = null;
+
+    [SerializeField]
+    private AudioConfigurationSO config = null;
+
+    [Header("Channel Broadcasting on")]
+    [SerializeField]
+    private AudioRequestChannelSO channel = null;
 
     [Header("Scene References")]
     [SerializeField]
@@ -119,6 +134,15 @@ public class DropPointStatusLight : MonoBehaviour
     private void GiveDeliveryFeedback(bool wasSuccesfulDelivery)
     {
         givingFeedback = true;
+
+        if (wasSuccesfulDelivery)
+        {
+            channel.RaiseEvent(config, correctAudioCue, transform.position);
+        }
+        else
+        {
+            channel.RaiseEvent(config, wrongAudioCue, transform.position);
+        }
 
         Color color = wasSuccesfulDelivery ? succesColor : failedColor;
         LTSeq sequence = LeanTween.sequence();

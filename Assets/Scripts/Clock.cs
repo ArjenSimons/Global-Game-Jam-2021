@@ -18,7 +18,10 @@ public class Clock : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField]
-    private AudioCueSO audioCue = null;
+    private AudioCueSO endGameAudiooCue = null;
+
+    [SerializeField]
+    private AudioCueSO digitalAlarmCue = null;
 
     [SerializeField]
     private AudioConfigurationSO config = null;
@@ -74,7 +77,8 @@ public class Clock : MonoBehaviour
 
     private bool HalfWayToNextSecond => (Time.realtimeSinceStartup % 1) >= FIFTY_PERCENT;
 
-    private bool timeIsPassing;
+    private bool timeCanIncrease;
+    private bool workdayOver;
 
     private void Awake()
     {
@@ -110,30 +114,35 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        if (timeIsPassing)
+        if (!workdayOver)
         {
-            currentTime += Time.deltaTime / durationOfOneHour;
-            CurrentMinutes = Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
+            //if there is work to be done and time is passing, update time
+            if (timeCanIncrease)
+            {
+                currentTime += Time.deltaTime / durationOfOneHour;
+                CurrentMinutes = Mathf.FloorToInt((currentTime % 1) * MINUTES_IN_HOUR);
+            }
+
+            if (CurrentHours == endTime && CurrentMinutes == 0)
+            {
+                OnWorkDayOver(false);
+            }
         }
 
         SetTime();
 
-        if (CurrentHours == endTime && CurrentMinutes == 0)
-        {
-            workdayOverChannel.RaiseEvent(false);
-        }
-
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            workdayOverChannel.RaiseEvent(false);
+            OnWorkDayOver(false);
         }
 #endif
     }
 
     private void OnGameStart()
     {
-        timeIsPassing = true;
+        timeCanIncrease = true;
+        workdayOver = false;
         CheckEvents();
     }
 
@@ -145,26 +154,38 @@ public class Clock : MonoBehaviour
         }
         if (CurrentMinutes == 0)
         {
+            if (CurrentHours != 9 && CurrentHours != endTime)
+            {
+                channel.RaiseEvent(config, digitalAlarmCue, transform.position);
+            }
             onHourPassed.Invoke();
         }
-        if (CurrentHours == endTime - 1 && CurrentMinutes == 58)
+        if (CurrentHours == endTime - 1 && CurrentMinutes == 57)
         {
             PlayEndGameAlarm();
         }
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
-            workdayOverChannel.RaiseEvent(false);
+            OnWorkDayOver(false);
         }
+    }
+
+    private void OnWorkDayOver(bool quitted)
+    {
+        timeCanIncrease = false;
+        workdayOver = true;
+        workdayOverChannel.RaiseEvent(quitted);
     }
 
     private void OnGameRestart()
     {
         SetStartTime();
+        SetTime();
     }
 
     private void OnGameEnd()
     {
-        timeIsPassing = false;
+        timeCanIncrease = false;
         if (gameFlow.GameEndState == GameEndState.PauseMenuQuit)
         {
             OnGameRestart();
@@ -187,6 +208,6 @@ public class Clock : MonoBehaviour
 
     private void PlayEndGameAlarm()
     {
-        channel.RaiseEvent(config, audioCue, transform.position);
+        channel.RaiseEvent(config, endGameAudiooCue, transform.position);
     }
 }
