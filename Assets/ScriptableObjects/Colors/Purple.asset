@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: Purple
   m_EditorClassIdentifier: 
-  color: {r: 0.51418114, g: 0, b: 1, a: 1}
+  color: {r: 0.51418114, g: 0.1764706, b: 0.54901963, a: 1}
   displayName: Purple
