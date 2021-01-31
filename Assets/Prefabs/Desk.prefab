@@ -15,7 +15,8 @@ MonoBehaviour:
   startTime: 9
   endTime: 17
   durationOfOneHour: 60
-  audioCue: {fileID: 11400000, guid: b8def45b52788b244b4db636988bf615, type: 2}
+  endGameAudiooCue: {fileID: 11400000, guid: b8def45b52788b244b4db636988bf615, type: 2}
+  digitalAlarmCue: {fileID: 11400000, guid: 8f37c7cbc8649d945a0b5c55c7c107d6, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   textTime: {fileID: 6146043817486708142}
