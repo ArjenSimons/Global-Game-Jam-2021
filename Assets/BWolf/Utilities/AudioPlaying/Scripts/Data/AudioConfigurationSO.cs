@@ -16,7 +16,7 @@ namespace BWolf.Utilities.AudioPlaying
         [SerializeField]
         private AudioMixerGroup outputAudioMixerGroup = null;
 
-        [SerializeField]
+        [SerializeField, Range(0.0f, 1.0f)]
         private float spatialBlend = 1f;
 
         [Header("Sound")]

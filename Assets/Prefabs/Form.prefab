@@ -861,6 +861,7 @@ MonoBehaviour:
   textRemarks: {fileID: 4583463994389239110}
   paperCollider: {fileID: 1353535920287133567}
   formSet: {fileID: 11400000, guid: 0069579b230ca1d459b9501885be679b, type: 2}
+  RandomNamesFile: {fileID: 4900000, guid: bba2656ab7f0e1e4c9378acdf21e6b2d, type: 3}
 --- !u!114 &-4189910323730010801
 MonoBehaviour:
   m_ObjectHideFlags: 0

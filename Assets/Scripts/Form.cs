@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -28,9 +31,20 @@ public class Form : MonoBehaviour
 
     public LostItem ItemDisplaying { get; private set; }
 
+    [Header("Data files")]
+    [SerializeField]
+    private TextAsset RandomNamesFile = null;
+
+    private string[] names;
+
     private void Awake()
     {
         formSet.Add(this);
+
+        names = RandomNamesFile.text.Split(
+            new[] { "\r\n", "\r", "\n" },
+            StringSplitOptions.None
+);
     }
 
     private void OnDestroy()
@@ -40,7 +54,7 @@ public class Form : MonoBehaviour
 
     public void SetText(string name, string item, string color, string remarks = "")
     {
-        textName.text = name;
+        textName.text = names[UnityEngine.Random.Range(0, names.Length)];
         textItem.text = item;
         textColor.text = color;
         textRemarks.text = remarks;

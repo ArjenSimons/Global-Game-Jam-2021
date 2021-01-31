@@ -14,13 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentaryType: 2
   commentaryList:
-  - Text: Here's some new forms
+  - Text: The new forms are here.
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: 6e4f67af62a1188488d8f7d0225cb155, type: 3}
   - Text: New forms, let's see what people lost!
     SpeakDuration: 3
-  - Text: The printer is running
+    Clip: {fileID: 8300000, guid: 27e6cf31cfcd3654baa55facd17a7e9e, type: 3}
+  - Text: The computer is printing new forms!
     SpeakDuration: 3
-  - Text: I'm spewing out forms!
+    Clip: {fileID: 8300000, guid: f417977cf5ea7524e9769ccd8a9d0d5b, type: 3}
+  - Text: Printing new forms, Bob.
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: 4bd51bd9cb54ce340a793e8126e03b5b, type: 3}
+  - Text: Sending forms your way!
+    SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: 96afdc678811b57478947b53bb842444, type: 3}
   - Text: Forms incoming!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: 2c9d1e4f3298ba34bab619fdcd5d10aa, type: 3}

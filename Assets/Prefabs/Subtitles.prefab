@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textSubtitles: {fileID: 2269737422084280737}
+  tfVoiceOverCamera: {fileID: 0}
+  audioClipRequestChannel: {fileID: 11400000, guid: a3fbe0a17b065e8468144818fd849ff7, type: 2}
+  audioConfig: {fileID: 11400000, guid: a910fa3bb870ea2489c0e37a0f9abeaf, type: 2}
   OnTextDone:
     m_PersistentCalls:
       m_Calls: []
