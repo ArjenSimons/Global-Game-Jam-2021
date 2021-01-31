@@ -62,7 +62,7 @@ public class Printer : MonoBehaviour
         //destroy credits
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         queuedItems.Clear();
         printing = false;

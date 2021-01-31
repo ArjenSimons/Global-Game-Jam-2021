@@ -27,7 +27,7 @@ public class PlayerDotImage : MonoBehaviour
         EnableImage(!value);
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         EnableImage(false);
     }

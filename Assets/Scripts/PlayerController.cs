@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = value;
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         Enable(false);
 
