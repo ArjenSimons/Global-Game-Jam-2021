@@ -26,7 +26,10 @@ public class GrabScript : MonoBehaviour
     private AudioCueSO PaperLetGoAudioCue = null;
 
     [SerializeField]
-    private AudioCueSO ItemHeavyPickupAudioCue = null;
+    private AudioCueSO ItemPickupAudioCue = null;
+
+    [SerializeField]
+    private AudioCueSO ItemLetGoAudioCue = null;
 
     [SerializeField]
     private AudioConfigurationSO config = null;
@@ -53,6 +56,9 @@ public class GrabScript : MonoBehaviour
 
     public GameObject CurrentlyGrabbedObject { get; private set; }
 
+    private Quaternion lastRot;
+    private float rotSpeed = 0;
+
     void Awake()
     {
         if (player)
@@ -60,6 +66,9 @@ public class GrabScript : MonoBehaviour
             playerCollider = player.GetComponent<Collider>();
             playerRigidbody = player.GetComponent<Rigidbody>();
         }
+
+        lastRot = transform.rotation;
+
     }
 
     // Update is called once per frame
@@ -75,6 +84,14 @@ public class GrabScript : MonoBehaviour
         {
             HandleSelectedItem(grabEmptyPoint);
         }
+
+        float dRotY = Mathf.Abs(lastRot.eulerAngles.y - transform.rotation.eulerAngles.y);
+        float dRotX = Mathf.Abs(lastRot.eulerAngles.x - transform.rotation.eulerAngles.x);
+        float dRotZ = Mathf.Abs(lastRot.eulerAngles.z - transform.rotation.eulerAngles.z);
+
+        rotSpeed = dRotY + dRotX + dRotZ;
+
+        lastRot = transform.rotation;
     }
 
     // Handles what should happen when an item is in its selected list
@@ -111,7 +128,7 @@ public class GrabScript : MonoBehaviour
                     }
                     else
                     {
-                        channel.RaiseEvent(config, ItemHeavyPickupAudioCue, transform.position);
+                        channel.RaiseEvent(config, ItemPickupAudioCue, transform.position);
                     }
                     break;
             }
@@ -130,6 +147,16 @@ public class GrabScript : MonoBehaviour
             grabbable.IsGrabbed = false;
             channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
         }
+        else
+        {
+            float tempVol = config.volume;
+            config.volume /= 2;
+            config.volume = tempVol / 10 * Mathf.Min(Mathf.Max(rotSpeed, 3), 10);
+
+            channel.RaiseEvent(config, ItemLetGoAudioCue, transform.position);
+
+            config.volume = tempVol;
+        }
         CurrentlyGrabbedObject = null;
     }
 
@@ -144,6 +171,10 @@ public class GrabScript : MonoBehaviour
         {
             grabbable.IsGrabbed = false;
             channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
+        }
+        else
+        {
+            channel.RaiseEvent(config, ItemLetGoAudioCue, transform.position);
         }
         CurrentlyGrabbedObject = null;
     }
