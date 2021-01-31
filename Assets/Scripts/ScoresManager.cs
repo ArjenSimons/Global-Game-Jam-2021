@@ -42,8 +42,8 @@ public class ScoresManager : MonoBehaviour
                 ResetCounts();
                 break;
 
-            case GameStateChange.OnGameEnd:
-                OnGameEnd();
+            case GameStateChange.GameRestarted:
+                OnGameRestart();
                 break;
 
             default:
@@ -51,7 +51,7 @@ public class ScoresManager : MonoBehaviour
         }
     }
 
-    private void OnGameEnd()
+    private void OnGameRestart()
     {
         ResetCounts();
     }
@@ -71,12 +71,14 @@ public class ScoresManager : MonoBehaviour
 
     private void IncrementCorrectForms()
     {
+        print("increment correct forms");
         correctForms += 1;
         scoresUpdatedChannel.RaiseEvent();
     }
 
     private void IncrementIncorrectForms()
     {
+        print("increment incorrect forms");
         incorrectForms += 1;
         scoresUpdatedChannel.RaiseEvent();
     }
