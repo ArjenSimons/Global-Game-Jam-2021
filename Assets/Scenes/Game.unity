@@ -317,42 +317,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51069072}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!84 &52897805
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 1920
-  m_Height: 1080
-  m_AntiAliasing: 2
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &53852384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,42 +1207,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5951060533792306571, guid: 225fa9bfdcf3ebb44b4d625afa916566, type: 3}
   m_PrefabInstance: {fileID: 1112685758}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &249863317
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 1920
-  m_Height: 1080
-  m_AntiAliasing: 2
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &277561082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1554,42 +1482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3a03d72b275d942b72dc6aabcda2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &358509691
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 3840
-  m_Height: 2160
-  m_AntiAliasing: 2
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &394854743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3564,36 +3456,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1409583037242225429, guid: c622d045de229c94b98d339ea91e50cc, type: 3}
   m_PrefabInstance: {fileID: 1321597536}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1330070225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1330070226}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1330070226
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330070225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1348576477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3753,6 +3615,42 @@ Transform:
   m_Father: {fileID: 664137451}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1441793185
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 1920
+  m_Height: 1080
+  m_AntiAliasing: 2
+  m_MipCount: -1
+  m_DepthFormat: 2
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1453182057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4412,25 +4310,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6823161632553481844, guid: 37bf0e97620e23140a937799dfe4fd51, type: 3}
   m_PrefabInstance: {fileID: 277561082}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1817261292 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3518255930515403191, guid: 9a5f41c73d7bebb4eb8352d36ff0f4af, type: 3}
-  m_PrefabInstance: {fileID: 1829436341}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1817261293
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817261292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1829436341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4493,16 +4372,15 @@ PrefabInstance:
     - target: {fileID: 7634190052933051637, guid: 9a5f41c73d7bebb4eb8352d36ff0f4af, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 52897805}
-    m_RemovedComponents:
-    - {fileID: 591241237840048692, guid: 9a5f41c73d7bebb4eb8352d36ff0f4af, type: 3}
+      objectReference: {fileID: 1441793185}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5f41c73d7bebb4eb8352d36ff0f4af, type: 3}
 --- !u!114 &1829436342 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3518255930515403184, guid: 9a5f41c73d7bebb4eb8352d36ff0f4af, type: 3}
   m_PrefabInstance: {fileID: 1829436341}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817261292}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28ece6564dbb952488d8d909cc1c6e0c, type: 3}
