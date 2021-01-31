@@ -15,6 +15,9 @@ public class GameFlowBackgroundFader : MonoBehaviour
     [SerializeField]
     private GameFlowSettings gameFlow = null;
 
+    [SerializeField]
+    private BoolChannel workdayOverChannel = null;
+
     private Image img;
 
     private void Awake()
@@ -24,6 +27,7 @@ public class GameFlowBackgroundFader : MonoBehaviour
         FadeOut();
 
         gameFlow.OnStartGameRestart += OnStartGameRestart;
+        workdayOverChannel.OnEventRaised += OnWorkDayOver;
     }
 
     private void OnStartGameRestart()
@@ -71,12 +75,12 @@ public class GameFlowBackgroundFader : MonoBehaviour
         }));
     }
 
-    public void OnWorkDayOver()
+    public void OnWorkDayOver(bool quitted)
     {
         FadeIn().append(fadeDelay).append(() =>
         {
             FadeOut();
-            gameFlow.RaiseGameEndEvent();
+            gameFlow.RaiseGameEndEvent(quitted);
         });
     }
 

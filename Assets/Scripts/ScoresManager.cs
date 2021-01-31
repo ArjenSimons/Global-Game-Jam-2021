@@ -32,7 +32,12 @@ public class ScoresManager : MonoBehaviour
     private void Awake()
     {
         gameFlow.OnGameStart += ResetCounts;
-        gameFlow.OnGameEnd += ResetCounts;
+        gameFlow.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnGameEnd(bool quitted)
+    {
+        ResetCounts();
     }
 
     private void ResetCounts()

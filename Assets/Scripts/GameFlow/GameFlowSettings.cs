@@ -13,7 +13,7 @@ public class GameFlowSettings : ScriptableObject
     public Action OnGameRestart;
     public Action OnStartGameRestart;
 
-    public Action OnGameEnd;
+    public Action<bool> OnGameEnd;
 
     private void OnEnable()
     {
@@ -74,11 +74,11 @@ public class GameFlowSettings : ScriptableObject
         }
     }
 
-    public void RaiseGameEndEvent()
+    public void RaiseGameEndEvent(bool quitted)
     {
         if (OnGameEnd != null)
         {
-            OnGameEnd();
+            OnGameEnd(quitted);
             GameHasStarted = false;
         }
         else
