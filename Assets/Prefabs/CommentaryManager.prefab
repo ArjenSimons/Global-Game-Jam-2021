@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399ce28846fad0c4b8da3bf5eaf07e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDelay: 10
-  minDelayBeforeForce: 40
+  minDelay: 5
+  minDelayBeforeForce: 30
   commentChance: 0.5
   incrementCorrectFormsChannel: {fileID: 11400000, guid: c01a7b3b700775345a9f55760ffa85e7, type: 2}
   incrementIncorrectFormsChannel: {fileID: 11400000, guid: c07ed0e71295d82438a2d5b1c19bfbc4, type: 2}

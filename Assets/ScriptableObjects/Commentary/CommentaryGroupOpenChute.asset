@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentaryType: 3
   commentaryList:
-  - Text: Open chute 1
-    SpeakDuration: 2
-  - Text: Open chute 2
-    SpeakDuration: 2
+  - Text: I'm opening the chute.
+    SpeakDuration: 3
+  - Text: Watch your head, more items!
+    SpeakDuration: 3
+  - Text: Here's some more stuff
+    SpeakDuration: 3
+  - Text: More items coming your way!
+    SpeakDuration: 3
+  - Text: The chute's open
+    SpeakDuration: 3
