@@ -400,6 +400,10 @@ MonoBehaviour:
   pressSpeed: 0.1
   minRangeForInteraction: 2
   minRangeForObjectTrigger: 0.35
+  buttonPressCue: {fileID: 11400000, guid: bcb5e8ea0af8ee24ea53887401f872d8, type: 2}
+  mechanicalButtonPressCue: {fileID: 11400000, guid: 1802342e929529547ae9e8f5a9960901, type: 2}
+  config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
+  channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   OnPress:
     m_PersistentCalls:
       m_Calls:
