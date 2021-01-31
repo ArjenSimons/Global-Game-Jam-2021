@@ -225,16 +225,30 @@ public class TutorialManager : MonoBehaviour
         {
             incrementIncorrectFormsChannel.OnEventRaised -= MissingForm;
             incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
-            subtitles.OnTextDone.AddListener(ReceivedAPoint2);
+            subtitles.OnTextDone.AddListener(Text8);
             subtitles.ShowText("That's it, well done!", 2f);
             marker3DButton.TrackedObject = null;
             marker3DDropPoint.TrackedObject = null;
         }
     }
 
-    private void ReceivedAPoint2()
+    private void Text8()
     {
-        subtitles.OnTextDone.RemoveListener(ReceivedAPoint2);
+        subtitles.OnTextDone.RemoveListener(Text8);
+        subtitles.OnTextDone.AddListener(Text9);
+        subtitles.ShowText("One more thing: The computer will print new forms every hour.", 3f);
+    }
+
+    private void Text9()
+    {
+        subtitles.OnTextDone.RemoveListener(Text9);
+        subtitles.OnTextDone.AddListener(Text10);
+        subtitles.ShowText("It'll get worse towards the end of the day. Just see how much you'll get done, okay?", 5f);
+    }
+
+    private void Text10()
+    {
+        subtitles.OnTextDone.RemoveListener(Text10);
         StartCoroutine(EndTutorial());
         subtitles.ShowText("Let's get to work! I'm gonna open the chute.", 4f);
     }
