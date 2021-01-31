@@ -105,6 +105,16 @@ public class PlayerController : MonoBehaviour
         sharedData.controller = this;
     }
 
+    private void OnEnable()
+    {
+        playerRigidbody.isKinematic = false;
+    }
+
+    private void OnDisable()
+    {
+        playerRigidbody.isKinematic = true;
+    }
+
     private void Start()
     {
         if (gameFlow.StartAtComputer)
