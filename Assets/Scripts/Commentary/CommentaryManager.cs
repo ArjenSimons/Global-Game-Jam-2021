@@ -71,19 +71,18 @@ public class CommentaryManager : MonoBehaviour
         openChuteChannel.OnEventRaised += OnOpenChute;
 
         gameFlowSettings.OnGameStateChanged += OnGameStateChanged;
-
-        minDelayPassed = true;
-        minDelayBeforeForcePassed = true;
     }
 
     private void EnableCommentary()
     {
-        CanComment = true;
         if (CountDownRoutine != null)
         {
             StopCoroutine(CountDownRoutine);
         }
+        minDelayPassed = false;
+        minDelayBeforeForcePassed = false;
         CountDownRoutine = StartCoroutine(CountDownDelays());
+        CanComment = true;
     }
 
     private void DisableCommentary()
