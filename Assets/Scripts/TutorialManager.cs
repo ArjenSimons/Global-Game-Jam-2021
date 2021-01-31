@@ -28,6 +28,9 @@ public class TutorialManager : MonoBehaviour
     private FormSet formSet = null;
 
     [SerializeField]
+    private ItemSet itemSet = null;
+
+    [SerializeField]
     private float delayBeforeStartTutorial = 2f;
 
     [SerializeField]
@@ -37,10 +40,21 @@ public class TutorialManager : MonoBehaviour
     private TrackPos marker3DForm = null;
 
     [SerializeField]
+    private TrackPos marker3DTrolley = null;
+
+    [SerializeField]
+    private TrackPos marker3DDropPoint = null;
+
+    [SerializeField]
     private TrackPos marker3DButton = null;
 
+    [SerializeField]
+    private Transform DropPointTransform = null;
+
     private bool waitForGrabForm;
+    private bool waitForGrabTrolley;
     private Grabbable formGrabbable;
+    private Grabbable trolleyGrabbable;
 
     private bool isBusy;
 
@@ -60,6 +74,14 @@ public class TutorialManager : MonoBehaviour
             {
                 waitForGrabForm = false;
                 Text5();
+            }
+        }
+        if (waitForGrabTrolley)
+        {
+            if (trolleyGrabbable.IsGrabbed)
+            {
+                waitForGrabForm = false;
+                Text7();
             }
         }
     }
@@ -116,27 +138,34 @@ public class TutorialManager : MonoBehaviour
     private void Text1()
     {
         subtitles.OnTextDone.AddListener(Text2);
-        subtitles.ShowText("Hey Bob, it's me, Bill. It's gonna be a hard first day since noone is there to help you!", 5f);
+        subtitles.ShowText("Hey Bob, it's me, Bill.", 2f);
     }
 
     private void Text2()
     {
         subtitles.OnTextDone.RemoveListener(Text2);
         subtitles.OnTextDone.AddListener(Text3);
-        subtitles.ShowText("I'll give you some quick instructions on how to do your job properly.", 4f);
+        subtitles.ShowText("I'm working remotely, because, well, you know!", 3f);
     }
 
     private void Text3()
     {
         subtitles.OnTextDone.RemoveListener(Text3);
+        subtitles.OnTextDone.AddListener(Text4);
+        subtitles.ShowText("Since it's your first day, here are your instructions:", 2.5f);
+    }
+
+    private void Text4()
+    {
+        subtitles.OnTextDone.RemoveListener(Text4);
         subtitles.OnTextDone.AddListener(EnableHands);
-        subtitles.ShowText("Next to your desk is your board. If new forms are printed out, throw 'em on the board.", 5f);
+        subtitles.ShowText("Check the board next to your desk.", 1.5f);
     }
 
     private void EnableHands()
     {
         subtitles.OnTextDone.RemoveListener(EnableHands);
-        subtitles.ShowText("I left a form from yesterday. Grab it.", 3f);
+        subtitles.ShowText("I left a form on it yesterday, grab it.", 3f);
         playerController.CanGrab = true;
         formGrabbable = formSet.GetFirstFormInSet().GetComponent<Grabbable>();
         waitForGrabForm = true;
@@ -146,22 +175,25 @@ public class TutorialManager : MonoBehaviour
     private void Text5()
     {
         marker3DForm.TrackedObject = null;
-        subtitles.ShowText("Alright, as the form says, someone lost their red trolley.", 4f);
+        subtitles.ShowText("Alright, as the form says, someone lost their red trolley.", 2.5f);
         subtitles.OnTextDone.AddListener(Text6);
     }
 
     private void Text6()
     {
         subtitles.OnTextDone.RemoveListener(Text6);
-        subtitles.OnTextDone.AddListener(Text7);
-        subtitles.ShowText("Your job is simple: Put the lost item WITH the matching form in the hole, then hit the button.", 5f);
+        subtitles.ShowText("Grab the red trolley in your other hand!", 2f);
+        trolleyGrabbable = itemSet.GetMatchWithLostItem(formSet.GetFirstFormInSet().ItemDisplaying).GetComponent<Grabbable>();
+        waitForGrabTrolley = true;
+        marker3DTrolley.TrackedObject = trolleyGrabbable.transform;
     }
 
     private void Text7()
     {
-        subtitles.OnTextDone.RemoveListener(Text7);
         StartCoroutine(EnableButton());
-        subtitles.ShowText("Go ahead and do it.", 2f);
+        subtitles.ShowText("Put them in the droppoint and press the button", 2f);
+        marker3DDropPoint.TrackedObject = DropPointTransform;
+        marker3DTrolley.TrackedObject = null;
     }
 
     private IEnumerator EnableButton()
@@ -196,6 +228,7 @@ public class TutorialManager : MonoBehaviour
             subtitles.OnTextDone.AddListener(ReceivedAPoint2);
             subtitles.ShowText("That's it, well done!", 2f);
             marker3DButton.TrackedObject = null;
+            marker3DDropPoint.TrackedObject = null;
         }
     }
 
