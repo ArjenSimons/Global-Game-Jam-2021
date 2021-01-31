@@ -226,7 +226,7 @@ public class TutorialManager : MonoBehaviour
     {
         subtitles.OnTextDone.RemoveListener(MissingForm2);
         subtitles.ShowText("Both the form AND the trolley! Try again!", 3f);
-        itemManager.RespawnTutorialItem();
+        StartCoroutine(itemManager.RespawnTutorialItem());
     }
 
     private void ReceivedAPoint()

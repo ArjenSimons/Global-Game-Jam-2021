@@ -132,6 +132,11 @@ public class GrabScript : MonoBehaviour
                     if (grabbable != null)
                     {
                         grabbable.IsGrabbed = true;
+                    }
+
+                    Form form = CurrentlyGrabbedObject.GetComponent<Form>();
+                    if (form != null)
+                    {
                         channel.RaiseEvent(config, PaperPickupAudioCue, grabbable.transform.position);
                     }
                     else
@@ -153,6 +158,11 @@ public class GrabScript : MonoBehaviour
         if (grabbable != null)
         {
             grabbable.IsGrabbed = false;
+        }
+
+        Form form = CurrentlyGrabbedObject.GetComponent<Form>();
+        if (form != null)
+        {
             channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
         }
         else
@@ -178,12 +188,18 @@ public class GrabScript : MonoBehaviour
         if (grabbable != null)
         {
             grabbable.IsGrabbed = false;
+        }
+
+        Form form = CurrentlyGrabbedObject.GetComponent<Form>();
+        if (form != null)
+        {
             channel.RaiseEvent(config, PaperLetGoAudioCue, grabbable.transform.position);
         }
         else
         {
             channel.RaiseEvent(config, ItemLetGoAudioCue, transform.position);
         }
+
         CurrentlyGrabbedObject = null;
     }
 
