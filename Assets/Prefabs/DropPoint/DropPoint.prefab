@@ -398,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressFactor: 4
   pressSpeed: 0.1
-  minRangeForInteraction: 2
+  minRangeForInteraction: 3
   minRangeForObjectTrigger: 0.35
   OnPress:
     m_PersistentCalls:
@@ -583,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c158151ce3f1d44c83b786c4a686366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeDelay: 0.3
+  closeDelay: 0
   closePosition: {x: 0, y: 1.05, z: 0.1}
-  closeTime: 1
+  closeTime: 0.8
   audioCue: {fileID: 11400000, guid: a469abee1241f734fad406cd399b45c9, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   itemDropRecognizer: {fileID: 1922752638180124639}
