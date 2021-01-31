@@ -41,6 +41,7 @@ public class CommentaryManager : MonoBehaviour
     private Coroutine CountDownRoutine;
 
     public bool CanComment { get; set; }
+
     private bool ShouldComment
     {
         get
@@ -68,8 +69,9 @@ public class CommentaryManager : MonoBehaviour
         incrementIncorrectFormsChannel.OnEventRaised += OnIncremenIncorrectForms;
         newFormsPrintedChannel.OnEventRaised += OnNewFormsPrinted;
         openChuteChannel.OnEventRaised += OnOpenChute;
-        gameFlowSettings.OnGameStart += EnableCommentary;
-        gameFlowSettings.OnGameEnd += DisableCommentary;
+
+        gameFlowSettings.OnGameStateChanged += OnGameStateChanged;
+
         minDelayPassed = true;
         minDelayBeforeForcePassed = true;
     }
@@ -84,11 +86,28 @@ public class CommentaryManager : MonoBehaviour
         CountDownRoutine = StartCoroutine(CountDownDelays());
     }
 
-    private void DisableCommentary(bool quitted)
+    private void DisableCommentary()
     {
         CanComment = false;
         minDelayPassed = false;
         minDelayBeforeForcePassed = false;
+    }
+
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.GameStarted:
+                EnableCommentary();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                DisableCommentary();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void OnIncrementCorrectForms()

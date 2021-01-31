@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startLocalCameraEulerAngles;
     private Vector3 startWorldPosition;
     private Vector3 startLocalEulerAngles;
-    private bool _canGrab;
+    private bool _canGrab = true;
 
     public GrabScript LeftHand => grabScriptLeftHand;
     public GrabScript RightHand => grabScriptRightHand;
@@ -329,7 +329,6 @@ public class PlayerController : MonoBehaviour
         walkSpeed = dPosX + dPosZ;
 
         lastPos = transform.position;
-        Debug.Log(walkSpeed);
 
         if (walkSpeed > 0.05f)
         {
