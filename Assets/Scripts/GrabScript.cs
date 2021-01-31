@@ -92,7 +92,6 @@ public class GrabScript : MonoBehaviour
         rotSpeed = dRotY + dRotX + dRotZ;
 
         lastRot = transform.rotation;
-        Debug.Log(rotSpeed);
     }
 
     // Handles what should happen when an item is in its selected list
@@ -152,9 +151,7 @@ public class GrabScript : MonoBehaviour
         {
             float tempVol = config.volume;
             config.volume /= 2;
-            print(playerRigidbody.angularVelocity);
             config.volume = tempVol / 10 * Mathf.Min(Mathf.Max(rotSpeed, 3), 10);
-
 
             channel.RaiseEvent(config, ItemLetGoAudioCue, transform.position);
 
