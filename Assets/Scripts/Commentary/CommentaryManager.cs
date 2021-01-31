@@ -144,7 +144,7 @@ public class CommentaryManager : MonoBehaviour
     {
         if (ShouldComment)
         {
-            Debug.Log("comment OnOpenChute");
+            //Debug.Log("comment OnOpenChute");
             Commentary commentary = commentaryLibrary.GetCommentary(CommentaryType.NewFormsPrinted);
             if (commentary == null)
             {

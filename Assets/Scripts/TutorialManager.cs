@@ -173,8 +173,11 @@ public class TutorialManager : MonoBehaviour
 
     private void MissingForm()
     {
-        subtitles.OnTextDone.AddListener(MissingForm2);
-        subtitles.ShowText("Not like that, Bob! You need to put in TWO things.", 3f);
+        if (gameFlowSettings.IsInTutorial)
+        {
+            subtitles.OnTextDone.AddListener(MissingForm2);
+            subtitles.ShowText("Not like that, Bob! You need to put in TWO things.", 3f);
+        }
     }
 
     private void MissingForm2()
@@ -186,12 +189,15 @@ public class TutorialManager : MonoBehaviour
 
     private void ReceivedAPoint()
     {
-        incrementIncorrectFormsChannel.OnEventRaised -= MissingForm;
-        incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
-        subtitles.OnTextDone.AddListener(ReceivedAPoint2);
-        subtitles.ShowText("That's it, well done!", 3f);
-        marker3DButton.TrackedObject = null;
-        StartCoroutine(EndTutorial());
+        if (gameFlowSettings.IsInTutorial)
+        {
+            incrementIncorrectFormsChannel.OnEventRaised -= MissingForm;
+            incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
+            subtitles.OnTextDone.AddListener(ReceivedAPoint2);
+            subtitles.ShowText("That's it, well done!", 3f);
+            marker3DButton.TrackedObject = null;
+            StartCoroutine(EndTutorial());
+        }
     }
 
     private void ReceivedAPoint2()

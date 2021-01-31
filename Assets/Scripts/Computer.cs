@@ -264,6 +264,7 @@ public class Computer : MonoBehaviour
 
     private void SetTexts()
     {
+        //print($"correct: {textCorrectForms.text}, failed: {textIncorrectForms.text}");
         textCorrectForms.text = scoreManager.CorrectForms + " forms completed";
         textIncorrectForms.text = scoreManager.IncorrectForms + " mistakes";
     }
