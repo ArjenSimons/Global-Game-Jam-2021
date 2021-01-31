@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09483334c06404545ab7e95d2d8f3560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 2
+  startDelay: 0
   dropInterval: 30
   dropRate: 15
   dropBurstInterval: 0.125
