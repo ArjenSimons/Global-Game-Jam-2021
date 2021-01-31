@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour
         {
             walkTimer++;
 
-            if (walkTimer >= 23)
+            if (walkTimer >= 18)
             {
                 float tempVol = config.volume;
                 config.volume = tempVol / 2 * (Mathf.Min(walkSpeed, 2) * 10);
@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            walkTimer = 15;
+            walkTimer = 14;
         }
     }
 
