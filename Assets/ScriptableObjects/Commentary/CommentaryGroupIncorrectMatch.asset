@@ -16,13 +16,19 @@ MonoBehaviour:
   commentaryList:
   - Text: Come on Bob, that wasn't right
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Bob do you need an eye test?
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Are you sure you're not colorblind Bob?
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Are you sure you're not colorblind Bob?
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Not sure if you're still up for employee of the month..
     SpeakDuration: 4
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Yikes Bob I hope management won't fire you!
     SpeakDuration: 4
+    Clip: {fileID: 0}

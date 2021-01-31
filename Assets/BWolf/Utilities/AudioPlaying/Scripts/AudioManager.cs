@@ -23,6 +23,9 @@ namespace BWolf.Utilities.AudioPlaying
         [SerializeField]
         private AudioRequestChannelSO themeChannel = null;
 
+        [SerializeField]
+        private AudioClipRequestChannelSO audioClipChannel = null;
+
         [Space]
         [SerializeField]
         private AudioCuesEventChannelSO stopChannel = null;
@@ -58,6 +61,7 @@ namespace BWolf.Utilities.AudioPlaying
         {
             sfxChannel.OnRequestRaised += PlayAudioCue;
             themeChannel.OnRequestRaised += PlayAudioCue;
+            audioClipChannel.OnRequestRaised += PlayAudioClip;
 
             stopChannel.OnEventRaised += StopPlayingAudioCues;
             pauseChannel.OnEventRaised += PausePlayingAudioCues;
@@ -78,7 +82,7 @@ namespace BWolf.Utilities.AudioPlaying
 
         public bool IsPlayingAudioCue(AudioCueSO audioCue)
         {
-            foreach(AudioEmitter emitter in activeEmitters)
+            foreach (AudioEmitter emitter in activeEmitters)
             {
                 if (audioCue.IsEmittedBy(emitter))
                 {
@@ -110,6 +114,20 @@ namespace BWolf.Utilities.AudioPlaying
                     //if an emitter is not going to loop, wait for it to finish to return it to the pool
                     emitter.OnAudioFinishedPlaying += ReturnAudioEmitter;
                 }
+            }
+        }
+
+        public void PlayAudioClip(AudioClip clip, AudioConfigurationSO config, bool loop, Vector3 position)
+        {
+            AudioEmitter emitter = emitterPool.Request();
+            emitter.PlayAudioClip(clip, config, loop, position);
+
+            activeEmitters.Add(emitter);
+
+            if (!loop)
+            {
+                //if an emitter is not going to loop, wait for it to finish to return it to the pool
+                emitter.OnAudioFinishedPlaying += ReturnAudioEmitter;
             }
         }
 

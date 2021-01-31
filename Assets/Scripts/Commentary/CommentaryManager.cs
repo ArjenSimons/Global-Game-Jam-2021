@@ -172,6 +172,7 @@ public class CommentaryManager : MonoBehaviour
     private void TriggerMessage(Commentary commentary)
     {
         subtitles.ShowText(commentary.Text, commentary.SpeakDuration);
+        subtitles.PlayAudio(commentary.Clip);
         subtitles.OnTextDone.AddListener(TextDone);
         minDelayPassed = false;
         minDelayBeforeForcePassed = false;

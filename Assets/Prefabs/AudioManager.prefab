@@ -47,6 +47,7 @@ MonoBehaviour:
   initialSize: 10
   sfxChannel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   themeChannel: {fileID: 11400000, guid: 02b96c534981b214dbc3159bde0f3ecc, type: 2}
+  audioClipChannel: {fileID: 11400000, guid: a3fbe0a17b065e8468144818fd849ff7, type: 2}
   stopChannel: {fileID: 11400000, guid: c275df6c18fe5ab488cc4b26c5cc6b64, type: 2}
   pauseChannel: {fileID: 11400000, guid: b60e5eec5f8d1b848b7c713afb51e4d2, type: 2}
   resumeChannel: {fileID: 11400000, guid: 5aada040c5d86234d9d319515c4a1ce2, type: 2}

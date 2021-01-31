@@ -16,11 +16,16 @@ MonoBehaviour:
   commentaryList:
   - Text: Here's some new forms
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: New forms, let's see what people lost!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: The printer is running
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: I'm spewing out forms!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Forms incoming!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}

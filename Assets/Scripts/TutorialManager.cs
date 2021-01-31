@@ -51,6 +51,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private Transform DropPointTransform = null;
 
+    [Header("Voice Over Audio")]
+    [SerializeField]
+    private AudioClip[] clips = null;
+
     private bool waitForGrabForm;
     private bool waitForGrabTrolley;
     private Grabbable formGrabbable;
@@ -76,11 +80,12 @@ public class TutorialManager : MonoBehaviour
                 Text5();
             }
         }
+
         if (waitForGrabTrolley)
         {
             if (trolleyGrabbable.IsGrabbed)
             {
-                waitForGrabForm = false;
+                waitForGrabTrolley = false;
                 Text7();
             }
         }
@@ -139,6 +144,7 @@ public class TutorialManager : MonoBehaviour
     {
         subtitles.OnTextDone.AddListener(Text2);
         subtitles.ShowText("Hey Bob, it's me, Bill.", 2f);
+        subtitles.PlayAudio(clips[0]);
     }
 
     private void Text2()
@@ -177,6 +183,7 @@ public class TutorialManager : MonoBehaviour
         marker3DForm.TrackedObject = null;
         subtitles.ShowText("Alright, as the form says, someone lost their red trolley.", 2.5f);
         subtitles.OnTextDone.AddListener(Text6);
+        subtitles.PlayAudio(clips[1]);
     }
 
     private void Text6()
@@ -190,8 +197,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Text7()
     {
+        print("text7");
         StartCoroutine(EnableButton());
         subtitles.ShowText("Put them in the droppoint and press the button", 2f);
+        subtitles.PlayAudio(clips[2]);
         marker3DDropPoint.TrackedObject = DropPointTransform;
         marker3DTrolley.TrackedObject = null;
     }
@@ -209,6 +218,7 @@ public class TutorialManager : MonoBehaviour
         {
             subtitles.OnTextDone.AddListener(MissingForm2);
             subtitles.ShowText("Not like that, Bob! You need to put in TWO things.", 3f);
+            subtitles.PlayAudio(clips[3]);
         }
     }
 
@@ -227,6 +237,7 @@ public class TutorialManager : MonoBehaviour
             incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
             subtitles.OnTextDone.AddListener(Text8);
             subtitles.ShowText("That's it, well done!", 2f);
+            subtitles.PlayAudio(clips[4]);
             marker3DButton.TrackedObject = null;
             marker3DDropPoint.TrackedObject = null;
         }

@@ -16,11 +16,16 @@ MonoBehaviour:
   commentaryList:
   - Text: I'm opening the chute.
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Watch your head, more items!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: Here's some more stuff
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: More items coming your way!
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
   - Text: The chute's open
     SpeakDuration: 3
+    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
