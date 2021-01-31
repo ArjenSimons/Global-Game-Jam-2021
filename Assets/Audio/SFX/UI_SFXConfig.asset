@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outputAudioMixerGroup: {fileID: -2934306166281812369, guid: f9ced5b549cd588489a42be26acd0cab, type: 2}
   spatialBlend: 1
-  volume: 0.562
+  volume: 0.065
