@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartAtComputer: 1
   SkipTutorial: 0
-  GameHasStarted: 0
+  GameHasStarted: 1
   IsInTutorial: 0
   GameEndState: 0

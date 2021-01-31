@@ -16,16 +16,16 @@ MonoBehaviour:
   commentaryList:
   - Text: And another one.
     SpeakDuration: 2
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
-  - Text: Plus one. Score!
+    Clip: {fileID: 8300000, guid: 21011a87e72e37b43b4b260254da8809, type: 3}
+  - Text: Plus one, good job!
     SpeakDuration: 2
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: 6290288b995b29842955f549da81f598, type: 3}
   - Text: Nice Bob, keep it going!
     SpeakDuration: 2
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: ca7e393e32b08bc44a9dfa0e4c23aa03, type: 3}
   - Text: Good stuff Bob!
     SpeakDuration: 2
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: 5a4e32e45d78dd84291de356bce28502, type: 3}
   - Text: Correct Match, keep it up!
     SpeakDuration: 2
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: 4a1ea3a74b362cd48a5d940bfecb7282, type: 3}
