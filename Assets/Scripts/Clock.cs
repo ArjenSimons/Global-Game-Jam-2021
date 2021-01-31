@@ -1,5 +1,6 @@
 using BWolf.Utilities.AudioPlaying;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -96,7 +97,7 @@ public class Clock : MonoBehaviour
         switch (gameStateChange)
         {
             case GameStateChange.GameStarted:
-                OnGameStart();
+                StartCoroutine(OnGameStart());
                 break;
 
             case GameStateChange.GameRestarted:
@@ -139,8 +140,9 @@ public class Clock : MonoBehaviour
 #endif
     }
 
-    private void OnGameStart()
+    private IEnumerator OnGameStart()
     {
+        yield return new WaitForSeconds(3.5f);
         timeCanIncrease = true;
         workdayOver = false;
         CheckEvents();

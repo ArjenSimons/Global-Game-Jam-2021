@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField]
-    private float startDelay = 2.0f;
+    private float startDelay = 0f;
 
     [SerializeField]
     private float dropInterval = 30.0f;
