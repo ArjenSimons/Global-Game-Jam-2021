@@ -18,7 +18,10 @@ public class Clock : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField]
-    private AudioCueSO audioCue = null;
+    private AudioCueSO endGameAudiooCue = null;
+
+    [SerializeField]
+    private AudioCueSO digitalAlarmCue = null;
 
     [SerializeField]
     private AudioConfigurationSO config = null;
@@ -145,6 +148,10 @@ public class Clock : MonoBehaviour
         }
         if (CurrentMinutes == 0)
         {
+            if (CurrentHours != 9 && CurrentHours != endTime)
+            {
+                channel.RaiseEvent(config, digitalAlarmCue, transform.position);
+            }
             onHourPassed.Invoke();
         }
         if (CurrentHours == endTime - 1 && CurrentMinutes == 58)
@@ -187,6 +194,6 @@ public class Clock : MonoBehaviour
 
     private void PlayEndGameAlarm()
     {
-        channel.RaiseEvent(config, audioCue, transform.position);
+        channel.RaiseEvent(config, endGameAudiooCue, transform.position);
     }
 }
