@@ -26,6 +26,9 @@ public class DropPointStatusLight : MonoBehaviour
     private AudioCueSO correctAudioCue = null;
 
     [SerializeField]
+    private AudioCueSO wrongAudioCue = null;
+
+    [SerializeField]
     private AudioConfigurationSO config = null;
 
     [Header("Channel Broadcasting on")]
@@ -135,6 +138,10 @@ public class DropPointStatusLight : MonoBehaviour
         if (wasSuccesfulDelivery)
         {
             channel.RaiseEvent(config, correctAudioCue, transform.position);
+        }
+        else
+        {
+            channel.RaiseEvent(config, wrongAudioCue, transform.position);
         }
 
         Color color = wasSuccesfulDelivery ? succesColor : failedColor;

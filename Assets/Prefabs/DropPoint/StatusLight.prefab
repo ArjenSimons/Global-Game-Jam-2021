@@ -686,6 +686,7 @@ MonoBehaviour:
   failedColor: {r: 1, g: 0, b: 0, a: 1}
   emptyStatusColor: {r: 0, g: 0, b: 0, a: 1}
   correctAudioCue: {fileID: 11400000, guid: cc0dad5ac69545a4997c81e034dce977, type: 2}
+  wrongAudioCue: {fileID: 11400000, guid: 639aa7215f77dde4890ec8200bd97856, type: 2}
   config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   rendLightBulb: {fileID: 1480623809665475387}
