@@ -304,7 +304,7 @@ public class ItemManager : MonoBehaviour
     {
         channel.RaiseEvent(config, audioCue, thrashShute.transform.position);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.8f);
 
         while (count != 0 && DropRandomItem())
         {
