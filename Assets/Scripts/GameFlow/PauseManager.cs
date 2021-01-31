@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PauseManager : MonoBehaviour
 {
@@ -16,6 +15,9 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField]
     private BoolChannel pauseChannel = null;
+
+    [SerializeField]
+    private BoolChannel workdayOverChannel = null;
 
     [Header("Scene References")]
     [SerializeField]
@@ -60,7 +62,8 @@ public class PauseManager : MonoBehaviour
 
     public void OnQuitButtonClick()
     {
-        Application.Quit();
+        EndPause();
+        workdayOverChannel.RaiseEvent(true);
     }
 
     public void EndPause()

@@ -35,11 +35,13 @@ public class Clock : MonoBehaviour
     [SerializeField]
     private GameFlowSettings gameFlow = null;
 
+    [SerializeField]
+    private BoolChannel workdayOverChannel = null;
+
     [Header("Events")]
     public UnityEvent onHalfHourPassed;
 
     public UnityEvent onHourPassed;
-    public UnityEvent onWorkdayOver;
 
     private float currentTime;
     private int _currentMinutes;
@@ -99,13 +101,13 @@ public class Clock : MonoBehaviour
 
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
-            onWorkdayOver.Invoke();
+            workdayOverChannel.RaiseEvent(false);
         }
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            onWorkdayOver.Invoke();
+            workdayOverChannel.RaiseEvent(true);
         }
 #endif
     }
@@ -132,7 +134,7 @@ public class Clock : MonoBehaviour
         }
         if (CurrentHours == endTime && CurrentMinutes == 0)
         {
-            onWorkdayOver.Invoke();
+            workdayOverChannel.RaiseEvent(false);
         }
     }
 
@@ -141,9 +143,13 @@ public class Clock : MonoBehaviour
         SetStartTime();
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         timeIsPassing = false;
+        if (quitted)
+        {
+            OnGameRestart();
+        }
     }
 
     private void SetStartTime()

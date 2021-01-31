@@ -193,7 +193,7 @@ public class ItemManager : MonoBehaviour
         formSet.DestroyAll();
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         StopAllCoroutines();
 
@@ -203,6 +203,11 @@ public class ItemManager : MonoBehaviour
         requestedItems.Clear();
 
         dropping = false;
+
+        if (quitted)
+        {
+            OnGameRestart();
+        }
     }
 
     private bool DropRandomItem(bool forceSpawnNonFiller = false)

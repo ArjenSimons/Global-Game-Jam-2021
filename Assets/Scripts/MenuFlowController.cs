@@ -35,7 +35,7 @@ public class MenuFlowController : MonoBehaviour
         gameFlow.OnGameEnd += OnGameEnd;
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         PlaceCameraAtComputerPosition();
     }

@@ -65,13 +65,21 @@ public class Computer : MonoBehaviour
         gameFlow.OnGameRestart += OnGameRestart;
     }
 
-    private void OnGameEnd()
+    private void OnGameEnd(bool quitted)
     {
         ClearScreen();
-        SetupEndGameFlow();
-        ApplyGamePlayResultsToEndGameText();
 
-        isInEndGameScreen = true;
+        if (quitted)
+        {
+            SetupStartMenuFlow();
+        }
+        else
+        {
+            SetupEndGameFlow();
+            ApplyGamePlayResultsToEndGameText();
+
+            isInEndGameScreen = true;
+        }
     }
 
     private void OnGameRestart()
