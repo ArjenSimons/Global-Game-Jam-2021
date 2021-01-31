@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0da1dfe35b8fd594a949d3fb195c4421, type: 3}
-  m_Name: 
+  m_Name: GameFlow
   m_EditorClassIdentifier: 
   StartAtComputer: 1
   SkipTutorial: 0
