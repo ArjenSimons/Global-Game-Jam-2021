@@ -154,7 +154,7 @@ public class Clock : MonoBehaviour
             }
             onHourPassed.Invoke();
         }
-        if (CurrentHours == endTime - 1 && CurrentMinutes == 58)
+        if (CurrentHours == endTime - 1 && CurrentMinutes == 57)
         {
             PlayEndGameAlarm();
         }
