@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &688285538220710498
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &688285538708786769
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +319,9 @@ MonoBehaviour:
   - {fileID: 3064678210459434614}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
   CanTriggerDropOffButton: 1
+  LostItem:
+    ItemType: {fileID: 0}
+    ItemColor: {fileID: 0}
 --- !u!114 &6496700141054083837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
   objects:
   - {fileID: 919537278009394364}
   - {fileID: 5424195674456059725}
@@ -461,6 +469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &4174926094599242900
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &4343648069396743492
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &6439213595626901754
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +777,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &6538213192008014121
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +889,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}
 --- !u!1 &6766009928444596142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,3 +1035,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 1, b: 1, a: 1}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 0}

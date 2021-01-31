@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     private GameFlowSettings gameFlow = null;
 
     [SerializeField]
+    private SharedPlayerData sharedData = null;
+
+    [SerializeField]
     private BoolChannel pauseChannel = null;
 
     private Vector3 playerVelocity = Vector3.zero;
@@ -98,6 +101,8 @@ public class PlayerController : MonoBehaviour
         startLocalCameraEulerAngles = localCameraEulerAngles;
         startWorldPosition = transform.position;
         startLocalEulerAngles = transform.localEulerAngles;
+
+        sharedData.controller = this;
     }
 
     private void Start()
@@ -106,6 +111,11 @@ public class PlayerController : MonoBehaviour
         {
             Enable(false);
         }
+    }
+
+    public bool IsInGrabRange(Vector3 positionOfObject)
+    {
+        return RightHand.IsInGrabRange(positionOfObject) || LeftHand.IsInGrabRange(positionOfObject);
     }
 
     public void SetCameraAttachedToHead(bool value)

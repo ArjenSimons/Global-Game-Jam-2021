@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
   objects:
   - {fileID: 8812174953290429247}
 --- !u!114 &5280807879443779235
@@ -95,6 +96,9 @@ MonoBehaviour:
   - {fileID: 8812174953290429216}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
   CanTriggerDropOffButton: 1
+  LostItem:
+    ItemType: {fileID: 0}
+    ItemColor: {fileID: 0}
 --- !u!114 &-3763201059502898123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,3 +211,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 0, b: 0, a: 0}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}

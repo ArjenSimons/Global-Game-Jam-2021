@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 0, b: 0, a: 0}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
 --- !u!1 &2562296957824027846
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
   objects:
   - {fileID: 6948437873779801116}
   - {fileID: 8565511697553320938}
@@ -109,6 +112,9 @@ MonoBehaviour:
   - {fileID: 7164300040201585121}
   items: {fileID: 11400000, guid: 81c5e7f354e0f1442ab8c151e962e2f5, type: 2}
   CanTriggerDropOffButton: 0
+  LostItem:
+    ItemType: {fileID: 0}
+    ItemColor: {fileID: 0}
 --- !u!114 &8565511697553320938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 0, b: 0, a: 0}
   LerpFactor: 10
+  PartOfGroup: 0
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
 --- !u!1001 &7466990932907041124
 PrefabInstance:
   m_ObjectHideFlags: 0

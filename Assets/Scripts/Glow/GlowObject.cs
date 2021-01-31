@@ -5,6 +5,10 @@ public class GlowObject : MonoBehaviour
 {
     public Color GlowColor;
     public float LerpFactor = 10;
+    public bool PartOfGroup = false;
+
+    [SerializeField]
+    private SharedPlayerData playerData = null;
 
     public Renderer[] Renderers
     {
@@ -33,16 +37,27 @@ public class GlowObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        SetGlow(true);
+        if (!PartOfGroup && playerData.controller.IsInGrabRange(transform.position))
+        {
+            SetGlow(true);
+        }
     }
 
     private void OnMouseExit()
     {
-        SetGlow(false);
+        if (!PartOfGroup)
+        {
+            SetGlow(false);
+        }
     }
 
     public void SetGlow(bool value)
     {
+        if (!playerData.controller.CanGrab)
+        {
+            return;
+        }
+
         if (value)
         {
             _targetColor = GlowColor;
@@ -51,8 +66,6 @@ public class GlowObject : MonoBehaviour
         {
             _targetColor = Color.black;
         }
-
-        enabled = true;
     }
 
     /// <summary>
@@ -60,16 +73,14 @@ public class GlowObject : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _currentColor = Color.Lerp(_currentColor, _targetColor, Time.deltaTime * LerpFactor);
-
-        for (int i = 0; i < _materials.Count; i++)
+        if (_currentColor != _targetColor)
         {
-            _materials[i].SetColor("_GlowColor", _currentColor);
-        }
+            _currentColor = Color.Lerp(_currentColor, _targetColor, Time.deltaTime * LerpFactor);
 
-        if (_currentColor.Equals(_targetColor))
-        {
-            enabled = false;
+            for (int i = 0; i < _materials.Count; i++)
+            {
+                _materials[i].SetColor("_GlowColor", _currentColor);
+            }
         }
     }
 }
