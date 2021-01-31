@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: DarkGreen
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.6320754, b: 0.12991509, a: 1}
+  color: {r: 0.02745098, g: 0.34117648, b: 0.09411765, a: 1}
   displayName: Dark Green
