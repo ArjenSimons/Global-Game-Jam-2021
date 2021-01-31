@@ -14,21 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentaryType: 1
   commentaryList:
-  - Text: Come on Bob, that wasn't right
+  - Text: Come on Bob, that wasn't right..
     SpeakDuration: 3
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
-  - Text: Bob do you need an eye test?
+    Clip: {fileID: 8300000, guid: b3bfc2a536aa7664491fe529734502de, type: 3}
+  - Text: Bob, do you need an eye test?
     SpeakDuration: 3
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: ffcd3d146da97f440b5c88480ede0f10, type: 3}
   - Text: Are you sure you're not colorblind Bob?
     SpeakDuration: 3
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
-  - Text: Are you sure you're not colorblind Bob?
-    SpeakDuration: 3
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
+    Clip: {fileID: 8300000, guid: cbd7af84dfda5684bb1ea40165d2c966, type: 3}
   - Text: Not sure if you're still up for employee of the month..
     SpeakDuration: 4
-    Clip: {fileID: 8300000, guid: e6a3a0f9007e83f46a8dd1410ab5383e, type: 3}
-  - Text: Yikes Bob I hope management won't fire you!
+    Clip: {fileID: 8300000, guid: 418a8e95ac9ba424a9f0364f576f4309, type: 3}
+  - Text: Yikes Bob that's another mistake..
     SpeakDuration: 4
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: b3a08e7a81f32da4a86f50dc6f4e886d, type: 3}

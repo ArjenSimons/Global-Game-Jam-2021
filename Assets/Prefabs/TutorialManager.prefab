@@ -59,3 +59,9 @@ MonoBehaviour:
   marker3DDropPoint: {fileID: 0}
   marker3DButton: {fileID: 0}
   DropPointTransform: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: fe5ee75d05973f6409bdb35d93e738ce, type: 3}
+  - {fileID: 8300000, guid: bee07bb08871059459e6d7e48035e732, type: 3}
+  - {fileID: 8300000, guid: c48674e0de4fa48438b543adc283f7e5, type: 3}
+  - {fileID: 8300000, guid: d3838c0968de9bb42ab278ae9df6c24e, type: 3}
+  - {fileID: 8300000, guid: 1c0dfc3aed72b54489a6a90fe6a10cf4, type: 3}

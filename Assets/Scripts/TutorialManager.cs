@@ -77,7 +77,7 @@ public class TutorialManager : MonoBehaviour
             if (formGrabbable.IsGrabbed)
             {
                 waitForGrabForm = false;
-                Text5();
+                Text6();
             }
         }
 
@@ -86,7 +86,7 @@ public class TutorialManager : MonoBehaviour
             if (trolleyGrabbable.IsGrabbed)
             {
                 waitForGrabTrolley = false;
-                Text7();
+                Text8();
             }
         }
     }
@@ -151,21 +151,28 @@ public class TutorialManager : MonoBehaviour
     {
         subtitles.OnTextDone.RemoveListener(Text2);
         subtitles.OnTextDone.AddListener(Text3);
-        subtitles.ShowText("I'm working remotely, because, well, you know!", 3f);
+        subtitles.ShowText("I'm here to help you on your first day.", 2f);
     }
 
     private void Text3()
     {
         subtitles.OnTextDone.RemoveListener(Text3);
         subtitles.OnTextDone.AddListener(Text4);
-        subtitles.ShowText("Since it's your first day, here are your instructions:", 2.5f);
+        subtitles.ShowText("I'm working remotely, because, well, you know!", 3.8f);
     }
 
     private void Text4()
     {
         subtitles.OnTextDone.RemoveListener(Text4);
+        subtitles.OnTextDone.AddListener(Text5);
+        subtitles.ShowText("Since it's your first day, let me give you your instructions:", 3f);
+    }
+
+    private void Text5()
+    {
+        subtitles.OnTextDone.RemoveListener(Text5);
         subtitles.OnTextDone.AddListener(EnableHands);
-        subtitles.ShowText("Check the board next to your desk.", 1.5f);
+        subtitles.ShowText("Next to your desk is a board.", 2f);
     }
 
     private void EnableHands()
@@ -178,28 +185,28 @@ public class TutorialManager : MonoBehaviour
         marker3DForm.TrackedObject = formSet.GetFirstFormInSet().transform;
     }
 
-    private void Text5()
+    private void Text6()
     {
         marker3DForm.TrackedObject = null;
-        subtitles.ShowText("Alright, as the form says, someone lost their red trolley.", 2.5f);
-        subtitles.OnTextDone.AddListener(Text6);
+        subtitles.ShowText("Alright, as the form says, someone lost their red trolley.", 4.5f);
+        subtitles.OnTextDone.AddListener(Text7);
         subtitles.PlayAudio(clips[1]);
     }
 
-    private void Text6()
+    private void Text7()
     {
-        subtitles.OnTextDone.RemoveListener(Text6);
-        subtitles.ShowText("Grab the red trolley in your other hand!", 2f);
+        subtitles.OnTextDone.RemoveListener(Text7);
+        subtitles.ShowText("Grab the red trolley in your other hand!", 3f);
         trolleyGrabbable = itemSet.GetMatchWithLostItem(formSet.GetFirstFormInSet().ItemDisplaying).GetComponent<Grabbable>();
         waitForGrabTrolley = true;
         marker3DTrolley.TrackedObject = trolleyGrabbable.transform;
     }
 
-    private void Text7()
+    private void Text8()
     {
-        print("text7");
+        print("text8");
         StartCoroutine(EnableButton());
-        subtitles.ShowText("Put them in the droppoint and press the button", 2f);
+        subtitles.ShowText("Put them BOTH in the droppoint and press the button.", 3f);
         subtitles.PlayAudio(clips[2]);
         marker3DDropPoint.TrackedObject = DropPointTransform;
         marker3DTrolley.TrackedObject = null;
@@ -235,33 +242,33 @@ public class TutorialManager : MonoBehaviour
         {
             incrementIncorrectFormsChannel.OnEventRaised -= MissingForm;
             incrementCorrectFormsChannel.OnEventRaised -= ReceivedAPoint;
-            subtitles.OnTextDone.AddListener(Text8);
-            subtitles.ShowText("That's it, well done!", 2f);
+            subtitles.OnTextDone.AddListener(Text9);
+            subtitles.ShowText("That's it, that's all it is!", 2f);
             subtitles.PlayAudio(clips[4]);
             marker3DButton.TrackedObject = null;
             marker3DDropPoint.TrackedObject = null;
         }
     }
 
-    private void Text8()
-    {
-        subtitles.OnTextDone.RemoveListener(Text8);
-        subtitles.OnTextDone.AddListener(Text9);
-        subtitles.ShowText("One more thing: The computer will print new forms every hour.", 3f);
-    }
-
     private void Text9()
     {
         subtitles.OnTextDone.RemoveListener(Text9);
         subtitles.OnTextDone.AddListener(Text10);
-        subtitles.ShowText("It'll get worse towards the end of the day. Just see how much you'll get done, okay?", 5f);
+        subtitles.ShowText("One more thing: The computer will print new forms every hour.", 4f);
     }
 
     private void Text10()
     {
         subtitles.OnTextDone.RemoveListener(Text10);
+        subtitles.OnTextDone.AddListener(Text11);
+        subtitles.ShowText("It'll get worse towards the end of the day. Just see how much you'll get done, okay?", 3.8f);
+    }
+
+    private void Text11()
+    {
+        subtitles.OnTextDone.RemoveListener(Text11);
         StartCoroutine(EndTutorial());
-        subtitles.ShowText("Let's get to work! I'm gonna open the chute.", 4f);
+        subtitles.ShowText("Let's get to work! I'm gonna open the chute.", 3f);
     }
 
     private IEnumerator EndTutorial()
