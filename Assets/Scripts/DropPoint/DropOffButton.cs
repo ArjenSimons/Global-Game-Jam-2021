@@ -46,7 +46,7 @@ public class DropOffButton : MonoBehaviour
 
     private Transform tfMainCamera;
 
-    public bool AllowPress { get; set; }
+    public bool AllowPress { get; set; } = true;
 
     private void Start()
     {

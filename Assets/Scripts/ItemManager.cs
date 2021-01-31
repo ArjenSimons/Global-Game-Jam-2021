@@ -103,12 +103,34 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
-        gameFlow.OnTutorialStart += OnTutorialStart;
-        gameFlow.OnGameStart += OnGameStart;
-        gameFlow.OnGameRestart += OnGameRestart;
-        gameFlow.OnGameEnd += OnGameEnd;
+        gameFlow.OnGameStateChanged += OnGameStateChanged;
 
         nextFormBundleAmount = formAmountFirstDrop;
+    }
+
+    private void OnGameStateChanged(GameStateChange gameStateChange)
+    {
+        switch (gameStateChange)
+        {
+            case GameStateChange.TutorialStarted:
+                OnTutorialStart();
+                break;
+
+            case GameStateChange.GameStarted:
+                OnGameStart();
+                break;
+
+            case GameStateChange.GameRestarted:
+                OnGameRestart();
+                break;
+
+            case GameStateChange.OnGameEnd:
+                OnGameEnd();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void PopulateLists()
@@ -199,7 +221,7 @@ public class ItemManager : MonoBehaviour
         formSet.DestroyAll();
     }
 
-    private void OnGameEnd(bool quitted)
+    private void OnGameEnd()
     {
         StopAllCoroutines();
 
@@ -210,7 +232,7 @@ public class ItemManager : MonoBehaviour
 
         dropping = false;
 
-        if (quitted)
+        if (gameFlow.GameEndState == GameEndState.PauseMenuQuit)
         {
             OnGameRestart();
         }

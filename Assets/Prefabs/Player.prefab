@@ -218,7 +218,7 @@ MonoBehaviour:
   sensitivityY: 1
   clampAnglesY: {x: -70, y: 70}
   audioCue: {fileID: 11400000, guid: 6ce44405e9600a44f8f98984d8e98a6b, type: 2}
-  config: {fileID: 11400000, guid: 48edf20a66dd3fe40b42542ad95a098c, type: 2}
+  config: {fileID: 11400000, guid: 0c34caff922dd3b43b5a9fff58330339, type: 2}
   channel: {fileID: 11400000, guid: 16340c489d7b2884eb35008175f30e04, type: 2}
   grabScriptLeftHand: {fileID: 2348958861946401727}
   grabScriptRightHand: {fileID: 3047768640337450108}
@@ -427,6 +427,10 @@ PrefabInstance:
       propertyPath: bezierTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: moveController
+      value: 
+      objectReference: {fileID: 3518255930515403184}
     - target: {fileID: 3492464107933084781, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
       propertyPath: cameraTransform
       value: 
