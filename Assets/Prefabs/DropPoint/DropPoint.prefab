@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 1922752637453672909}
   - component: {fileID: 1922752637453672906}
   - component: {fileID: 469064685}
-  - component: {fileID: 4849099850947394997}
+  - component: {fileID: 1883975225223659959}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -433,7 +433,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowColor: {r: 1, g: 0, b: 0, a: 1}
   LerpFactor: 10
---- !u!114 &4849099850947394997
+  PartOfGroup: 1
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
+--- !u!114 &1883975225223659959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,11 +444,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1922752637453672911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5668e7084e6ed54eaa6ca6027165e24, type: 3}
+  m_Script: {fileID: 11500000, guid: 622175c0e67b0de40b977ea1fb7779ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlowColor: {r: 1, g: 0, b: 0, a: 1}
-  LerpFactor: 10
+  playerData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
+  objects:
+  - {fileID: 469064685}
 --- !u!1 &1922752637485504457
 GameObject:
   m_ObjectHideFlags: 0

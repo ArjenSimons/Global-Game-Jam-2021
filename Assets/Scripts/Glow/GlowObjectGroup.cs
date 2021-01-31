@@ -5,19 +5,35 @@ using UnityEngine;
 public class GlowObjectGroup : MonoBehaviour
 {
     [SerializeField]
+    private SharedPlayerData playerData = null;
+
+    [SerializeField]
     private GlowObject[] objects;
+
+    private bool isGlowing;
+    private bool isOver;
 
     private void Awake()
     {
         if (objects == null)
         {
-            objects = GetComponentsInChildren<GlowObject>();
+            FetchObjects();
         }
     }
 
     private void Reset()
     {
+        FetchObjects();
+    }
+
+    private void FetchObjects()
+    {
         objects = GetComponentsInChildren<GlowObject>();
+
+        foreach (GlowObject glowObject in objects)
+        {
+            glowObject.PartOfGroup = true;
+        }
     }
 
     public void SetColor(Color color)
@@ -28,19 +44,49 @@ public class GlowObjectGroup : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
+    private void SetGlow(bool value)
     {
         foreach (GlowObject glowObject in objects)
         {
-            glowObject.SetGlow(true);
+            glowObject.SetGlow(value);
         }
+
+        isGlowing = value;
+    }
+
+    private void Update()
+    {
+        if (!isOver)
+        {
+            return;
+        }
+
+        if (isGlowing && !playerData.controller.IsInGrabRange(transform.position))
+        {
+            //a glowing object out of range needs to unglow
+            SetGlow(false);
+        }
+        else if (!isGlowing && playerData.controller.IsInGrabRange(transform.position))
+        {
+            //an unglowing object that comes into range needs to start glowing
+            SetGlow(true);
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (playerData.controller.IsInGrabRange(transform.position))
+        {
+            SetGlow(true);
+        }
+
+        isOver = true;
     }
 
     private void OnMouseExit()
     {
-        foreach (GlowObject glowObject in objects)
-        {
-            glowObject.SetGlow(false);
-        }
+        SetGlow(false);
+
+        isOver = false;
     }
 }

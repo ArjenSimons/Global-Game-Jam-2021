@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: Sand
   m_EditorClassIdentifier: 
-  color: {r: 0.85882354, g: 0.81960785, b: 0.7058824, a: 1}
+  color: {r: 0.74509805, g: 0.68235296, b: 0.5019608, a: 1}
   displayName: Sand

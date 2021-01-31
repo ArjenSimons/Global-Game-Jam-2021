@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3518255930515403197}
   - component: {fileID: 3518255930515403185}
   - component: {fileID: 3518255930515403184}
-  - component: {fileID: 591241237840048692}
+  - component: {fileID: 1817261293}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -224,9 +224,10 @@ MonoBehaviour:
   grabPointRight: {fileID: 3518255930212725282}
   crosshair: {fileID: 0}
   gameFlow: {fileID: 11400000, guid: 7f2a3c8665651a44cb03b793ec56d4c6, type: 2}
+  sharedData: {fileID: 11400000, guid: 150ce80329ec1154c9715c716e45ac83, type: 2}
   pauseChannel: {fileID: 11400000, guid: 13257d39a1b47ce47836ceddcb7b8c45, type: 2}
---- !u!65 &591241237840048692
-BoxCollider:
+--- !u!136 &1817261293
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,8 +236,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.8, z: 0.6}
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5476230447180118811
 GameObject:
@@ -398,6 +400,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3518255930515403197}
     m_Modifications:
+    - target: {fileID: 113738805387866884, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.347
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531386293220872439, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.398
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531386293220872439, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.065
+      objectReference: {fileID: 0}
     - target: {fileID: 1640076983260332197, guid: 4f3bc5257041cdd49bf94beb9364c396, type: 3}
       propertyPath: m_Name
       value: MenuFlow

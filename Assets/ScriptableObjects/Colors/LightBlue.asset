@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee506a4c37c1b459c86a987352d59e, type: 3}
   m_Name: LightBlue
   m_EditorClassIdentifier: 
-  color: {r: 0.21751513, g: 0.71162033, b: 0.9811321, a: 1}
+  color: {r: 0.12941177, g: 0.6392157, b: 0.8392157, a: 1}
   displayName: Light Blue
