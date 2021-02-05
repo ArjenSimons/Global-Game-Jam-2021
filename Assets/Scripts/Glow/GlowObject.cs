@@ -10,6 +10,8 @@ public class GlowObject : MonoBehaviour
     [SerializeField]
     private SharedPlayerData playerData = null;
 
+    bool glow = false;
+
     public Renderer[] Renderers
     {
         get;
@@ -35,11 +37,29 @@ public class GlowObject : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (!PartOfGroup)
+        {
+            if (playerData.controller.IsInGrabRange(transform.position))
+            {
+                SetGlow(glow);
+            }
+            else SetGlow(false);
+        }   
+        glow = false;
+    }
+
+    public void EnableGlow()
+    {
+        glow = true;
+    }
+
     private void OnMouseEnter()
     {
         if (!PartOfGroup && playerData.controller.IsInGrabRange(transform.position))
         {
-            SetGlow(true);
+            //SetGlow(true);
         }
     }
 
@@ -47,7 +67,7 @@ public class GlowObject : MonoBehaviour
     {
         if (!PartOfGroup)
         {
-            SetGlow(false);
+            //SetGlow(false);
         }
     }
 
@@ -60,6 +80,7 @@ public class GlowObject : MonoBehaviour
 
         if (value)
         {
+            glow = true;
             _targetColor = GlowColor;
         }
         else
@@ -73,6 +94,8 @@ public class GlowObject : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        
+
         if (_currentColor != _targetColor)
         {
             _currentColor = Color.Lerp(_currentColor, _targetColor, Time.deltaTime * LerpFactor);

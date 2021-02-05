@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PickupableItem
+  - Button
   layers:
   - Default
   - TransparentFX

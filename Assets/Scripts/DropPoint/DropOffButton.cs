@@ -58,10 +58,10 @@ public class DropOffButton : MonoBehaviour
 
     private void Update()
     {
-        if (hasFocus && Input.GetMouseButtonDown(0) && AllowPress)
-        {
-            TryPress();
-        }
+        //if (hasFocus && Input.GetMouseButtonDown(0) && AllowPress)
+        //{
+        //    TryPress();
+        //}
     }
 
     private void OnMouseEnter()
@@ -75,6 +75,21 @@ public class DropOffButton : MonoBehaviour
     private void OnMouseExit()
     {
         hasFocus = false;
+    }
+
+    public void PressButton(Transform grabStartPoint)
+    {
+        if (AllowPress && CameraIsInRange())
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, 50))
+            {
+                if (hit.transform.tag == "Button")
+                {
+                    TryPress();
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

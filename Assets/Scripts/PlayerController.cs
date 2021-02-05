@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
+    private DropOffButton dropOffButton;
+
+    [SerializeField]
+    private Transform grabStartPoint;
+
+    [SerializeField]
     private GrabScript grabScriptLeftHand;
 
     [SerializeField]
@@ -230,9 +236,34 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             grabScriptLeftHand.DeselectItem();
+            dropOffButton.PressButton(grabStartPoint);
         }
 
-        if (Input.GetMouseButtonDown(1) && CanGrab)
+        RaycastHit hit;
+        if (Physics.Raycast(grabStartPoint.position, grabStartPoint.TransformDirection(Vector3.forward), out hit, 200))
+        {
+            if (hit.transform.tag == "PickupableItem")
+            {
+                GlowObject glowObj = hit.transform.GetComponent<GlowObject>();
+
+                if (glowObj != null)
+                {
+                    glowObj.EnableGlow();
+                }
+                else
+                {
+                    glowObj = hit.transform.GetComponentInChildren<GlowObject>();
+
+                    if (glowObj != null)
+                    {
+                        glowObj.EnableGlow();
+                    }
+                }
+            }
+        }
+
+
+            if (Input.GetMouseButtonDown(1) && CanGrab)
         {
             grabScriptRightHand.SelectItem();
         }
